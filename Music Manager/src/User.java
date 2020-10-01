@@ -19,6 +19,12 @@ public class User {
 		
 	}
 	
+	public String toString() 
+	{
+		//nao mostrar senha
+		return this.emailUser +"\n"+ this.nameUser + "\n"+ this.adm;
+	}
+	
 	
 
 }

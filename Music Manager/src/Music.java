@@ -81,7 +81,17 @@ public class Music {
 	
 	public String toString() 
 	{
-		return "retornar algo aqui";
+		return this.musicArtist + this.musicID + this.musicName + this.musicRecorder;
+	}
+	
+	public void addFavMusic(Music music) 
+	{
+		//Favoritos = this.music?
+	}
+	
+	public void addFavPlaylist(Music music) 
+	{
+		
 	}
 
 }

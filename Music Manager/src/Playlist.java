@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 
 public class Playlist {
-	private ArrayList<Music> playlistMusic;
+	private User playlistUser;
+	private ArrayList<Music> PlaylistMusic;
+	
+	//GET/SETTERS
+	
+	
 	
 	public boolean equals(Playlist outraPlaylist) 
 	{
@@ -10,7 +15,13 @@ public class Playlist {
 	
 	public String toString() 
 	{
-		return "";
+		return "Dados do usuario: " + this.playlistUser.toString() 
+		+" dados da playlist: "+ this.PlaylistMusic.toString();
 	}
+	
+	public void createPlaylist() {}
+	public void addMusicPlaylist() {}
+	public void removeMusicPlaylist() {}
+	public void deleteMusicPlaylist() {}
 
 }
