@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class search {
     
     private String nameInput; // input do usuario de nome;
@@ -9,7 +11,7 @@ public class search {
 
     //-----metodos-----//
     public void userInput(){// precurar playlist de usuarios.
-
+        Scanner userInput = new Scanner(System.in);
     }
 
     public void filterPlaylists(){// Filtrar playlist, varre arrayList de playlists.
