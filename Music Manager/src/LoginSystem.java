@@ -13,4 +13,8 @@ public class LoginSystem {
         return true;
     }
 
+    public void newAccount(){// com dados verificados, ira chamar o construtor de user, cara novos usuarios;
+        
+    }
+
 }

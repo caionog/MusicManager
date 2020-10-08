@@ -1,16 +1,17 @@
 
 public class User {
-	//Classe que vai informar dados do usuário para o cadastro e login
-	//e fornercer informações necessárias para as outras classes
+	//Classe que vai informar dados do usuï¿½rio para o cadastro e login
+	//e fornercer informaï¿½ï¿½es necessï¿½rias para as outras classes
 	private String nameUser;
 	private String passwordUser;
 	private String emailUser;
 	private boolean adm;
 	
 	
-	public void creatUser() 
-	{
-		
+	public void creatUser(String emailUser, String nameUser,String passwordUSer) {
+		this.emailUser = emailUser;
+		this.nameUser = nameUser;
+		this.passwordUser = passwordUSer;
 		
 	}
 	
