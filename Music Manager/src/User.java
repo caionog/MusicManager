@@ -6,13 +6,15 @@ public class User {
 	private String passwordUser;
 	private String emailUser;
 	private boolean adm;
+	private int id;
 	
-	
+	//------- construtor de uuario que será usado em "criar conta" pagina de login;
 	public void creatUser(String emailUser, String nameUser,String passwordUSer) {
+		this.adm = false;
 		this.emailUser = emailUser;
 		this.nameUser = nameUser;
 		this.passwordUser = passwordUSer;
-		
+		//adicionar id aqui;
 	}
 	
 	public void modifyUser() 
