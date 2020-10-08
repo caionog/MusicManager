@@ -14,19 +14,39 @@ public class User {
 		this.emailUser = emailUser;
 		this.nameUser = nameUser;
 		this.passwordUser = passwordUSer;
-		//adicionar id aqui;
+		
 	}
-	//----------gets and setters-----------//
+	//---------------------getters-----------------//
 
 	public String getNameUser(){
 		return this.nameUser;
 	}
+	public String getPasswordUser(){
+		return this.passwordUser;
+	}
+	public String getEmailUser(){
+		return this.emailUser;
+	}
+	public int getUserId(){
+		return this.id;
+	}
+//----------------------setters------------------//
+	public void setNameUser(String newNameUser){
+		this.nameUser = newNameUser;
+	}
+
+	public void setPasswordUser(String newPasswordUser){
+		this.passwordUser = newPasswordUser;
+	}
+	public void setEmailUser(String newEmailUser){
+		this.emailUser = newEmailUser;
+	}
+	public void setUserId(int newUserId){
+		this.id = newUserId;
+	}
 
 
-
-
-
-
+//--------------------metodos-------------------\\
 	public void modifyUser() 
 	{
 		
