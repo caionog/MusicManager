@@ -16,7 +16,17 @@ public class User {
 		this.passwordUser = passwordUSer;
 		//adicionar id aqui;
 	}
-	
+	//----------gets and setters-----------//
+
+	public String getNameUser(){
+		return this.nameUser;
+	}
+
+
+
+
+
+
 	public void modifyUser() 
 	{
 		
