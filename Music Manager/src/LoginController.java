@@ -1,3 +1,5 @@
+import java.util.stream.Stream;
+
 public class LoginController {
     
     
@@ -12,6 +14,12 @@ public class LoginController {
 
     }
     public void editEmail(){
+
+    }
+    public void newAccount(){
         
+    }
+    public void saveAccount(String emailInput, String passwordInput){
+
     }
 }
