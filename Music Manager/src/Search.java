@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
-public class search {
+public class Search {
     
     private String nameInput; // input do usuario de nome;
-    private genres genreInput; // input usuario para genero
+    private Genre genreInput; // input usuario para genero
     private String artistInput; //input usuario para artista
     private String recorderInput; //input usuario para gravadora
     private String durationInput; //input usuario para duaração da musica

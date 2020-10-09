@@ -26,11 +26,13 @@ public class UserRepo {
         else{return null;}
         }
     }
-    public void addUser(User usuario){
-        this.usuarioUsers.add(usuario);
+    public boolean addUser(User usuario){
+        return this.usuarioUsers.add(usuario);
     }
 
-    public removeUser(){
-
+    public boolean removeUser(User usuario){
+      return usuarioUsers.remove(usuario);
+        
     }
+    
 }

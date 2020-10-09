@@ -1,4 +1,4 @@
-public class genres {
+public class Genre {
     public Boolean axe=false;
     public Boolean blues=false;
     public Boolean country=false;
