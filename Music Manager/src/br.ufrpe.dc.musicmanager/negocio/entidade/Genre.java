@@ -1,3 +1,4 @@
+package negocio.entidade;
 public class Genre {
     public Boolean axe=false;
     public Boolean blues=false;

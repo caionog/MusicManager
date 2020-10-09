@@ -1,7 +1,8 @@
+package negocio.entidade;
 import java.util.ArrayList;
 
 public class Music {
-	//Classe que vai informar os dados das músicas para a criação das playlists
+	//Classe que vai informar os dados das mï¿½sicas para a criaï¿½ï¿½o das playlists
 	private String musicName;
 	private ArrayList<String> musicGenre;
 	private int musicID;
@@ -73,7 +74,7 @@ public class Music {
 	}
 
 
-//Métodos
+//Mï¿½todos
 	public boolean equals(Music outraMusic) 
 	{
 		return true;
