@@ -1,3 +1,7 @@
+package gui;
+
+import negocio.Playlist;
+import negocio.User;
 
 public class Applications {
 	private Playlist ApplicationsPlaylist;
