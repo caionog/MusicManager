@@ -1,6 +1,6 @@
-package dados;
+
 import java.util.ArrayList;
-import negocio.entidade.User;
+import User;
 
 public class UserRepo {
     private ArrayList<User> usuarioUsers;

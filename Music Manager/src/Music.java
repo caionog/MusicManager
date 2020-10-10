@@ -1,4 +1,4 @@
-package negocio.entidade;
+
 import java.util.ArrayList;
 
 public class Music {

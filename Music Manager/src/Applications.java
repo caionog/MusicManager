@@ -1,4 +1,4 @@
-package apresentacao;
+
 public class Applications {
 	private Playlist ApplicationsPlaylist;
 	private User ApplicationsUser;
