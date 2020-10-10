@@ -23,8 +23,7 @@ public class LoginSystem {
         System.out.println("email nao encontrado");   
         return false;
        }
-       boolean b = login.getPasswordUser() != this.passwordInput;
-    if(b){
+       if(login.getPasswordUser() == this.passwordInput){
         System.out.println("im here");
         return false;
        }
