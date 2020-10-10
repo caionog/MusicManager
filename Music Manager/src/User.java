@@ -9,7 +9,7 @@ public class User {
 	private int id;
 	
 	//------- construtor de uuario que será usado em "criar conta" pagina de login;
-	public void creatUser(String emailUser, String nameUser,String passwordUSer) {
+	public User(String emailUser, String nameUser,String passwordUSer) {
 		this.adm = false;
 		this.emailUser = emailUser;
 		this.nameUser = nameUser;
@@ -57,7 +57,6 @@ public class User {
 		//nao mostrar senha
 		return this.emailUser +"\n"+ this.nameUser + "\n"+ this.adm;
 	}
-	
 	
 
 }

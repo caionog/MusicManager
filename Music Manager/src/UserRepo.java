@@ -1,39 +1,62 @@
 
 import java.util.ArrayList;
-import User;
 
 public class UserRepo {
-    private ArrayList<User> usuarioUsers;
-    usuariosUsers = new arraylist();
+    private ArrayList<User> usuarioUsers = new ArrayList<User>();
+    //usuariosUsers = new ArrayList<User>();
 
     //----------------buscadores-----------------\\
-    public User getUserName(String nomeUsuario ){// navega pelo array comparando nome dos usuarios com a String digitada
+    public User searchUserName(String nomeUsuario ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
         for(int posicao=0;posicao<=achou;posicao++){
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getNameUser() == nomeUsuario){
             return comparUser;
         }
-        else{return null;}
         }
+        return null;
     }
-    public User getUserId(int id ){// navega pelo array comparando nome dos usuarios com a String digitada
+    public User searchUserId(int id ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
         for(int posicao=0;posicao<=achou;posicao++){
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getUserId() == id){
             return comparUser;
         }
-        else{return null;}
         }
+        return null;
     }
+
+    public User searchUserEmail(String emailUser ){// navega pelo array comparando nome dos usuarios com a String digitada
+        int achou = usuarioUsers.size();
+        for(int posicao=0;posicao<=achou;posicao++){
+        User comparUser = usuarioUsers.get(posicao);
+        if (comparUser.getEmailUser().equalsIgnoreCase(emailUser)== true){
+            return comparUser;
+        }
+        }
+        return null;
+    }
+
     public boolean addUser(User usuario){
+        usuario.setUserId(this.usuarioUsers.size()+1);
         return this.usuarioUsers.add(usuario);
+        
     }
 
     public boolean removeUser(User usuario){
       return usuarioUsers.remove(usuario);
         
     }
-    
+    //------------------construtor---------------//
+    public UserRepo(){
+        User defaultUSer = new User("default","","");
+        usuarioUsers.add(defaultUSer);
+    }
+    public int getSize(){
+        return this.usuarioUsers.size();
+    }
+    public User getUser(int index){
+        return this.usuarioUsers.get(index);
+    }
 }
