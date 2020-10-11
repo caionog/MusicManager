@@ -15,14 +15,48 @@ public class User {
 	private ArrayList<Playlist> favoritePlaylists = new ArrayList<>(0);
 	
 	
-	public User(int id, Boolean adm, String name, String password, String email) {
-		this.id = id;
+	public User(Boolean adm, String email, String name, String password) {
+	
 		this.adm = adm;
 		this.name = name;
 		this.password = password;
 		this.email = email;
 	}
-	
+	//---------------------getters-----------------//
+
+	public String getNameUser(){
+		return this.name;
+	}
+	public String getPasswordUser(){
+		return this.password;
+	}
+	public String getEmailUser(){
+		return this.email;
+	}
+	public int getUserId(){
+		return this.id;
+	}
+//----------------------setters------------------//
+	public void setNameUser(String newNameUser){
+		this.name = newNameUser;
+	}
+
+	public void setPasswordUser(String newPasswordUser){
+		this.password = newPasswordUser;
+	}
+	public void setEmailUser(String newEmailUser){
+		this.email = newEmailUser;
+	}
+	public void setUserId(int newUserId){
+		this.id = newUserId;
+	}
+
+
+//--------------------metodos-------------------\\
+	public void modifyUser() 
+	{
+		
+	}
 	public String toString() 
 	{
 		//nao mostrar senha

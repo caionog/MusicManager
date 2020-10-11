@@ -1,21 +1,17 @@
 package negocio;
+import java.util.ArrayList;
 
 public class Music {
-	//Classe que vai informar os dados das musicas para a criacao das playlists
+	//Classe que vai informar os dados das m�sicas para a cria��o das playlists
 	private String musicName;
-	private Genres musicGenres;
+	private ArrayList<String> musicGenre;
 	private int musicID;
 	private String musicArtist;
 	private String musicRecorder;
 	
 	//Construtores e get/sets
-	public Music(String musicName, Genres musicGenre, int musicID, String musicArtist, String musicRecorder) {
-		this.musicName = musicName;
-		this.musicGenres = musicGenre;
-		this.musicID = musicID;
-		this.musicArtist = musicArtist;
-		this.musicRecorder = musicRecorder;
-	}
+	public Music(String musicName,ArrayList<String> musicGenre,int musicID,
+			String musicArtist,String musicRecorder) {}
 	
 	
 	
@@ -31,14 +27,14 @@ public class Music {
 
 
 
-	public Genres getMusicGenre() {
-		return musicGenres;
+	public ArrayList<String> getMusicGenre() {
+		return musicGenre;
 	}
 
 
 
-	public void setMusicGenre(Genres musicGenres) {
-		this.musicGenres = musicGenres;
+	public void setMusicGenre(ArrayList<String> musicGenre) {
+		this.musicGenre = musicGenre;
 	}
 
 
@@ -86,14 +82,7 @@ public class Music {
 	
 	public String toString() 
 	{
-		String s = ""; 
-
-		s += "Artista: " + this.musicArtist;
-		s += "musicID: " + this.musicID;
-		s += "Titulo: " + this.musicName;
-		s += "Gravadora: " + this.musicRecorder;
-
-		return s;
+		return this.musicArtist + this.musicID + this.musicName + this.musicRecorder;
 	}
 	
 	public void addFavMusic(Music music) 
