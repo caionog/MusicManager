@@ -15,14 +15,9 @@ public class MainScreen {
 		LoginSystem login = new LoginSystem();
 		login.inputEmailAndPassWord();
 		login.newAccount(repositorioUser);
-		System.out.println("dados salvos");
-		System.out.println(repositorioUser.getSize());
-		System.out.println(repositorioUser.getUser(0).getEmailUser());
-		System.out.println(repositorioUser.getUser(1).getEmailUser());
-		System.out.println(repositorioUser.getUser(2).getEmailUser());
-		System.out.println(repositorioUser.searchUserEmail("murilo@gmail.com"));
-
-
+		
+		
+	
 		System.out.println("-------testando login------");
 		login.inputEmailAndPassWord();
 		boolean validate = login.isValidateInput(repositorioUser);

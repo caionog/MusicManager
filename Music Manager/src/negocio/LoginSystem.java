@@ -16,26 +16,29 @@ public class LoginSystem {
         Scanner login = new Scanner(System.in);
         System.out.println("E-mail :");
         this.emailInput = login.nextLine();
+        
         System.out.println("senha :");
+    
         this.passWordInput = login.nextLine();
-        login.close();
+        //login.close();
        
     }
 
     public boolean isValidateInput(UserRepo repositorioUser){// verifica se os dados do input são validos para acesso.
-       User login = repositorioUser.searchUserEmail(this.emailInput);// caso seja encontrado login = usuario caso contratio login = null;
+       User login = repositorioUser.searchUserEmail(this.emailInput);// caso seja encontrado login = usuario caso contratio login = null; 
        if(login == null){// se login == null email nao encontrado.
-        System.out.println("email nao encontrado");   
-        return false;
+            System.out.println("email nao encontrado");   
+            return false;
        }
-       if(login.getPasswordUser() == this.passWordInput){
-        System.out.println("im here");
-        return false;
+       System.out.println(login.toString());  
+       if(login.getPasswordUser() == this.passWordInput){ // se password for igual ao salvo, retorna true pra login
+            System.out.println("im here");
+            return true;
        }
        else{
         
            System.out.println("im fuking here yeeea");
-           return true; 
+           return false; 
         }
     }
 
