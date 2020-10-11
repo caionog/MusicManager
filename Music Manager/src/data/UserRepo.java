@@ -1,9 +1,11 @@
+package data;
 
 import java.util.ArrayList;
 
+import negocio.User;
 public class UserRepo {
     private ArrayList<User> usuarioUsers = new ArrayList<User>();
-    //usuariosUsers = new ArrayList<User>();
+    
 
     //----------------buscadores-----------------\\
     public User searchUserName(String nomeUsuario ){// navega pelo array comparando nome dos usuarios com a String digitada
@@ -50,7 +52,7 @@ public class UserRepo {
     }
     //------------------construtor---------------//
     public UserRepo(){
-        User defaultUSer = new User("default","","");
+        User defaultUSer = new User(false,"default","","");
         usuarioUsers.add(defaultUSer);
     }
     public int getSize(){

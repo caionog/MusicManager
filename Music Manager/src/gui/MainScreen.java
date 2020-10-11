@@ -1,10 +1,15 @@
+package gui;
+
 import java.util.Scanner;
+import negocio.LoginSystem;
+import negocio.User;
+import data.UserRepo;
 
 public class MainScreen {
 	public static void main(String[] args) {
-		System.out.println("teste login");
+		System.out.println(" ('¬')_Ll Loading Program... ");
 		
-		User defaultUser = new User("maria@gmail.com","Maria Ferreira" , "123456");
+		User defaultUser = new User(false,"maria@gmail.com","Maria Ferreira" , "123456");
 		UserRepo repositorioUser = new UserRepo();
 		repositorioUser.addUser(defaultUser);
 		LoginSystem login = new LoginSystem();

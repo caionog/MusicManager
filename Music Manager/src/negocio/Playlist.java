@@ -1,3 +1,4 @@
+package negocio;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class Playlist {
 	
 	public String toString() 
 	{
-		return "Dados do usuario: " + this.playlistUser.toString() 
+		return "Dados do usuario: " + this.playlistUser.toString() + "\n"
 		+" dados da playlist: "+ this.PlaylistMusic.toString();
 	}
 	
