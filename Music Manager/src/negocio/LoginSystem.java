@@ -29,6 +29,7 @@ public class LoginSystem {
        if(login == null){// se login == null email nao encontrado.
             System.out.println("email nao encontrado");   
             return false;
+            
        }
        if(login.getPasswordUser().equals(this.passWordInput)){ // se password for igual ao salvo, retorna true pra login
             System.out.println("im here");

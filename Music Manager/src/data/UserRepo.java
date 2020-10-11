@@ -31,7 +31,7 @@ public class UserRepo {
 
     public User searchUserEmail(String emailUser ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
-        for(int posicao=0;posicao<achou;posicao++){
+        for (int posicao=0; posicao<achou; posicao++){
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getEmailUser().equals(emailUser)== true){
             return comparUser;
