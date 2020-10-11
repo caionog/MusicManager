@@ -30,14 +30,11 @@ public class LoginSystem {
             System.out.println("email nao encontrado");   
             return false;
        }
-       System.out.println(login.toString());  
-       if(login.getPasswordUser() == this.passWordInput){ // se password for igual ao salvo, retorna true pra login
+       if(login.getPasswordUser().equals(this.passWordInput)){ // se password for igual ao salvo, retorna true pra login
             System.out.println("im here");
             return true;
        }
        else{
-        
-           System.out.println("im fuking here yeeea");
            return false; 
         }
     }
