@@ -12,14 +12,14 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
 public class Music {
-	
+	private int idSong;
 	private String summarySong;
 	private String metaData;
 	private String artistSong;
 	private String titleSong;
 	private String genreSong;
 	private boolean favoriteSong;
-	
+
 	//GETTERS
 
 	public String getSummarySong() {
@@ -54,7 +54,14 @@ public class Music {
 		}
 	}
 	
-	
+	public int getId() 
+	{
+		return this.idSong;
+	}
+	public void setId(int Id) 
+	{
+		this.idSong = Id;
+	}
 	
 	public void CreatMusic(String path)  throws Exception, IOException, SAXException, TikaException
 	{
