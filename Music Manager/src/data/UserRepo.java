@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import negocio.User;
 public class UserRepo {
     private ArrayList<User> usuarioUsers = new ArrayList<User>();
+    private int IDs;
+    private int IdRemovido;
     
 
     //----------------buscadores-----------------\\
@@ -41,15 +43,25 @@ public class UserRepo {
     }
 
     public boolean addUser(User usuario){
-        usuario.setUserId(this.usuarioUsers.size()+1);
+        this.IDs++;
+        usuario.setUserId(this.IDs);
         return this.usuarioUsers.add(usuario);
         
     }
 
     public boolean removeUser(User usuario){
-      return usuarioUsers.remove(usuario);
+      this.IdRemovido = usuario.getUserId();
+        return usuarioUsers.remove(usuario);
         
     }
+    public void refreshList(int IdRemovido){
+        int achou = usuarioUsers.size();
+        for(int posicao = IdRemovido-1; posicao < achou; posicao++ ){
+            User usuario = this.usuarioUsers.get(posicao);
+           usuario.setUserId( usuario.getUserId() - 1 );
+        }
+        }
+    
     //------------------construtor---------------//
     public UserRepo(){
         User defaultUSer = new User(false,"default","","");
