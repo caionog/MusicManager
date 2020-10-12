@@ -7,6 +7,8 @@ public class LoginSystem {
     
     private String emailInput;
     private String passWordInput;  
+    private String name;
+    private int alrightLogin;
 
     public boolean validateInput() { // verifica se os dados do input são validos para acesso.
         return true;
@@ -28,25 +30,30 @@ public class LoginSystem {
         System.out.println("email nao encontrado");   
         return false;
        }
-       if(login.getPasswordUser() == this.passWordInput){
-        System.out.println("im here");
-        return false;
+       if(login.getPasswordUser().equals(this.passWordInput) ){
+        this.alrightLogin = login.getUserId();
+        return true;
        }
        else{
         
-           System.out.println("im fuking here yeeea");
-           return true; 
+           return false; 
         }
     }
 
     public void newAccount(UserRepo repositorioUser){// com dados verificados, ira chamar o construtor de user, cara novos usuarios;
-        User newUser = new User(false,emailInput,"default",passWordInput);
+        System.out.println("Name :");
+        Scanner name = new Scanner(System.in);
+        String nameInput = name.nextLine();
+        User newUser = new User(false,emailInput,nameInput,passWordInput);
         repositorioUser.addUser(newUser);
         
     }
     public LoginSystem(){
         this.emailInput = "";
         this.passWordInput = "";
+    }
+    public User loginNow(UserRepo repositorioUser){
+        return repositorioUser.searchUserId(this.alrightLogin);
     }
 }
 
