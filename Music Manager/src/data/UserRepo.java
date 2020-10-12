@@ -37,7 +37,10 @@ public class UserRepo {
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getEmailUser().equalsIgnoreCase(emailUser)== true){
             return comparUser;
-        }
+            
+        } 
+     
+    
         }
         return null;
     }
