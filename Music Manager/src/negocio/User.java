@@ -11,8 +11,8 @@ public class User {
 	private String password;
 	private String email;
 	
-	private ArrayList<Music> favoriteMusics = new ArrayList<>(0);
-	private ArrayList<Playlist> favoritePlaylists = new ArrayList<>(0);
+	private ArrayList<Music> favoriteMusics = new ArrayList(0);
+	private ArrayList<Playlist> favoritePlaylists = new ArrayList(0);
 	
 	
 	public User(Boolean adm, String email, String name, String password) {

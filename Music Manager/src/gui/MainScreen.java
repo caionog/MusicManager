@@ -1,13 +1,28 @@
 package gui;
 
+import java.io.IOException;
 import java.util.Scanner;
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
+
 import negocio.LoginSystem;
+import negocio.Music;
 import negocio.User;
 import data.UserRepo;
 
 
 public class MainScreen {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
+		System.out.println("teste");
+		String pathSong ="hey-jude.mp3";
+		Music musica1 = new Music();
+		musica1.CreatMusic(pathSong);
+	    musica1.printMetadata(pathSong);
+	    musica1.printSummary(pathSong);
+	    System.out.println(musica1.getTitleSong());
+	
+		
+		
 		System.out.println(" ('¬')_Ll Loading Program... ");
 		
 		User defaultUser = new User(false,"maria@gmail.com","Maria Ferreira" , "123456");
@@ -35,5 +50,7 @@ public class MainScreen {
 		else{
 			System.out.println("email invalido ou senha incorreta");
 	}
+	
 	}
+	
 }
