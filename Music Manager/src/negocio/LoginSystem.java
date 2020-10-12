@@ -18,7 +18,7 @@ public class LoginSystem {
         this.emailInput = login.nextLine();
         System.out.println("senha :");
         this.passWordInput = login.nextLine();
-        login.close();
+        
        
     }
 

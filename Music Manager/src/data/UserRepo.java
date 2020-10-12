@@ -10,7 +10,7 @@ public class UserRepo {
     //----------------buscadores-----------------\\
     public User searchUserName(String nomeUsuario ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
-        for(int posicao=0;posicao<=achou;posicao++){
+        for(int posicao=0;posicao<achou;posicao++){
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getNameUser() == nomeUsuario){
             return comparUser;
@@ -20,7 +20,7 @@ public class UserRepo {
     }
     public User searchUserId(int id ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
-        for(int posicao=0;posicao<=achou;posicao++){
+        for(int posicao=0;posicao<achou;posicao++){
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getUserId() == id){
             return comparUser;
@@ -31,11 +31,14 @@ public class UserRepo {
 
     public User searchUserEmail(String emailUser ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
-        for(int posicao=0;posicao<=achou;posicao++){
+        for(int posicao=0;posicao<achou;posicao++){
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getEmailUser().equalsIgnoreCase(emailUser)== true){
             return comparUser;
-        }
+            
+        } 
+     
+    
         }
         return null;
     }
