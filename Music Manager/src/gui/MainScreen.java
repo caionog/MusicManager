@@ -16,7 +16,6 @@ public class MainScreen {
 	
 	public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
 		
-		System.out.println("teste");
 		String pathSong ="hey-jude.mp3";
 		Music musica1 = new Music();
 		musica1.CreatMusic(pathSong);
