@@ -1,29 +1,34 @@
 package negocio;
-
+import negocio.Music;
 import java.util.ArrayList;
 
 public class Playlist {
-	private User playlistUser;
-	private ArrayList<Music> PlaylistMusic;
-	
-	//GET/SETTERS
-	
-	
-	
-	public boolean equals(Playlist outraPlaylist) 
+	public ArrayList<Music> library = new ArrayList<Music>();
+	int contador = 0;
+	public int getSizeLibrary() 
 	{
-		return true;
+		return this.library.size();
+	}
+	public void addMusicLibrary(Music music) 
+	{
+		this.library.add(music);
+		
+		
 	}
 	
-	public String toString() 
+	public String getTitle(Music music) 
 	{
-		return "Dados do usuario: " + this.playlistUser.toString() + "\n"
-		+" dados da playlist: "+ this.PlaylistMusic.toString();
+		return music.getTitleSong();
 	}
-	
-	public void createPlaylist() {}
-	public void addMusicPlaylist() {}
-	public void removeMusicPlaylist() {}
-	public void deleteMusicPlaylist() {}
-
+	/*
+	public Music searchMusicLibrary(String title) 
+	{
+		int achou = this.getSizeLibrary();
+		for(int posicao=0;posicao<achou;posicao++) 
+		{
+			Music titlesearcher = library.
+			
+		}
+	}
+*/
 }

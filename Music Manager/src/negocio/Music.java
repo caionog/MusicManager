@@ -11,8 +11,10 @@ import org.apache.tika.parser.mp3.ID3v1Handler;
 import org.apache.tika.sax.BodyContentHandler; 
 import org.xml.sax.SAXException;
 
+
 public class Music {
-	
+	public int contador = 0;
+	private int idSong = 0;
 	private String summarySong;
 	private String metaData;
 	private String artistSong;
@@ -53,9 +55,20 @@ public class Music {
 			this.favoriteSong = true;
 		}
 	}
+
 	
 	
-	
+	public int getIdSong() {
+		return idSong;
+		
+	}
+
+	public int setIdSong(int idSong) {
+		this.idSong = idSong;
+		idSong += 1;
+		return idSong;
+	}
+
 	public void CreatMusic(String path)  throws Exception, IOException, SAXException, TikaException
 	{
 		BodyContentHandler handler = new BodyContentHandler();  
@@ -72,6 +85,9 @@ public class Music {
 	    this.genreSong = tags.getGenre();
 	    this.metaData = metadata.toString();
 	    this.summarySong = handler.toString();
+	    this.setIdSong(idSong);
+	    idSong += idSong;
+	    
 	    
 	}
 		
