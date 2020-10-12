@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import negocio.User;
 public class UserRepo {
     private ArrayList<User> usuarioUsers = new ArrayList<User>();
+    private int IDs;
+    private int IdRemovido;
     
 
     //----------------buscadores-----------------\\
     public User searchUserName(String nomeUsuario ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
-        for ( int posicao=0; posicao<achou; posicao++){
+        for(int posicao=0;posicao<achou;posicao++){
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getNameUser() == nomeUsuario){
             return comparUser;
@@ -31,9 +33,9 @@ public class UserRepo {
 
     public User searchUserEmail(String emailUser ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
-        for (int posicao=0; posicao<achou; posicao++){
+        for(int posicao=0;posicao<achou;posicao++){
         User comparUser = usuarioUsers.get(posicao);
-        if (comparUser.getEmailUser().equals(emailUser)== true){
+        if (comparUser.getEmailUser().equalsIgnoreCase(emailUser)== true){
             return comparUser;
         }
         }
@@ -41,18 +43,30 @@ public class UserRepo {
     }
 
     public boolean addUser(User usuario){
-        usuario.setUserId(this.usuarioUsers.size()+1);
+        this.IDs++;
+        usuario.setUserId(this.IDs);
         return this.usuarioUsers.add(usuario);
         
     }
 
     public boolean removeUser(User usuario){
+      this.IdRemovido = usuario.getUserId();
+      this.refreshListID(IdRemovido);  
       return usuarioUsers.remove(usuario);
+
         
     }
+    public void refreshListID(int IdRemovido){
+        int achou = usuarioUsers.size();
+        for(int posicao = IdRemovido-1; posicao < achou; posicao++ ){
+            User usuario = this.usuarioUsers.get(posicao);
+           usuario.setUserId( usuario.getUserId() - 1 );
+        }
+        }
+    
     //------------------construtor---------------//
     public UserRepo(){
-        User defaultUSer = new User(false,"default","default","default");
+        User defaultUSer = new User(false,"default","","");
         usuarioUsers.add(defaultUSer);
     }
     public int getSize(){
