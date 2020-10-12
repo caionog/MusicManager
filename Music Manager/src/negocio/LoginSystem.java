@@ -42,9 +42,9 @@ public class LoginSystem {
 
     public void newAccount(UserRepo repositorioUser){// com dados verificados, ira chamar o construtor de user, cara novos usuarios;
         System.out.println("Name :");
-        Scanner name = new Scanner(System.in);
-        String nameInput = name.nextLine();
-        User newUser = new User(false,emailInput,nameInput,passWordInput);
+        Scanner nameInput = new Scanner(System.in);
+        this.name = nameInput.nextLine();
+        User newUser = new User(false,emailInput,name,passWordInput);
         repositorioUser.addUser(newUser);
         
     }
