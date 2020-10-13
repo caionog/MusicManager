@@ -31,6 +31,8 @@ public class MainScreen {
 		UserRepo repositorioUser = new UserRepo();
 		repositorioUser.addUser(defaultUser);
 		LoginSystem login = new LoginSystem();
+		
+		System.out.println("-------criando conta------");
         login.inputEmailAndPassWord();
 		login.newAccount(repositorioUser);
 		System.out.println("dados salvos");
