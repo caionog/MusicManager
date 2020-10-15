@@ -37,7 +37,10 @@ public class UserRepo {
         User comparUser = usuarioUsers.get(posicao);
         if (comparUser.getEmailUser().equalsIgnoreCase(emailUser)== true){
             return comparUser;
-        }
+            
+        } 
+     
+    
         }
         return null;
     }
@@ -51,12 +54,10 @@ public class UserRepo {
 
     public boolean removeUser(User usuario){
       this.IdRemovido = usuario.getUserId();
-      this.refreshListID(IdRemovido);  
-      return usuarioUsers.remove(usuario);
-
+        return usuarioUsers.remove(usuario);
         
     }
-    public void refreshListID(int IdRemovido){
+    public void refreshList(int IdRemovido){
         int achou = usuarioUsers.size();
         for(int posicao = IdRemovido-1; posicao < achou; posicao++ ){
             User usuario = this.usuarioUsers.get(posicao);
