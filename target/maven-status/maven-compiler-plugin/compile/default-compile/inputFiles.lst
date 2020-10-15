@@ -1,0 +1,17 @@
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/interfaces/IUserController.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/Music.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/interfaces/IMusicController.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/gui/MainScreen.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/data/UserRepo.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/data/MusicRepo.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/data/PlaylistRepo.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/User.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/gui/Applications.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/Genres.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/LoginSystem.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/controllers/UserController.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/controllers/MusicController.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/controllers/PlaylistController.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/interfaces/IPlaylistController.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/Playlist.java
+/home/murilo/VScode/Projeto IP2/MusicManager/Music Manager/src/negocio/controllers/LoginController.java
