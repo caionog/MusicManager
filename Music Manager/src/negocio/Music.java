@@ -75,7 +75,7 @@ public class Music {
 
 	//--------------------metodos-------------------\\
 	
-	public void CreateMusic(String path) throws Exception, IOException, SAXException, TikaException {
+	public void createMusic(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  

@@ -22,14 +22,8 @@ public class MainScreen {
 	
 	public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
 
-		String mp3StoragePath = "Music Manager\\src\\data\\mp3 storage\\";
-		String pathSong = mp3StoragePath + "Thanks For Playing My Game" + ".mp3";
-
-		// Music musica1 = new Music();
-		// musica1.CreatMusic(pathSong);
-	    // musica1.printMetadata(pathSong);
-	    // musica1.printSummary(pathSong);
-	    // System.out.println(musica1.getTitleSong());
+		String mp3StoragePath = "Music Manager\\src\\data\\mp3 storage\\GD\\";
+		String pathSong = mp3StoragePath + "BackOnTrack" + ".mp3";
 		
 		Boolean teste = true;
 		_Visibility v = Enum.valueOf(_Visibility.class, "VISIBLE");
@@ -40,7 +34,7 @@ public class MainScreen {
 		
 		if (teste) {
 			Music m = new Music(1, "title", "artist", genres, "summary", "metaData");
-			m.CreateMusic(pathSong);
+			m.createMusic(pathSong);
 			m.addGenre(g);
 			System.out.println( m.toString() );
 
@@ -69,7 +63,7 @@ public class MainScreen {
         login.inputEmailAndPassWord();
 		boolean validate = login.isValidateInput(repositorioUser);
 		System.out.println(validate);
-		if(validate==true){
+		if(validate==true) {
 			System.out.println(" bem vindo");
 
 		} else {
