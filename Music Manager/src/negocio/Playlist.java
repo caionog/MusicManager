@@ -32,6 +32,9 @@ public class Playlist {
 
 	//----------------------setters------------------//
 
+	public void setId(int id) {
+		this.id = id;
+	}
 	public void setMusics(ArrayList<Music> musics) {
 		this.musics = musics;
 	}
