@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.util.Scanner;
 import org.apache.tika.exception.TikaException;
+import org.apache.tika.parser.microsoft.SummaryExtractor;
 import org.xml.sax.SAXException;
 
 import negocio.LoginSystem;
@@ -18,17 +19,33 @@ public class MainScreen {
 	public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
 		
 		System.out.println("teste");
-		String pathSong ="hey-jude.mp3";
+		String path ="hey-jude.mp3";
 		Music musica1 = new Music();
-		musica1.CreatMusic(pathSong);
-		System.out.println("ID da musica: ");
-		System.out.println(musica1.getIdSong());
-		Music musica2 = new Music();
-		pathSong = "nerdcast_746_relacoes_publicas_med.mp3";
-		musica2.CreatMusic(pathSong);
-		System.out.println("ID da musica: ");
-		System.out.println(musica2.getIdSong());
+		musica1.CreatMusic(path);
+		System.out.println("O caminho da musica de ID "+musica1.getIdSong()+" é: "+musica1.getPathSong());
+		System.out.println("As informações da muisca de ID " + musica1.getIdSong()+" são: ");
+		musica1.printSummary(musica1.getPathSong());
+	
+
 		
+		
+		Music musica2 = new Music();
+		path = "nerdcast_746_relacoes_publicas_med.mp3";
+		musica2.CreatMusic(path);
+		System.out.println("O caminho da musica de ID "+musica2.getIdSong()+" é: "+musica2.getPathSong());
+		System.out.println("As informações da muisca de ID " + musica2.getIdSong()+" são: ");
+		musica2.printSummary(musica2.getPathSong());
+	
+		Music musica3 = new Music();
+		path = "bensound-acousticbreeze.mp3";
+		musica3.CreatMusic(path);
+		System.out.println("O caminho da musica de ID "+musica3.getIdSong()+" é: "+musica3.getPathSong());
+		System.out.println("As informações da muisca de ID " + musica3.getIdSong()+" são: ");
+		musica2.printSummary(musica3.getPathSong());
+
+		
+	//	System.out.println("O caminho da musica de ID "+musica1.getIdSong()+" é: "+musica1.getPathSong());
+
 		
 	    //musica1.printMetadata(pathSong);
 	    //musica1.printSummary(pathSong);
