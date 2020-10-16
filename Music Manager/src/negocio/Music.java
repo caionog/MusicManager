@@ -1,9 +1,12 @@
 package negocio;
 
-import java.io.File;  
-import java.io.FileInputStream;  
-import java.io.IOException;  
-import org.apache.tika.exception.TikaException;  
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import java.util.ArrayList;
+
+import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;  
 import org.apache.tika.parser.ParseContext;  
 import org.apache.tika.parser.mp3.Mp3Parser;
@@ -12,59 +15,67 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
 public class Music {
-	private int idSong;
-	private String summarySong;
+
+	private int id;
+	private String title;
+	private String artist;
+	private ArrayList<Genre> genres = new ArrayList<Genre>();
+
+	private String summary;
 	private String metaData;
-	private String artistSong;
-	private String titleSong;
-	private String genreSong;
-	private boolean favoriteSong;
 
-	//GETTERS
+	public Music(int id, String title, String artist, ArrayList<Genre> genres, String summary, String metaData) {
+		this.id = id;
+		this.title = title;
+		this.artist = artist;
+		this.genres = genres;
 
-	public String getSummarySong() {
-		return summarySong;
+		this.summary = summary;
+		this.metaData = metaData;
 	}
 
+	//---------------------getters-----------------//
+
+	public int getId() {
+		return id;
+	}
+	public String getSummary() {
+		return summary;
+	}
 	public String getMetaData() {
 		return metaData;
 	}
-
 	public String getArtistSong() {
-		return artistSong;
+		return artist;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public ArrayList<Genre> getGenres() {
+		return genres;
 	}
 
-	public String getTitleSong() {
-		return titleSong;
-	}
-
-	public String getGenreSong() {
-		return genreSong;
-	}
-
-	public boolean isFavoriteSong() {
-		return favoriteSong;
-	}
-
-	public void makeFavoriteSong(Music music) 
-	{
-		if(this.favoriteSong == false) 
-		{
-			this.favoriteSong = true;
-		}
-	}
+	//----------------------setters------------------//
 	
-	public int getId() 
-	{
-		return this.idSong;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
-	public void setId(int Id) 
-	{
-		this.idSong = Id;
+	public void setMetaData(String metaData) {
+		this.metaData = metaData;
 	}
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public void setGenres(ArrayList<Genre> genres) {
+		this.genres = genres;
+	}
+
+	//--------------------metodos-------------------\\
 	
-	public void CreatMusic(String path)  throws Exception, IOException, SAXException, TikaException
-	{
+	public void CreateMusic(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  
@@ -74,16 +85,18 @@ public class Music {
 	    Mp3Parser.parse(inputstream, handler, metadata, pcontext);
 	    
 	    
-	    this.artistSong = tags.getArtist();
-	    this.titleSong = tags.getTitle();
-	    this.genreSong = tags.getGenre();
-	    this.metaData = metadata.toString();
-	    this.summarySong = handler.toString();
-	    
+	    setArtist( tags.getArtist() );
+	    setTitle( tags.getTitle() );
+	    String genresTemp = tags.getGenre();
+	    setMetaData( metadata.toString() );
+		setSummary( handler.toString() );
+		
+		// Tratamento do output do tika para se encaixar no enum
+	    System.out.println("Generos temp: " + genresTemp);
+	    System.out.println("Generos: " + genres);
 	}
 		
-	public void printMetadata(String path)throws Exception, IOException, SAXException, TikaException
-	{
+	public void printMetadata(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  
@@ -94,9 +107,7 @@ public class Music {
 	
 	}
 	
-	public void printSummary(String path)throws Exception, IOException, SAXException, TikaException
-    {
-    	
+	public void printSummary(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  
@@ -105,5 +116,22 @@ public class Music {
 	    Mp3Parser.parse(inputstream, handler, metadata, pcontext);
 	    System.out.println("Summary:\n"+ handler.toString());
 	}
+
+	public void addGenre(Genre g) {
+		genres.add(g);
+	}
 	
+	public String toString() {
+		String s = "[";
+		s += "id= " + id;
+		s += ", title= " + title;
+		s += ", artista= "+ artist;
+		s += ", generos=" + genres;
+		s += ", metadata= " + metaData;
+		s += ", summary= " + summary;
+		s += "]";
+
+		return s;
+	}
+
 }

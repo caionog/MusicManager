@@ -6,7 +6,7 @@ import negocio.User;
 public class UserRepo {
     private ArrayList<User> usuarioUsers = new ArrayList<User>();
     private int IDs;
-    private int IdRemovido;
+    // private int IdRemovido;
     
 
     //----------------buscadores-----------------\\
@@ -52,28 +52,28 @@ public class UserRepo {
         
     }
 
-    public boolean removeUser(User usuario){
-      this.IdRemovido = usuario.getUserId();
+    public boolean removeUser(User usuario) {
+        // this.IdRemovido = usuario.getUserId();
         return usuarioUsers.remove(usuario);
-        
     }
-    public void refreshList(int IdRemovido){
+
+    public void refreshList(int IdRemovido) {
         int achou = usuarioUsers.size();
-        for(int posicao = IdRemovido-1; posicao < achou; posicao++ ){
+        for(int posicao = IdRemovido-1; posicao < achou; posicao++ ) {
             User usuario = this.usuarioUsers.get(posicao);
            usuario.setUserId( usuario.getUserId() - 1 );
         }
         }
     
     //------------------construtor---------------//
-    public UserRepo(){
-        User defaultUSer = new User(false,"default","","");
+    public UserRepo() {
+        User defaultUSer = new User(0, false, "default", "", "");
         usuarioUsers.add(defaultUSer);
     }
-    public int getSize(){
+    public int getSize() {
         return this.usuarioUsers.size();
     }
-    public User getUser(int index){
+    public User getUser(int index) {
         return this.usuarioUsers.get(index);
     }
 }

@@ -14,17 +14,15 @@ public class LoginSystem {
         return true;
     }
 
-    public void inputEmailAndPassWord(){// trata os dados do input para teste de validação.
+    public void inputEmailAndPassWord() {// trata os dados do input para teste de validação.
         Scanner login = new Scanner(System.in);
         System.out.println("E-mail :");
         this.emailInput = login.nextLine();
         System.out.println("senha :");
         this.passWordInput = login.nextLine();
-        
-       
     }
 
-    public boolean isValidateInput(UserRepo repositorioUser){// verifica se os dados do input são validos para acesso.
+    public boolean isValidateInput(UserRepo repositorioUser) {// verifica se os dados do input são validos para acesso.
        User login = repositorioUser.searchUserEmail(this.emailInput);// caso seja encontrado login = usuario caso contratio login = null;
        if(login == null){// se login == null email nao encontrado.
         System.out.println("email nao encontrado");   
@@ -40,19 +38,20 @@ public class LoginSystem {
         }
     }
 
-    public void newAccount(UserRepo repositorioUser){// com dados verificados, ira chamar o construtor de user, cara novos usuarios;
+    public void newAccount(UserRepo repositorioUser) {// com dados verificados, ira chamar o construtor de user, cara novos usuarios;
         System.out.println("Name :");
         Scanner nameInput = new Scanner(System.in);
         this.name = nameInput.nextLine();
-        User newUser = new User(false,emailInput,name,passWordInput);
+        User newUser = new User(1, false, emailInput, name, passWordInput);
         repositorioUser.addUser(newUser);
-        
     }
-    public LoginSystem(){
+
+    public LoginSystem() {
         this.emailInput = "";
         this.passWordInput = "";
     }
-    public User loginNow(UserRepo repositorioUser){
+
+    public User loginNow(UserRepo repositorioUser) {
         return repositorioUser.searchUserId(this.alrightLogin);
     }
 }
