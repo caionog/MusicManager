@@ -1,18 +1,6 @@
 package negocio;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
 import java.util.ArrayList;
-
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;  
-import org.apache.tika.parser.ParseContext;  
-import org.apache.tika.parser.mp3.Mp3Parser;
-import org.apache.tika.parser.mp3.ID3v1Handler;
-import org.apache.tika.sax.BodyContentHandler; 
-import org.xml.sax.SAXException;
 
 public class Music {
 
@@ -57,6 +45,9 @@ public class Music {
 
 	//----------------------setters------------------//
 	
+	public int setId(int id) {
+		return this.id = id;
+	}
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
@@ -74,48 +65,6 @@ public class Music {
 	}
 
 	//--------------------metodos-------------------\\
-	
-	public void createMusic(String path) throws Exception, IOException, SAXException, TikaException {
-		BodyContentHandler handler = new BodyContentHandler();  
-	    Metadata metadata = new Metadata();  
-	    FileInputStream inputstream = new FileInputStream(new File(path));  
-	    ParseContext pcontext = new ParseContext();  
-	    Mp3Parser  Mp3Parser = new  Mp3Parser(); 
-	    ID3v1Handler tags = new ID3v1Handler(inputstream, handler);
-	    Mp3Parser.parse(inputstream, handler, metadata, pcontext);
-	    
-	    
-	    setArtist( tags.getArtist() );
-	    setTitle( tags.getTitle() );
-	    String genresTemp = tags.getGenre();
-	    setMetaData( metadata.toString() );
-		setSummary( handler.toString() );
-		
-		// Tratamento do output do tika para se encaixar no enum
-	    System.out.println("Generos temp: " + genresTemp);
-	    System.out.println("Generos: " + genres);
-	}
-		
-	public void printMetadata(String path) throws Exception, IOException, SAXException, TikaException {
-		BodyContentHandler handler = new BodyContentHandler();  
-	    Metadata metadata = new Metadata();  
-	    FileInputStream inputstream = new FileInputStream(new File(path));  
-	    ParseContext pcontext = new ParseContext();  
-	    Mp3Parser  Mp3Parser = new  Mp3Parser(); 
-	    Mp3Parser.parse(inputstream, handler, metadata, pcontext);
-	    System.out.println("Metadata:\n" + metadata.toString());
-	
-	}
-	
-	public void printSummary(String path) throws Exception, IOException, SAXException, TikaException {
-		BodyContentHandler handler = new BodyContentHandler();  
-	    Metadata metadata = new Metadata();  
-	    FileInputStream inputstream = new FileInputStream(new File(path));  
-	    ParseContext pcontext = new ParseContext();  
-	    Mp3Parser  Mp3Parser = new  Mp3Parser(); 
-	    Mp3Parser.parse(inputstream, handler, metadata, pcontext);
-	    System.out.println("Summary:\n"+ handler.toString());
-	}
 
 	public void addGenre(Genre g) {
 		genres.add(g);
@@ -127,8 +76,8 @@ public class Music {
 		s += ", title= " + title;
 		s += ", artista= "+ artist;
 		s += ", generos=" + genres;
-		s += ", metadata= " + metaData;
 		s += ", summary= " + summary;
+		s += ", metadata= " + metaData;
 		s += "]";
 
 		return s;
