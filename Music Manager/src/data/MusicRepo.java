@@ -8,25 +8,21 @@ import negocio.Genre;
 import negocio.Music;
 
 public class MusicRepo {
-    private ArrayList<Music> library = new ArrayList<Music>();
+    private ArrayList<Music> musicLibrary = new ArrayList<Music>();
+
+    public ArrayList<Music> getMusicLibrary() {
+        return musicLibrary;
+    }
 
     // CRD (o U é Update/Editar, e editar música não faz sentido)
 
     // Create Music no ArrayList
     public void createMusic(String title, String artist, ArrayList<Genre> genres, String summary, String metaData) {
 
-        // Simulação dos dados extraidos na musica "GD\BackOnTrack.mp3"
-        genres = new ArrayList<Genre>();
-        Genre g = Enum.valueOf(Genre.class, "ELETRONIC");
-        Music m = new Music(1, "BackOnTrack", "Waterflame", genres, "Musica do jogo geometry dash", "metaData");
-        m.addGenre(g);
-        System.out.println("Simulação de criar música: \n" + m.toString());
+        int id = musicLibrary.size()+1;
+        Music m = new Music(id, title, artist, genres, summary, metaData);
 
-        // Comentado enquanto a função extrair estivar sendo criada
-        // int id = library.size()+1;
-        // Music m = new Music(id, title, artist, genres, summary, metaData);
-
-        library.add(m);
+        musicLibrary.add(m);
 
         // TO-DO: Código que adiciona no .txt mais uma Music
     }
@@ -56,7 +52,7 @@ public class MusicRepo {
 
     // Deletar Music no ArrayList e atualiza o .txt
     public Boolean deleteMusic(Music m) {
-        Boolean result = library.remove(m);
+        Boolean result = musicLibrary.remove(m);
 
         if (result == true) {
             // Atualiza o .txt
@@ -67,15 +63,19 @@ public class MusicRepo {
 
     // Funções auxiliares
 
-    private Music searchMusic(int id) {
-        Music m = null;
-        
-        for (Music music : library) {
-            if (music.getId() == id) {
-                m = music;
-            }
-        }
-
-        return m;
+    public Music getMusic(int index) {
+        return musicLibrary.get(index);
     }
+
+    // private Music searchMusic(int id) {
+    //     Music m = null;
+        
+    //     for (Music music : musicLibrary) {
+    //         if (music.getId() == id) {
+    //             m = music;
+    //         }
+    //     }
+
+    //     return m;
+    // }
 }

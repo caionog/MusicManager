@@ -4,20 +4,33 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import negocio.Music;
 import negocio.Playlist;
+import negocio.User;
 
 public class PlaylistRepo {
-    private ArrayList<Playlist> playlistsBank = new ArrayList<Playlist>();
+    private ArrayList<Playlist> playlistsLibrary = new ArrayList<Playlist>();
 
-    // CRD (o U é Update/Editar, e editar música não faz sentido)
+    public ArrayList<Playlist> getPlaylistsBank() {
+        return playlistsLibrary;
+    }
+
+    // CRUD
 
     // Create Music no ArrayList
-    public void createPlaylist() {
-        // Código que adiciona no .txt mais uma playlist
+    // Adiciona Playlist no Arraylist e atualiza o .txt
+    public void createPlaylist(ArrayList<Music> musics, User creator) {
+
+        int id = playlistsLibrary.size()+1;
+        Playlist p = new Playlist(id, musics, creator);
+
+        playlistsLibrary.add(p);
+
+        // TO-DO Código que adiciona no .txt mais uma playlist
     }
 
     // Read Playlist num .txt e coloca tds elas no arraylist MusicBanck
-    public void readPlaylistBanck() throws FileNotFoundException {
+    public void readPlaylistLibrary() throws FileNotFoundException {
         FileReader reader = new FileReader("Music Manager\\src\\data\\txt storage\\repositorio de playlists.txt");
 
         // int character = reader.read();
@@ -34,22 +47,9 @@ public class PlaylistRepo {
         // System.out.print( "\n" + valueOff(id));
     }
 
-    // Adiciona Playlist no Arraylist e atualiza o .txt
-    public boolean addPlaylist(Playlist p) { 
-        p.setId(playlistsBank.size()+1);
-
-        Boolean result =  playlistsBank.add(p);
-
-        if (result) {
-            // Atualiza o .txt
-        }
-
-        return result;
-    }
-
     // Deletar Playlist no ArrayList e atualiza o .txt
     public Boolean deletePlaylist(Playlist p) {
-        Boolean result =  playlistsBank.remove(p);
+        Boolean result =  playlistsLibrary.remove(p);
 
         if (result == true) {
             // Atualiza o .txt
@@ -62,7 +62,7 @@ public class PlaylistRepo {
     private Playlist searchPlaylist(int id) {
         Playlist p = null;
         
-        for (Playlist playlist : playlistsBank) {
+        for (Playlist playlist : playlistsLibrary) {
             if (playlist.getId() == id) {
                 p = playlist;
             }

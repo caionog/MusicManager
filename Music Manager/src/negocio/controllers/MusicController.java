@@ -20,20 +20,24 @@ public class MusicController {
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  
 	    ParseContext pcontext = new ParseContext();  
-	    Mp3Parser  Mp3Parser = new  Mp3Parser(); 
+		Mp3Parser  Mp3Parser = new  Mp3Parser(); 
 		ID3v1Handler tags = new ID3v1Handler(inputstream, handler);
 		
-	    Mp3Parser.parse(inputstream, handler, metadata, pcontext); // Extrai metadata nesse comando
-	    
-	    String artist = tags.getArtist();
+		Mp3Parser.parse(inputstream, handler, metadata, pcontext); // Extrai metadata nesse comando
+
+		String artist = tags.getArtist();
 	    String title = tags.getTitle();
-	    String genresTemp = tags.getGenre();
-	    String metaData = metadata.toString();
+		String genresTemp = tags.getGenre();
+		String metaData = metadata.toString();
 		String summary = handler.toString();
 		
-		// Tratamento do output genresTemp do tika para se encaixar no ArrayList<Genre> que eh um arraylist de enum
-
-		Boolean debugMode = true;
+		// TO-DO Tratamento do output genresTemp do tika para se encaixar no ArrayList<Genre> que eh um arraylist de enum
+		// genres = new ArrayList<Genre>();
+        // Genre g = Enum.valueOf(Genre.class, "ELETRONIC");
+        // Genre g1 = Enum.valueOf(Genre.class, "POP");
+		// Genre g2 = Enum.valueOf(Genre.class, "ROCK");
+		
+		Boolean debugMode = false;
 	
 		if (debugMode) {
 			System.out.println("=-= Informações extraidas =-=");
@@ -41,8 +45,7 @@ public class MusicController {
 			System.out.println("title: " + title);
 			System.out.println("Generos temp: " + genresTemp);
 			System.out.println("metaData: " + metaData);
-			System.out.println("summary: " + summary);
-			System.out.println("\n");
+			System.out.println("summary: " + summary + "\n");
 		}
 		
 		mr.createMusic(artist, title, null, metaData, summary);
