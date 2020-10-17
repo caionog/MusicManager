@@ -2,6 +2,7 @@ package negocio;
 
 public enum Genre {
 
+  NULL(-1), NOT_LISTED(0), 
   AXE(1), BLUES(2), COUNTRY(3), ELETRONIC(4), LINING(5),
   FUNK(6), GOSPEL(7), HIPHOP(8), JAZZ(9), MPB(10),
   CLASSIC(11), PAGODE(12), POP(13), REAGUE(14), ROCK(15),
@@ -11,5 +12,9 @@ public enum Genre {
 
   Genre(int value) {
     this.value = value;
+  }
+
+  public int getValue() {
+    return value;
   }
 }

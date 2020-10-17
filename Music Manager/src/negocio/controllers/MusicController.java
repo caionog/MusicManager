@@ -3,7 +3,6 @@ package negocio.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
@@ -14,9 +13,10 @@ import org.xml.sax.SAXException;
 
 import data.MusicRepo;
 import negocio.Genre;
+import negocio.Music;
 public class MusicController {
 
-    public void extractMetaData(MusicRepo mr, String path) throws Exception, IOException, SAXException, TikaException {
+    public void extractMetaData(MusicRepo musicRepo, String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  
@@ -29,12 +29,10 @@ public class MusicController {
 	    // String title = tags.getTitle();
 		// String genresTemp = tags.getGenre();
 		
+		String title =  metadata.get("title");
 		String artist = metadata.get("creator");
-	    String title =  metadata.get("title");
-		String genresTemp = metadata.get("xmpDM:genre");
+		String genreStr = metadata.get("xmpDM:genre");
 		String comprimentoStr = metadata.get("xmpDM:duration");
-		String metaData = metadata.toString();
-		String summary = handler.toString();
 		
 		// Tratamento dos dados extraidos
 
@@ -43,26 +41,26 @@ public class MusicController {
 		int minutes = (int) ((comprimento / (1000*60)) % 60);
 		int hours   = (int) ((comprimento / (1000*60*60)) % 24);
 
-		ArrayList<Genre> genres = null;
-		if ( genresTemp != null ) {
-			genres = new ArrayList<Genre>(0);
-			Genre g = Enum.valueOf(Genre.class, genresTemp.toUpperCase());
-			genres.add(g);
+		Genre genre;
+		if ( genreStr != null ) {
+			genre = Enum.valueOf(Genre.class, genreStr.toUpperCase());
+		} else {
+			genre = Enum.valueOf(Genre.class, "NULL");
 		}
 
-		// TO-DO pedir para o usuario completar os generos ???
+		// TO-DO pedir para o usuario completar os genero nos arquivos sem genero
 		
 
-		Boolean debugMode = true;
+		Boolean teste = false;
 	
-		if (debugMode) {
+		if (teste) {
 			System.out.println("=-= Informações extraidas =-=");
-			System.out.println("artist: " + artist);
 			System.out.println("title: " + title);
-			System.out.println("Generos temp: " + genresTemp);
+			System.out.println("artist: " + artist);
+			System.out.println("Generos temp: " + genreStr);
 			System.out.println("Duração em ms: " + comprimento + "|" + String.format("%02d:%02d:%02d", hours, minutes, seconds) );
-			// System.out.println("metaData: " + metaData);
-			// System.out.println("summary: " + summary + "\n");
+			// System.out.println("metaData: " +  metadata.toString());
+			// System.out.println("summary: " + handler.toString());
 			System.out.println("=-= --------------------- =-=");
 			
 			Boolean mostrarTags = false;
@@ -77,7 +75,11 @@ public class MusicController {
 			}
 		}
 		
-		mr.createMusic(artist, title, genres, metaData, summary);
+		musicRepo.createMusic(title, artist, genre, comprimentoStr);
+	}
+
+	public void deleteMusic(MusicRepo musicRepo, Music selectedMusic) {
+		musicRepo.deleteMusic(selectedMusic);
 	}
 		
 	public void printMetadata(String path) throws Exception, IOException, SAXException, TikaException {

@@ -1,25 +1,18 @@
 package negocio;
-
-import java.util.ArrayList;
-
 public class Music {
 
 	private int id;
 	private String title;
 	private String artist;
-	private ArrayList<Genre> genres = new ArrayList<Genre>();
+	private Genre genre;
+	private String duration;
 
-	private String summary;
-	private String metaData;
-
-	public Music(int id, String title, String artist, ArrayList<Genre> genres, String summary, String metaData) {
+	public Music(int id, String title, String artist, Genre genre, String duration) {
 		this.id = id;
 		this.title = title;
 		this.artist = artist;
-		this.genres = genres;
-
-		this.summary = summary;
-		this.metaData = metaData;
+		this.genre = genre;
+		this.duration = duration;
 	}
 
 	//---------------------getters-----------------//
@@ -27,20 +20,17 @@ public class Music {
 	public int getId() {
 		return id;
 	}
-	public String getSummary() {
-		return summary;
-	}
-	public String getMetaData() {
-		return metaData;
-	}
-	public String getArtistSong() {
+	public String getArtist() {
 		return artist;
 	}
 	public String getTitle() {
 		return title;
 	}
-	public ArrayList<Genre> getGenres() {
-		return genres;
+	public Genre getGenre() {
+		return genre;
+	}
+	public String getDuration() {
+		return duration;
 	}
 
 	//----------------------setters------------------//
@@ -48,36 +38,30 @@ public class Music {
 	public int setId(int id) {
 		return this.id = id;
 	}
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
-	public void setMetaData(String metaData) {
-		this.metaData = metaData;
-	}
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public void setGenres(ArrayList<Genre> genres) {
-		this.genres = genres;
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	//--------------------metodos-------------------\\
-
-	public void addGenre(Genre g) {
-		genres.add(g);
-	}
 	
 	public String toString() {
 		String s = "[";
 		s += "id= " + id;
 		s += ", title= " + title;
 		s += ", artista= "+ artist;
-		s += ", generos=" + genres;
-		s += ", summary= " + summary;
-		s += ", metadata= " + metaData;
+		s += ", generos=" + genre;
+		s += ", duration=" + duration;
+		// s += ", summary= " + summary;
+		// s += ", metadata= " + metaData;
 		s += "]";
 
 		return s;
