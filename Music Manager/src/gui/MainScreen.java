@@ -36,34 +36,41 @@ public class MainScreen {
 		// Simulando o input do path duma música
 		String mp3StoragePath = "Music Manager\\src\\data\\mp3 storage\\";
 		String pathSong = mp3StoragePath + "GD\\BackOnTrack" + ".mp3";
-		String pathSong2 = mp3StoragePath + "hey-jude" + ".mp3";
-		String pathSong3 = mp3StoragePath + "GD\\53576" + ".mp3";
+		String pathSong1 = mp3StoragePath + "hey-jude" + ".mp3";
+		String pathSong2 = mp3StoragePath + "GD\\53576" + ".mp3";
+		String pathSong3 = mp3StoragePath + "Transistor\\Darren Korb - She Shines" + ".mp3";
 		
 		// Simulando a extração de dados e criação da Music no repositório de musicas com base no input path
 		mController.extractMetaData(mRepo, pathSong);
+		mController.extractMetaData(mRepo, pathSong1);
 		mController.extractMetaData(mRepo, pathSong2);
 		mController.extractMetaData(mRepo, pathSong3);
 		
 		Music backOnTrack = mRepo.getMusic(0);
 		Music heyJude = mRepo.getMusic(1);
 		Music guitarVSpiano = mRepo.getMusic(2);
+		Music sheShines = mRepo.getMusic(3);
 
-		System.out.println("Resultado da simulação de criar música: \n" + backOnTrack.toString() );
-		System.out.println("Resultado da simulação de criar música: \n" + heyJude.toString() );
-		System.out.println("Resultado da simulação de criar música: \n" + guitarVSpiano.toString() );
+		// System.out.println("Resultado da simulação de criar música: \n" + backOnTrack.toString() );
+		// System.out.println("Resultado da simulação de criar música: \n" + heyJude.toString() );
+		// System.out.println("Resultado da simulação de criar música: \n" + guitarVSpiano.toString() );
+		// System.out.println("Resultado da simulação de criar música: \n" + sheShines.toString() );
 
 		ArrayList<Music> selectedMusic = new ArrayList<Music>(); 
 		selectedMusic.add(backOnTrack);
 		selectedMusic.add(heyJude);
 		selectedMusic.add(guitarVSpiano);
+		selectedMusic.add(sheShines);
 
 		pController.groupSelectedMusic(pRepo, selectedMusic, loggedUser);
 
-		mController.printMetadata(pathSong);
-		mController.printMetadata(pathSong2);
-		mController.printMetadata(pathSong3);
+		// mController.printMetadata(pathSong);
+		// mController.printMetadata(pathSong1);
+		// mController.printMetadata(pathSong2);
+		// mController.printMetadata(pathSong3);
 
 		// mController.printSummary(pathSong);
+		// mController.printSummary(pathSong1);
 		// mController.printSummary(pathSong2);
 		// mController.printSummary(pathSong3);
 
