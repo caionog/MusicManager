@@ -16,22 +16,23 @@ public class PlaylistController {
         pRepo.createPlaylist(selected, creator);
     }
 
+
     public void populatePlaylistLibrary(PlaylistRepo playlistRepo, MusicRepo musicRepo) throws FileNotFoundException {
-        playlistRepo.readPlaylistLibrary(musicRepo);
-	}
+        playlistRepo.populatePlaylistLibrary(musicRepo);
+    }
+    
 
     public void togglePlaylistVisibility(PlaylistRepo playlistRepo, Playlist selectedPlaylist) throws IOException {
         playlistRepo.updatePlaylist(selectedPlaylist);
     }
 
+
 	public void editPlaylist(PlaylistRepo playlistRepo, Music selectedMusic) {
 
     }
+
     
     public void deletePlaylist() {
         
     }
-
-	
-
 }

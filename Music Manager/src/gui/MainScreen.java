@@ -2,21 +2,21 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
-import negocio.LoginSystem;
+import negocio.UserPermission;
 import negocio.Music;
 import negocio.Playlist;
 import negocio.User;
 import data.MusicRepo;
 import data.PlaylistRepo;
 import data.UserRepo;
-
+import negocio.controllers.LoginController;
 import negocio.controllers.MusicController;
 import negocio.controllers.PlaylistController;
+import negocio.controllers.UserController;
 
 public class MainScreen {
 
@@ -25,8 +25,9 @@ public class MainScreen {
 		System.out.println("[ ('¬')_Ll Loading Program... ]");
 
 		// Instanciando o básico para inicializar o sistema
-		User loggedUser = new User(1, true, "logged@gmail.com", "usuário de teste", "1234");
 
+		LoginController login = new LoginController();
+		UserController userController = new UserController();
 		MusicController musicController = new MusicController();
 		PlaylistController playlistController = new PlaylistController();
 
@@ -37,6 +38,18 @@ public class MainScreen {
 		PlaylistRepo playlistRepo = new PlaylistRepo();
 		playlistRepo.resetRepo();
 		playlistController.populatePlaylistLibrary(playlistRepo, musicRepo);
+
+		UserRepo userRepo = new UserRepo();
+		userRepo.resetRepo();
+		userController.populateUsersRepo(userRepo, musicRepo, playlistRepo);
+
+		// Criando 2 usuarios
+		userController.registerUser(userRepo, UserPermission.ADM, "maria@gmail.com", "Maria Ferreira", "123456");
+		userController.registerUser(userRepo, UserPermission.ADM, "logged@gmail.com", "usuário de teste", "1234");
+		
+		User defaultUser = userRepo.getUserByIndex(0);
+		User loggedUser = userRepo.getUserByIndex(1);
+
 
 		// Simulando o input do path duma música
 		String mp3StoragePath = "Music Manager\\src\\data\\mp3 storage\\";
@@ -75,42 +88,40 @@ public class MainScreen {
 
 		// Print do resultado da criação e troca de visibilidade da playlist
 		System.out.println(selectedPlaylist.toString());
-
-		Boolean testarLogin = false;
-
-		if (testarLogin) {
-			User defaultUser = new User(1, false,"maria@gmail.com","Maria Ferreira" , "123456");
-			UserRepo repositorioUser = new UserRepo();
-			repositorioUser.addUser(defaultUser);
-			LoginSystem login = new LoginSystem();
 			
-			System.out.println("-------criando conta------");
-			login.inputEmailAndPassWord();
-			login.newAccount(repositorioUser);
-			System.out.println("dados salvos");
-			System.out.println(repositorioUser.getSize());
-			System.out.println(repositorioUser.getUser(0).getEmailUser());
-			System.out.println(repositorioUser.getUser(1).getEmailUser());
-			System.out.println(repositorioUser.getUser(2).getEmailUser());
-			System.out.println(repositorioUser.getSize());
-			defaultUser.setNameUser("Jorge");
-			System.out.println(repositorioUser.searchUserName("Jorge"));
-			System.out.println("isso aqui; "+ repositorioUser.searchUserEmail("murilo@gmail.com"));
-			System.out.println(repositorioUser.searchUserEmail("murilo@gmail.com"));
+		// Adicionando musicas e playlists favoritas no loggedUser
+		Music favMusic = musicRepo.getMusicByIndex(0);
+		Playlist favPlaylist = playlistRepo.getPlaylistByIndex(0);
+
+		userController.addFavoriteMusic(userRepo, loggedUser, favMusic);
+		userController.addFavoritePlaylist(userRepo, loggedUser, favPlaylist);
+		
+		
+		System.out.println("-------criando conta------");
+		login.inputEmailAndPassWord();
+		login.newAccount(userRepo);
+		System.out.println("dados salvos");
+		System.out.println(userRepo.getSize());
+		System.out.println(userRepo.getUserByIndex(0).getEmail());
+		System.out.println(userRepo.getUserByIndex(1).getEmail());
+		System.out.println(userRepo.getUserByIndex(2).getEmail());
+		System.out.println(userRepo.getSize());
+		defaultUser.setNameUser("Jorge");
+		System.out.println(userRepo.searchUserByName("Jorge"));
+		System.out.println("isso aqui; "+ userRepo.searchUserByEmail("murilo@gmail.com"));
+		System.out.println(userRepo.searchUserByEmail("murilo@gmail.com"));
 
 
-			System.out.println("-------testando login------");
-			login.inputEmailAndPassWord();
-			boolean validate = login.isValidateInput(repositorioUser);
-			System.out.println(validate);
-			if(validate==true) {
-				System.out.println(" bem vindo");
+		System.out.println("-------testando login------");
+		login.inputEmailAndPassWord();
+		boolean validate = login.isValidateInput(userRepo);
+		System.out.println(validate);
+		if(validate==true) {
+			System.out.println(" bem vindo");
 
-			} else {
-				System.out.println("email invalido ou senha incorreta");
-			}
-
-		} // Fim do if de teste
+		} else {
+			System.out.println("email invalido ou senha incorreta");
+		}
 	
 	} // Fim do main
 	

@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +14,7 @@ import negocio._Visibility;
 
 public class PlaylistRepo {
 
-    private ArrayList<Playlist> playlistsLibrary = new ArrayList<>();
+    private ArrayList<Playlist> playlistsLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\playlists repository\\";
 
     // TO-DO alterar id dentro do .txt ou visibilidade (U)
@@ -28,7 +26,7 @@ public class PlaylistRepo {
 
         // Cria a playlist
         int id = generateId(); // Gera um id unico, ou seja, nao se repete
-        Playlist p = new Playlist(id, musics, creator.getUserId(), _Visibility.INVISIBLE);
+        Playlist p = new Playlist(id, musics, creator.getId(), _Visibility.INVISIBLE);
 
         // Adiciona na biblioteca
         playlistsLibrary.add(p);
@@ -54,50 +52,56 @@ public class PlaylistRepo {
         }
     }
 
-    // Read Playlist num .txt e coloca tds elas no arraylist playlistsLibrary
-    public void readPlaylistLibrary(MusicRepo musicRepo) throws FileNotFoundException {
-        File playlistRepoFolder = new File(absolutePath);
 
-        for (final File playlist : playlistRepoFolder.listFiles()) {
-            Boolean teste = false;
-            if (teste) {
-                System.out.println(playlist.getName());
-                System.out.println(playlist.getPath());
-            }
+    // Read playlist.txt
+    public ArrayList<String> readPlaylist(int playlistId) throws FileNotFoundException {
 
-            ArrayList<String> playlistData = new ArrayList<>(4);
-            Scanner reader = new Scanner(playlist);
-            while (reader.hasNextLine()) {
-                String lineData = reader.nextLine();
-                if (teste) {
-                    System.out.println(lineData);
-                }
-                
-                playlistData.add(lineData);
-            }
-            reader.close();
+        ArrayList<String> playlistData = new ArrayList<>(4);
 
-            int id = Integer.valueOf(playlistData.get(0)); // Str -> int
-            int creatorId = Integer.valueOf(playlistData.get(1)); // str -> int
-            _Visibility v = Enum.valueOf(_Visibility.class, playlistData.get(2)); // Str -> _Visibilty
-            String musicsIds[] = playlistData.get(3).split(","); // Str -> Str[] -> ArrayList<Music>
+        File playlistFile = new File(absolutePath + playlistId + ".txt");
+        Scanner reader = new Scanner(playlistFile);
 
-            // Str[] -> ArrayList<Music>
-            ArrayList<Music> musics = new ArrayList<>();
-            for (String musicId : musicsIds) {
-                Music m = musicRepo.searchMusic(Integer.valueOf(musicId));
-                if (m != null) musics.add(m);
-            }
-
-            Playlist p = new Playlist(id, musics, creatorId, v);
-            playlistsLibrary.add(p);
+        while (reader.hasNextLine()) {
+            String lineData = reader.nextLine();
+            playlistData.add(lineData);
         }
+        reader.close();
+
+        return playlistData;
     }
 
+
+    // Updaters no .txt
     // Update palylist no Arraylist e no .txt ?
     public void updatePlaylist(int[] selectedToRemoveMusicIds) {
 
     }
+
+    public void updateVisibility(String newVisibility, int playlistId) throws IOException {
+        File playlist = new File(absolutePath + playlistId + ".txt");
+
+        // playlist.getName().split("[.]")[0]
+        ArrayList<String> playlistData = readPlaylist(playlistId);
+
+        String id = playlistData.get(0); // Str
+        String creatorId = playlistData.get(1); // str
+        // Não precisa pegar playlistData.get(2) que é a visibilidade antiga
+        String musicsIds[] = playlistData.get(3).split(","); // Str -> Str[]
+
+        String s = "";
+        s += id + "\n";
+        s += creatorId + "\n";
+        s += newVisibility + "\n";
+        for (String musicId : musicsIds) s += musicId + ",";
+        s += "\n";
+
+        FileWriter writer = new FileWriter(playlist.getAbsolutePath());
+        // TO-DO verificar se o writer sobrescreve ou adiciona
+
+        writer.write(s); // Escreve no file
+        writer.close();
+	}
+
 
     public void updatePlaylist(Playlist p) throws IOException {
         if ( p.getVisibility().getValue()) {
@@ -133,6 +137,7 @@ public class PlaylistRepo {
         writer.close();
     }
 
+
     // Delete Playlist no ArrayList e deleta um .txt
     public void deletePlaylist(Playlist p) {
         Boolean teste = false;
@@ -154,11 +159,50 @@ public class PlaylistRepo {
         }
     }
 
+
     // Funções auxiliares
+
+    // Read todas as Playlist.txt e coloca tds no arraylist playlistLibrary
+    public void populatePlaylistLibrary(MusicRepo musicRepo) throws FileNotFoundException {
+        File playlistRepoFolder = new File(absolutePath);
+
+        for (final File playlist : playlistRepoFolder.listFiles()) {
+
+            int playlistId = Integer.valueOf(playlist.getName().split("[.]")[0]);
+            ArrayList<String> playlistData = readPlaylist(playlistId);
+
+            int id = Integer.valueOf(playlistData.get(0)); // Str -> int
+            int creatorId = Integer.valueOf(playlistData.get(1)); // str -> int
+            _Visibility v = Enum.valueOf(_Visibility.class, playlistData.get(2)); // Str -> _Visibilty
+            String musicsIds[] = playlistData.get(3).split(","); // Str -> Str[] -> ArrayList<Music>
+
+            // Str[] -> ArrayList<Music>
+            ArrayList<Music> musics = new ArrayList<>();
+            for (String musicId : musicsIds) {
+                Music m = musicRepo.searchMusic(Integer.valueOf(musicId));
+                if (m != null) musics.add(m);
+            }
+
+            Playlist p = new Playlist(id, musics, creatorId, v);
+            playlistsLibrary.add(p);
+        }
+    }
 
     public ArrayList<Playlist> getPlaylistsLibrary() {
         return playlistsLibrary;
     }
+
+    public Playlist getPlaylistByIndex(int index) {
+        return playlistsLibrary.get(index);
+    }
+
+
+    public Playlist getPlaylistById(int id) {
+		Playlist p = searchPlaylist(id);
+
+        return p;
+    }
+
 
     private int generateId() throws FileNotFoundException {
         File musicRepoFolder = new File(absolutePath);
@@ -190,7 +234,7 @@ public class PlaylistRepo {
     }
 
 
-    private Playlist searchPlaylist(int id) {
+    Playlist searchPlaylist(int id) {
         Playlist p = null;
         
         for (Playlist playlist : playlistsLibrary) {

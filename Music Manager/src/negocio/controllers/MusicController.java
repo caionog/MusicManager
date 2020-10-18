@@ -74,9 +74,11 @@ public class MusicController {
 		musicRepo.createMusic(title, artist, genre, comprimentoStr);
 	}
 
+
 	public void populateMusicLibrary(MusicRepo musicRepo) throws IOException {
-		musicRepo.readMusicLibrary();
+		musicRepo.populateMusicLibrary();
 	}
+
 
 	public void deleteMusic(MusicRepo musicRepo, Music selectedMusic) {
 		musicRepo.deleteMusic(selectedMusic);
@@ -92,6 +94,7 @@ public class MusicController {
 	    System.out.println("Metadata:\n" + metadata.toString());
 	
 	}
+	
 	
 	public void printSummary(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  

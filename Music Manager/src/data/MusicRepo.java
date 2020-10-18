@@ -12,7 +12,7 @@ import negocio.Music;
 
 public class MusicRepo {
 
-    private ArrayList<Music> musicLibrary = new ArrayList<>();
+    private ArrayList<Music> musicLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\musics repository\\";
 
     // CRD (o U é Update, e editar música não faz sentido)
@@ -57,39 +57,24 @@ public class MusicRepo {
         }
     }
 
-    // Read Music num .txt e coloca tds elas no arraylist musicLibrary
-    public void readMusicLibrary() throws IOException {
-        File musicRepoFolder = new File(absolutePath);
 
-        for (final File music : musicRepoFolder.listFiles()) {
-            Boolean teste = false;
-            if (teste) {
-                System.out.println(music.getName());
-                System.out.println(music.getPath());
-            }
+    // Read Music.txt
+    public ArrayList<String> readMusic(int musicId) throws FileNotFoundException {
 
-            ArrayList<String> musicData = new ArrayList<String>(5);
-            Scanner reader = new Scanner(music);
-            while (reader.hasNextLine()) {
-                String lineData = reader.nextLine();
-                if (teste) {
-                    System.out.println(lineData);
-                }
-                
-                musicData.add(lineData);
-            }
-            reader.close();
+        ArrayList<String> musicData = new ArrayList<>(5);
 
-            int id = Integer.valueOf(musicData.get(0)); // Str -> int
-            String title = musicData.get(1); // str
-            String artist = musicData.get(2); // str
-            Genre genre = Enum.valueOf(Genre.class, musicData.get(3)); // Str -> Genre
-            String duration = musicData.get(4); // Str (-> double somente na hora de vizualizar)
+        File musicFile = new File(absolutePath + musicId + ".txt");
+        Scanner reader = new Scanner(musicFile);
 
-            Music m = new Music(id, title, artist, genre, duration);
-            musicLibrary.add(m);
+        while (reader.hasNextLine()) {
+            String lineData = reader.nextLine();
+            musicData.add(lineData);
         }
+        reader.close();
+
+        return musicData;
     }
+
 
     // Deletar Music no ArrayList e deleta um .txt
     public void deleteMusic(Music m) {
@@ -112,21 +97,45 @@ public class MusicRepo {
         }
     }
 
+
     // Funções auxiliares
+
+    // Read todas as Musics.txt e coloca tds no arraylist musicLibrary
+    public void populateMusicLibrary() throws IOException {
+    File musicRepoFolder = new File(absolutePath);
+
+    for (final File music : musicRepoFolder.listFiles()) {
+
+        int musicId = Integer.valueOf(music.getName().split("[.]")[0]);
+        ArrayList<String> musicData = readMusic( musicId );
+
+        int id = Integer.valueOf(musicData.get(0)); // Str -> int
+        String title = musicData.get(1); // str
+        String artist = musicData.get(2); // str
+        Genre genre = Enum.valueOf(Genre.class, musicData.get(3)); // Str -> Genre
+        String duration = musicData.get(4); // Str (-> double somente na hora de vizualizar)
+
+        Music m = new Music(id, title, artist, genre, duration);
+        musicLibrary.add(m);
+    }
+}
 
     public ArrayList<Music> getMusicLibrary() {
         return musicLibrary;
     }
 
+
     public Music getMusicByIndex(int index) {
         return musicLibrary.get(index);
     }
+
 
     public Music getMusicById(int id) {
         Music m = searchMusic(id);
 
         return m;
     }
+
 
     private int generateId() throws FileNotFoundException {
         File musicRepoFolder = new File(absolutePath);
@@ -146,6 +155,7 @@ public class MusicRepo {
         return greaterId+1;
     }
 
+
     public void resetRepo() {
         File musicRepoFolder = new File(absolutePath);
 
@@ -155,6 +165,7 @@ public class MusicRepo {
         
         musicLibrary = new ArrayList<Music>(0);
     }
+
 
     public Music searchMusic(int id) {
         Music m = null;

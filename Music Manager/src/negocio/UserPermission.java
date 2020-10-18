@@ -1,12 +1,11 @@
 package negocio;
 
-public enum _Visibility {
-
-    VISIBLE(true), INVISIBLE(false);
+public enum UserPermission {
+    ADM(true), NORMAL(false);
 
     private Boolean value;
 
-    _Visibility(Boolean value) {
+    UserPermission(Boolean value) {
         this.value = value;
     }
 
@@ -16,9 +15,9 @@ public enum _Visibility {
 
     public String getStrValue() {
         if (value) {
-            return "VISIBLE";
+            return "ADM";
         } else {
-            return "INVISIBLE";
+            return "NORMAL_USER";
         }
     }
 }

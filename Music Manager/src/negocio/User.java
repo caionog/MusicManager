@@ -3,53 +3,86 @@ package negocio;
 import java.util.ArrayList;
 
 public class User {
-	//Classe que vai informar dados do usuario para o cadastro e login
-	//e fornercer informacoes necessarias para as outras classes
+
 	private int id;
-	private boolean adm;
+	private UserPermission userPermission;
+	private String email;
 	private String name;
 	private String password;
-	private String email;
+
+	private ArrayList<Music> favoriteMusics = new ArrayList<>(0);
+	private ArrayList<Playlist> favoritePlaylists = new ArrayList<>(0);
 	
-	private ArrayList<Music> favoriteMusics = new ArrayList<Music>(0);
-	private ArrayList<Playlist> favoritePlaylists = new ArrayList<Playlist>(0);
 	
-	
-	public User(int id, Boolean adm, String email, String name, String password) {
+	public User(int id, UserPermission userPermission, String email, String name, String password) {
 		this.id = id;
-		this.adm = adm;
+		this.userPermission = userPermission;
+		this.email = email;
 		this.name = name;
 		this.password = password;
-		this.email = email;
 	}
+
+	public User(int id, UserPermission userPermission, String email, String name, String password, 
+			ArrayList<Music> favoriteMusics, ArrayList<Playlist> favoritePlaylists) {
+		this.id = id;
+		this.userPermission = userPermission;
+		this.email = email;
+		this.name = name;
+		this.password = password;
+
+		this.favoriteMusics = favoriteMusics;
+		this.favoritePlaylists = favoritePlaylists;
+	}
+
+
 	//---------------------getters-----------------//
 
-	public String getNameUser() {
-		return this.name;
+	public int getId() {
+		return id;
 	}
-	public String getPasswordUser() {
-		return this.password;
+	public UserPermission getUserPermission() {
+		return userPermission;
 	}
-	public String getEmailUser() {
-		return this.email;
+	public String getEmail() {
+		return email;
 	}
-	public int getUserId() {
-		return this.id;
+	public String getName() {
+		return name;
+	}
+	public String getPassword() {
+		return password;
+	}
+
+	public ArrayList<Music> getFavoriteMusics() {
+		return favoriteMusics;
+	}
+	public void setFavoriteMusics(ArrayList<Music> favoriteMusics) {
+		this.favoriteMusics = favoriteMusics;
 	}
 	
 	//----------------------setters------------------//
 
+	public void setId(int newUserId) {
+		this.id = newUserId;
+	}
+	public void setUserPermission(UserPermission userPermission) {
+		this.userPermission = userPermission;
+	}
+	public void setEmail(String newEmailUser) {
+		this.email = newEmailUser;
+	}
 	public void setNameUser(String newNameUser) {
 		this.name = newNameUser;
 	}
 	public void setPasswordUser(String newPasswordUser) {
 		this.password = newPasswordUser;
 	}
-	public void setEmailUser(String newEmailUser) {
-		this.email = newEmailUser;
+	
+	public ArrayList<Playlist> getFavoritePlaylists() {
+		return favoritePlaylists;
 	}
-	public void setUserId(int newUserId) {
-		this.id = newUserId;
+	public void setFavoritePlaylists(ArrayList<Playlist> favoritePlaylists) {
+		this.favoritePlaylists = favoritePlaylists;
 	}
 
 	//--------------------metodos-------------------\\
@@ -102,8 +135,31 @@ public class User {
 		return playlists;
 	}
 
+
 	public String toString() {
 		//nao mostrar senha
-		return "ID: "+ this.id + "\n" + this.email +"\n"+ this.name + "\n" + "ADM: " + this.adm;
+		return "ID: "+ this.id + "\n" + this.email +"\n"+ this.name + "\n" + "userPermission: " + this.userPermission;
+	}
+
+
+	public String musicsToIds() {
+		String s = "";
+
+		for (Music music : favoriteMusics) {
+			s += music.getId() + ",";
+		}
+
+		return s;
+	}
+
+
+	public String playlistsToIds() {
+		String s = "";
+
+		for (Playlist playlist : favoritePlaylists) {
+			s += playlist.getId() + ",";
+		}
+
+		return s;
 	}
 }
