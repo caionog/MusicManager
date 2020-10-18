@@ -52,7 +52,7 @@ public class LoginSystem {
     }
 
     public User loginNow(UserRepo repositorioUser) {
-        return repositorioUser.searchUserId(this.alrightLogin);
+        return repositorioUser.searchUserById(this.alrightLogin);
     }
 }
 

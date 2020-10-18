@@ -102,14 +102,6 @@ public class User {
 		return playlists;
 	}
 
-	public void toggleVisibility(Playlist p) {
-		if ( p.getVisibility().value ) {
-			p.setVisibility( _Visibility.INVISIBLE );
-		} else {
-			p.setVisibility( _Visibility.VISIBLE );
-		}
-	}
-
 	public String toString() {
 		//nao mostrar senha
 		return "ID: "+ this.id + "\n" + this.email +"\n"+ this.name + "\n" + "ADM: " + this.adm;

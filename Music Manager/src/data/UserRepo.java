@@ -10,17 +10,17 @@ public class UserRepo {
     
 
     //----------------buscadores-----------------\\
-    public User searchUserName(String nomeUsuario ){// navega pelo array comparando nome dos usuarios com a String digitada
+    public User searchUserName(String nomeUsuario ) {// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
-        for(int posicao=0;posicao<achou;posicao++){
-        User comparUser = usuarioUsers.get(posicao);
-        if (comparUser.getNameUser() == nomeUsuario){
-            return comparUser;
-        }
+        for (int posicao = 0 ; posicao < achou ; posicao++) {
+            User comparUser = usuarioUsers.get(posicao);
+            if (comparUser.getNameUser() == nomeUsuario){
+                return comparUser;
+            }
         }
         return null;
     }
-    public User searchUserId(int id ){// navega pelo array comparando nome dos usuarios com a String digitada
+    public User searchUserById(int id ){// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usuarioUsers.size();
         for(int posicao=0;posicao<achou;posicao++){
         User comparUser = usuarioUsers.get(posicao);

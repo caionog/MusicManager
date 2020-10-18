@@ -17,17 +17,13 @@ import negocio.Music;
 public class MusicController {
 
     public void extractMetaData(MusicRepo musicRepo, String path) throws Exception, IOException, SAXException, TikaException {
-		BodyContentHandler handler = new BodyContentHandler();  
+		BodyContentHandler handler = new BodyContentHandler();
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  
 	    ParseContext pcontext = new ParseContext();  
 		Mp3Parser  Mp3Parser = new  Mp3Parser(); 
 		
 		Mp3Parser.parse(inputstream, handler, metadata, pcontext); // Extrai metadata nesse metodo
-		// ID3v1Handler tags = new ID3v1Handler(inputstream, handler);
-		// String artist = tags.getArtist();
-	    // String title = tags.getTitle();
-		// String genresTemp = tags.getGenre();
 		
 		String title =  metadata.get("title");
 		String artist = metadata.get("creator");
@@ -45,10 +41,10 @@ public class MusicController {
 		if ( genreStr != null ) {
 			genre = Enum.valueOf(Genre.class, genreStr.toUpperCase());
 		} else {
-			genre = Enum.valueOf(Genre.class, "NULL");
+			genre = Genre.NULL;
 		}
 
-		// TO-DO pedir para o usuario completar os genero nos arquivos sem genero
+		// TO-DO pedir para o usuario completar os genero nos arquivos sem genero (Genre.NULL)
 		
 
 		Boolean teste = false;
@@ -76,6 +72,10 @@ public class MusicController {
 		}
 		
 		musicRepo.createMusic(title, artist, genre, comprimentoStr);
+	}
+
+	public void populateMusicLibrary(MusicRepo musicRepo) throws IOException {
+		musicRepo.readMusicLibrary();
 	}
 
 	public void deleteMusic(MusicRepo musicRepo, Music selectedMusic) {

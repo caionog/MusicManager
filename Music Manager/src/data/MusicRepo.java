@@ -11,17 +11,17 @@ import negocio.Genre;
 import negocio.Music;
 
 public class MusicRepo {
-    private ArrayList<Music> musicLibrary = new ArrayList<Music>();
-    private String absolutePath = "Music Manager\\src\\data\\txt storage\\music repository\\";
+
+    private ArrayList<Music> musicLibrary = new ArrayList<>();
+    private String absolutePath = "Music Manager\\src\\data\\txt storage\\musics repository\\";
 
     // CRD (o U é Update, e editar música não faz sentido)
 
-    // Create Music no ArrayList
-    public void createMusic(String title, String artist, Genre genre, String duration)
-            throws IOException {
+    // Create Music no ArrayList e cria um .txt no repositorio
+    public void createMusic(String title, String artist, Genre genre, String duration) throws IOException, FileNotFoundException {
 
         // Cria a musica
-        int id = generateId();
+        int id = generateId(); // Gera um id unico, ou seja, nao se repete
         Music m = new Music(id, title, artist, genre, duration);
 
         // Adiciona na biblioteca
@@ -35,7 +35,7 @@ public class MusicRepo {
             s += m.getId() + "\n";
             s += m.getTitle() + "\n";
             s += m.getArtist() + "\n";
-            s += m.getGenre().getValue() + "\n";
+            s += m.getGenre().getValueStr() + "\n";
             s += m.getDuration();
 
             // Escreve no file
@@ -44,7 +44,7 @@ public class MusicRepo {
             writer.close();
             
         } else {
-            System.out.println("file ja existe");
+            System.out.println("file ja existe");  // Caso o gerador de ID falhe
         }
 
         Boolean teste = true;
@@ -57,8 +57,8 @@ public class MusicRepo {
         }
     }
 
-    // Read Music num .txt e coloca tds elas no arraylist MusicBanck
-    public void readMusicBanck() throws IOException {
+    // Read Music num .txt e coloca tds elas no arraylist musicLibrary
+    public void readMusicLibrary() throws IOException {
         File musicRepoFolder = new File(absolutePath);
 
         for (final File music : musicRepoFolder.listFiles()) {
@@ -80,18 +80,18 @@ public class MusicRepo {
             }
             reader.close();
 
-            int id = Integer.valueOf(musicData.get(0)); // ID (Str)
-            String title = musicData.get(1); // Title
-            String artist = musicData.get(2); // Artist
-            Genre genre = handleGenre(musicData.get(3)); // Genre (Str)
-            String duration = musicData.get(4); // Duration(Str/double)
+            int id = Integer.valueOf(musicData.get(0)); // Str -> int
+            String title = musicData.get(1); // str
+            String artist = musicData.get(2); // str
+            Genre genre = Enum.valueOf(Genre.class, musicData.get(3)); // Str -> Genre
+            String duration = musicData.get(4); // Str (-> double somente na hora de vizualizar)
 
             Music m = new Music(id, title, artist, genre, duration);
             musicLibrary.add(m);
         }
     }
 
-    // Deletar Music no ArrayList e atualiza o .txt
+    // Deletar Music no ArrayList e deleta um .txt
     public void deleteMusic(Music m) {
         Boolean teste = false;
         if (teste) {
@@ -131,19 +131,19 @@ public class MusicRepo {
     private int generateId() throws FileNotFoundException {
         File musicRepoFolder = new File(absolutePath);
 
-        int id = 0;
+        int greaterId = 0;
 
         for (final File music : musicRepoFolder.listFiles()) {
             Scanner reader = new Scanner(music);
             int compareId = Integer.valueOf(reader.nextLine());
             reader.close();
 
-            if (compareId >= id) {
-                id = compareId;
+            if (compareId >= greaterId) {
+                greaterId = compareId;
             }
         }
 
-        return id+1;
+        return greaterId+1;
     }
 
     public void resetRepo() {
@@ -156,7 +156,7 @@ public class MusicRepo {
         musicLibrary = new ArrayList<Music>(0);
     }
 
-    private Music searchMusic(int id) {
+    public Music searchMusic(int id) {
         Music m = null;
         
         for (Music music : musicLibrary) {
@@ -166,70 +166,5 @@ public class MusicRepo {
         }
 
         return m;
-    }
-
-    private Genre handleGenre(String genreStr) {
-        int genreInt = Integer.valueOf(genreStr);
-        Genre g;
-        switch (genreInt) {
-            case 0:
-                g = Enum.valueOf(Genre.class, "NOT_LISTED");
-                break;
-            case 1:
-                g = Enum.valueOf(Genre.class, "AXE");
-                break;
-            case 2:
-                g = Enum.valueOf(Genre.class, "BLUES");
-                break;
-            case 3:
-                g = Enum.valueOf(Genre.class, "COUNTRY"); 
-                break;
-            case 4:
-                g = Enum.valueOf(Genre.class, "ELETRONIC");
-                break;
-            case 5:
-                g = Enum.valueOf(Genre.class, "LINING");
-                break;
-            case 6:
-                g = Enum.valueOf(Genre.class, "FUNK");
-                break;
-            case 7:
-                g = Enum.valueOf(Genre.class, "GOSPEL");
-                break;
-            case 8:
-                g = Enum.valueOf(Genre.class, "HIPHOP");
-                break;
-            case 9:
-                g = Enum.valueOf(Genre.class, "JAZZ");
-                break;
-            case 10:
-                g = Enum.valueOf(Genre.class, "MPB");
-                break;
-            case 11:
-                g = Enum.valueOf(Genre.class, "CLASSIC");
-                break;    
-            case 12:
-                g = Enum.valueOf(Genre.class, "PAGODE");
-                break;
-            case 13:
-                g = Enum.valueOf(Genre.class, "POP");
-                break;
-            case 14:
-                g = Enum.valueOf(Genre.class, "REAGUE");
-                break;
-            case 15:
-                g = Enum.valueOf(Genre.class, "ROCK");
-                break;
-            case 16:
-                g = Enum.valueOf(Genre.class, "SAMBA");
-                break;
-            case 17:
-                g = Enum.valueOf(Genre.class, "BACK_COUNTRY");
-                break;
-            default:
-                g = Enum.valueOf(Genre.class, "NULL");
-        }
-
-        return g;
     }
 }

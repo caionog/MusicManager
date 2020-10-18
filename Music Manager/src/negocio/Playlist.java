@@ -6,13 +6,14 @@ public class Playlist {
 
 	private int id;
 	private ArrayList<Music> musics;
-	private User creator;
-	private _Visibility visibility = Enum.valueOf(_Visibility.class, "INVISIBLE");
+	private int creatorId;
+	private _Visibility visibility = _Visibility.INVISIBLE;
 	
-	public Playlist(int id, ArrayList<Music> musics, User creator) {
+	public Playlist(int id, ArrayList<Music> musics, int creatorId, _Visibility visibility) {
 		this.id = id;
 		this.musics = musics;
-		this.creator = creator;
+		this.creatorId = creatorId;
+		this.visibility = visibility;
 	}
 
 	//---------------------getters-----------------//
@@ -23,8 +24,8 @@ public class Playlist {
 	public ArrayList<Music> getMusics() {
 		return musics;
 	}
-	public User getCreator() {
-		return creator;
+	public int getCreatorId() {
+		return creatorId;
 	}
 	public _Visibility getVisibility() {
 		return visibility;
@@ -38,8 +39,8 @@ public class Playlist {
 	public void setMusics(ArrayList<Music> musics) {
 		this.musics = musics;
 	}
-	public void setCreator(User creator) {
-		this.creator = creator;
+	public void setCreatorId(int creatorId) {
+		this.creatorId = creatorId;
 	}
 	public void setVisibility(_Visibility visibility) {
 		this.visibility = visibility;
@@ -57,9 +58,14 @@ public class Playlist {
 
 	public String toString() {
 		String s = "=-= Dados do usuario =-=" + "\n";
-		s += creator.toString() + "\n";
+		s += "creatorId: " + creatorId + "\n";
 		s += "=-= dados da playlist =-=" + "\n";
-		s += musics.toString();
+		s += id + "\n";
+		s += visibility + "\n";
+		s += "=-= Lista de musicas =-=" + "\n";
+		for (Music music : musics) {
+			s += music.toString() + "\n";
+		}
 
 		return s;
 	}

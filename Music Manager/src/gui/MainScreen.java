@@ -2,22 +2,24 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
 import negocio.LoginSystem;
 import negocio.Music;
+import negocio.Playlist;
 import negocio.User;
-
 import data.MusicRepo;
 import data.PlaylistRepo;
 import data.UserRepo;
 
 import negocio.controllers.MusicController;
 import negocio.controllers.PlaylistController;
+
 public class MainScreen {
-	
+
 	public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
 
 		System.out.println("[ ('¬')_Ll Loading Program... ]");
@@ -25,16 +27,16 @@ public class MainScreen {
 		// Instanciando o básico para inicializar o sistema
 		User loggedUser = new User(1, true, "logged@gmail.com", "usuário de teste", "1234");
 
-		MusicRepo mRepo = new MusicRepo();
-		mRepo.resetRepo();
-		mRepo.readMusicBanck(); // Preenche o array com as musicas ja guardas nos .txt
+		MusicController musicController = new MusicController();
+		PlaylistController playlistController = new PlaylistController();
 
-		PlaylistRepo pRepo = new PlaylistRepo();
+		MusicRepo musicRepo = new MusicRepo();
+		musicRepo.resetRepo();
+		musicController.populateMusicLibrary(musicRepo); // Preenche o array com as musicas ja guardas nos .txt
 
-		MusicController mController = new MusicController();
-		PlaylistController pController = new PlaylistController();
-
-		// _Visibility v = Enum.valueOf(_Visibility.class, "INVISIBLE"); // Somente usado em criação de playlist
+		PlaylistRepo playlistRepo = new PlaylistRepo();
+		playlistRepo.resetRepo();
+		playlistController.populatePlaylistLibrary(playlistRepo, musicRepo);
 
 		// Simulando o input do path duma música
 		String mp3StoragePath = "Music Manager\\src\\data\\mp3 storage\\";
@@ -43,28 +45,36 @@ public class MainScreen {
 		String pathSong3 = mp3StoragePath + "GD\\53576" + ".mp3";
 		String pathSong4 = mp3StoragePath + "Transistor\\Darren Korb - She Shines" + ".mp3";
 		String pathSong5 = mp3StoragePath + "ADOFAI\\The Midnight Train" + ".mp3";
-		
+
 		// Simulando a criação da Music no repositório de musicas com base no input path
-		mController.extractMetaData(mRepo, pathSong1);
-		mController.extractMetaData(mRepo, pathSong2);
-		mController.extractMetaData(mRepo, pathSong3);
-		mController.extractMetaData(mRepo, pathSong4);
-		mController.extractMetaData(mRepo, pathSong5);
-		
+		musicController.extractMetaData(musicRepo, pathSong1);
+		musicController.extractMetaData(musicRepo, pathSong2);
+		musicController.extractMetaData(musicRepo, pathSong3);
+		musicController.extractMetaData(musicRepo, pathSong4);
+		musicController.extractMetaData(musicRepo, pathSong5);
+
+		// Testando a geração de ids (deletar e criar uma musica depois)
+		int id = 1;
+		Music selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong1
+		musicController.deleteMusic(musicRepo, selectedMusic); // Deleta uma musica
+		musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
+
 		// Simulando a criação de playlists
 		ArrayList<Music> selectedMusics = new ArrayList<Music>(2);
-		for (Music music : mRepo.getMusicLibrary()) {
+		for (Music music : musicRepo.getMusicLibrary()) {
 			if (selectedMusics.size() < 2) {
 				selectedMusics.add(music);
 			}
 		}
-		pController.groupSelectedMusic(pRepo, selectedMusics, loggedUser);
 
-		// Testando a geração de ids (deletar e criar uma musica depois)
-		int id = 1; 
-		Music selectedMusic = mRepo.getMusicById(id); // id da musica criada com o pathSong1
-		mController.deleteMusic(mRepo, selectedMusic); // Deleta uma musica
-		mController.extractMetaData(mRepo, pathSong1); // Cria uma musica depois de deletar
+		playlistController.groupSelectedMusic(playlistRepo, selectedMusics, loggedUser);
+
+		// Alterando visibilidade da playlist
+		Playlist selectedPlaylist = playlistRepo.getPlaylistsLibrary().get(0);
+		playlistController.togglePlaylistVisibility(playlistRepo, selectedPlaylist);
+
+		// Print do resultado da criação e troca de visibilidade da playlist
+		System.out.println(selectedPlaylist.toString());
 
 		Boolean testarLogin = false;
 
