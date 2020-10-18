@@ -44,7 +44,7 @@ public class MainScreen {
 		userController.populateUsersRepo(userRepo, musicRepo, playlistRepo);
 
 		// Criando 2 usuarios
-		userController.registerUser(userRepo, UserPermission.ADM, "maria@gmail.com", "Maria Ferreira", "123456");
+		userController.registerUser(userRepo, UserPermission.NORMAL, "maria@gmail.com", "Maria Ferreira", "123456");
 		userController.registerUser(userRepo, UserPermission.ADM, "logged@gmail.com", "usuário de teste", "1234");
 		
 		User defaultUser = userRepo.getUserByIndex(0);
@@ -80,21 +80,27 @@ public class MainScreen {
 			}
 		}
 
-		playlistController.groupSelectedMusic(playlistRepo, selectedMusics, loggedUser);
+		playlistController.groupSelectedMusic(playlistRepo, selectedMusics, defaultUser);
+
+		ArrayList<Music> selectedMusics2 = new ArrayList<Music>(2);
+		for (Music music : musicRepo.getMusicLibrary()) {
+			if (selectedMusics2.size() < 2) {
+				selectedMusics2.add(music);
+			}
+		}
+
+		playlistController.groupSelectedMusic(playlistRepo, selectedMusics2, defaultUser);
 
 		// Alterando visibilidade da playlist
 		Playlist selectedPlaylist = playlistRepo.getPlaylistsLibrary().get(0);
 		playlistController.togglePlaylistVisibility(playlistRepo, selectedPlaylist);
-
-		// Print do resultado da criação e troca de visibilidade da playlist
-		System.out.println(selectedPlaylist.toString());
 			
 		// Adicionando musicas e playlists favoritas no loggedUser
 		Music favMusic = musicRepo.getMusicByIndex(0);
 		Playlist favPlaylist = playlistRepo.getPlaylistByIndex(0);
 
-		userController.addFavoriteMusic(userRepo, loggedUser, favMusic);
-		userController.addFavoritePlaylist(userRepo, loggedUser, favPlaylist);
+		userController.addFavoriteMusic(userRepo, defaultUser, favMusic);
+		userController.addFavoritePlaylist(userRepo, defaultUser, favPlaylist);
 		
 		
 		System.out.println("-------criando conta------");

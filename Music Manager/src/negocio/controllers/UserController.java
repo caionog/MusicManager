@@ -9,13 +9,8 @@ import negocio.Music;
 import negocio.Playlist;
 import negocio.User;
 import negocio.UserPermission;
-import negocio._Visibility;
 
 public class UserController {
-
-    public void validateLogin() {
-
-    }
 
     public void registerUser(UserRepo userRepo, UserPermission userPermission, String email, String name, String password)
             throws IOException {
@@ -40,21 +35,5 @@ public class UserController {
         u.addFavPlaylist(p);
 
         userRepo.updateUserFavoritePlaylists(u.getId(), p.getId() );
-    }
-    
-
-    public void togglePlaylistVisibility(PlaylistRepo playlistRepo, Playlist p) throws IOException {
-
-        _Visibility newVisibility;
-
-        if (p.getVisibility().getValue()) {
-            newVisibility = _Visibility.INVISIBLE;
-        } else {
-            newVisibility = _Visibility.VISIBLE;
-        }
-
-        p.setVisibility(newVisibility);
-
-        playlistRepo.updateVisibility(newVisibility.getStrValue(), p.getId() );
     }
 }

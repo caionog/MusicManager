@@ -9,6 +9,7 @@ import data.PlaylistRepo;
 import negocio.Music;
 import negocio.Playlist;
 import negocio.User;
+import negocio._Visibility;
 
 public class PlaylistController {
 
@@ -22,8 +23,19 @@ public class PlaylistController {
     }
     
 
-    public void togglePlaylistVisibility(PlaylistRepo playlistRepo, Playlist selectedPlaylist) throws IOException {
-        playlistRepo.updatePlaylist(selectedPlaylist);
+    public void togglePlaylistVisibility(PlaylistRepo playlistRepo, Playlist p) throws IOException {
+
+        _Visibility newVisibility;
+
+        if (p.getVisibility().getValue()) {
+            newVisibility = _Visibility.INVISIBLE;
+        } else {
+            newVisibility = _Visibility.VISIBLE;
+        }
+
+        p.setVisibility(newVisibility);
+
+        playlistRepo.updateVisibility(newVisibility.getStrValue(), p.getId() );
     }
 
 

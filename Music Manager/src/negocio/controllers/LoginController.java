@@ -19,36 +19,42 @@ public class LoginController {
     }
 
 
-    public void inputEmailAndPassWord() {// trata os dados do input para teste de validação.
+    public void inputEmailAndPassWord() { // trata os dados do input para teste de validação.
+        @SuppressWarnings("resource")
         Scanner login = new Scanner(System.in);
-        System.out.println("E-mail :");
+        // if (login.hasNextLine()) login.nextLine(); // Esvazia o buffer do teclado
+        
+        System.out.print("E-mail :");
         this.emailInput = login.nextLine();
-        System.out.println("senha :");
+
+        System.out.print("senha :");
         this.passWordInput = login.nextLine();
     }
 
 
-    public boolean isValidateInput(UserRepo repositorioUser) {// verifica se os dados do input são validos para acesso.
-       User login = repositorioUser.searchUserByEmail(this.emailInput);// caso seja encontrado login = usuario caso contratio login = null;
-       if(login == null){// se login == null email nao encontrado.
-        System.out.println("email nao encontrado");   
-        return false;
-       }
-       if(login.getPassword().equals(this.passWordInput) ){
-        this.alrightLogin = login.getId();
-        return true;
-       }
-       else{
-        
-           return false; 
+    public boolean isValidateInput(UserRepo repositorioUser) { // verifica se os dados do input são validos para acesso.
+        User login = repositorioUser.searchUserByEmail(this.emailInput);// caso seja encontrado login = usuario caso contratio login = null;
+        if (login == null) {// se login == null email nao encontrado.
+            System.out.println("email nao encontrado");   
+            return false;
+        }
+
+        if (login.getPassword().equals(this.passWordInput) ) {
+            this.alrightLogin = login.getId();
+            return true;
+        } else {
+            return false; 
         }
     }
 
 
-    public void newAccount(UserRepo repositorioUser) {// com dados verificados, ira chamar o construtor de user, cara novos usuarios;
-        System.out.println("Name :");
+    public void newAccount(UserRepo repositorioUser) { // com dados verificados, chama o construtor de user, cara novos usuarios;
+        @SuppressWarnings("resource")
         Scanner nameInput = new Scanner(System.in);
+
+        System.out.println("Name :");
         this.name = nameInput.nextLine();
+
         User newUser = new User(1, UserPermission.NORMAL, emailInput, name, passWordInput);
         repositorioUser.addUser(newUser);
     }

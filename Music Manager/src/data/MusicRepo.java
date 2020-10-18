@@ -47,7 +47,7 @@ public class MusicRepo {
             System.out.println("file ja existe");  // Caso o gerador de ID falhe
         }
 
-        Boolean teste = true;
+        Boolean teste = false;
         if (teste) {
             System.out.println("= ---------------------- =");
             System.out.println("File name: " + musicFile.getName());

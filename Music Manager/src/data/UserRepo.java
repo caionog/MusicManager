@@ -49,10 +49,8 @@ public class UserRepo {
             s += newRegisteredUser.getName() + "\n";
             s += newRegisteredUser.getPassword() + "\n";
 
-            s += "," + "\n";
-            s += "," + "\n";
-            // s += newRegisteredUser.musicsToIds() + "\n"; // Str separeados por ,
-            // s += newRegisteredUser.playlistsToIds() + "\n"; // Str separados por ,
+            s += "\n"; // Cria sem musica ou playlist favoria
+            s += "\n";
 
             // Escreve no file
             FileWriter writer = new FileWriter(userFile.getAbsolutePath());
@@ -83,8 +81,7 @@ public class UserRepo {
     }
 
     // Updaters no .txt
-    public void updateUserFavoriteMusics(int userId, int musicId) throws IOException {
-        File music = new File(absolutePath + musicId + ".txt");
+    public void updateUserFavoriteMusics(int userId, int newMusicId) throws IOException {
 
         ArrayList<String> playlistData = readUser(userId);
         
@@ -94,7 +91,7 @@ public class UserRepo {
         String name = playlistData.get(3);
         String password = playlistData.get(4);
 
-        String musicIds = playlistData.get(5);
+        String musicIds[] = playlistData.get(5).split(",");
         String playlistIds = playlistData.get(6);
 
         String s = "";
@@ -104,19 +101,20 @@ public class UserRepo {
         s += name + "\n";
         s += password + "\n";
 
-        s += musicIds + "," + musicId + "\n";
-        s += playlistIds + "," + "\n";
+        for (String musicId : musicIds) s += musicId + ",";
+        s += newMusicId + "\n";
+        
+        s += playlistIds + "\n";
 
-        FileWriter writer = new FileWriter(music.getAbsolutePath());
-        // TO-DO verificar se o rtier sobrescreve ou adiciona
+        File user = new File(absolutePath + userId + ".txt");
+        FileWriter writer = new FileWriter(user.getAbsolutePath());
 
-        writer.write(s); // Escreve no file
+        writer.write(s); // Sobrescreve o file atualizando os ids favoritos
         writer.close();
     }
     
 
-	public void updateUserFavoritePlaylists(int userId, int playlistId) throws IOException {
-        File playlist = new File(absolutePath + playlistId + ".txt");
+	public void updateUserFavoritePlaylists(int userId, int newPlaylistId) throws IOException {
 
         ArrayList<String> playlistData = readUser(userId);
         
@@ -126,8 +124,8 @@ public class UserRepo {
         String name = playlistData.get(3);
         String password = playlistData.get(4);
 
-        String musicIds = playlistData.get(5);
-        String playlistIds = playlistData.get(6);
+        String musicsIds = playlistData.get(5);
+        String playlistIds[] = playlistData.get(6).split(",");
 
         String s = "";
         s += id + "\n";
@@ -136,13 +134,14 @@ public class UserRepo {
         s += name + "\n";
         s += password + "\n";
 
-        s += musicIds + "," + "\n";
-        s += playlistIds + "," + playlistId + "\n";
+        s += musicsIds + "\n";
+        for (String playlistId : playlistIds) s += playlistId + ",";
+        s += newPlaylistId + "\n";
 
-        FileWriter writer = new FileWriter(playlist.getAbsolutePath());
-        // TO-DO verifar o resultado do writer
+        File user = new File(absolutePath + userId + ".txt");
+        FileWriter writer = new FileWriter(user.getAbsolutePath());
 
-        writer.write(s); // Escreve no file
+        writer.write(s); // Sobrescreve o file atualizando os ids favoritos
         writer.close();
 	}
 

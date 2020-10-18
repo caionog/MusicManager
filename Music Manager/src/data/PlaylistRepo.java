@@ -78,64 +78,26 @@ public class PlaylistRepo {
     }
 
     public void updateVisibility(String newVisibility, int playlistId) throws IOException {
-        File playlist = new File(absolutePath + playlistId + ".txt");
 
-        // playlist.getName().split("[.]")[0]
         ArrayList<String> playlistData = readPlaylist(playlistId);
 
         String id = playlistData.get(0); // Str
         String creatorId = playlistData.get(1); // str
         // Não precisa pegar playlistData.get(2) que é a visibilidade antiga
-        String musicsIds[] = playlistData.get(3).split(","); // Str -> Str[]
+        String musicsIds = playlistData.get(3); // Str -> Str[]
 
         String s = "";
         s += id + "\n";
         s += creatorId + "\n";
         s += newVisibility + "\n";
-        for (String musicId : musicsIds) s += musicId + ",";
-        s += "\n";
+        s += musicsIds + "\n";
 
+        File playlist = new File(absolutePath + playlistId + ".txt");
         FileWriter writer = new FileWriter(playlist.getAbsolutePath());
-        // TO-DO verificar se o writer sobrescreve ou adiciona
 
-        writer.write(s); // Escreve no file
+        writer.write(s); // Sobrescreve o .txt atualizando a visibilidade
         writer.close();
 	}
-
-
-    public void updatePlaylist(Playlist p) throws IOException {
-        if ( p.getVisibility().getValue()) {
-			p.setVisibility( _Visibility.INVISIBLE );
-		} else {
-			p.setVisibility( _Visibility.VISIBLE );
-        }
-        
-        // Atualiza o .txt
-        File playlistFile = new File(absolutePath + p.getId() + ".txt");
-
-        ArrayList<String> playlistData = new ArrayList<>(4);
-        Scanner reader = new Scanner(playlistFile);
-        while (reader.hasNextLine()) {
-            String lineData = reader.nextLine();
-            playlistData.add(lineData);
-        }
-        reader.close();
-
-        // playlistFile.delete();
-        //File newPlaylistFile = new File(absolutePath + p.getId() + ".txt");
-
-        String id = playlistData.get(0); // Str
-        String creatorId = playlistData.get(1); // str
-        String visibility = playlistData.get(2).equals("VISIBLE") ? "INVISIBLE" : "VISIBLE"; // Str -> Str
-        String musicsIds = playlistData.get(3); // Str
-
-        final String s = id + "\n" + creatorId + "\n" + visibility + "\n" + musicsIds + "\n";
-
-        FileWriter writer = new FileWriter(playlistFile, false);
-        //FileWriter writer = new FileWriter(newPlaylistFile, false);
-        writer.write(s);
-        writer.close();
-    }
 
 
     // Delete Playlist no ArrayList e deleta um .txt
