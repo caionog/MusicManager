@@ -101,7 +101,7 @@ public class UserRepo {
         s += name + "\n";
         s += password + "\n";
 
-        for (String musicId : musicIds) s += musicId + ",";
+        for (String musicId : musicIds) if( !musicId.isEmpty() ) s += musicId + ",";
         s += newMusicId + "\n";
         
         s += playlistIds + "\n";
@@ -135,7 +135,7 @@ public class UserRepo {
         s += password + "\n";
 
         s += musicsIds + "\n";
-        for (String playlistId : playlistIds) s += playlistId + ",";
+        for (String playlistId : playlistIds) if( !playlistId.isEmpty() ) s += playlistId + ",";
         s += newPlaylistId + "\n";
 
         File user = new File(absolutePath + userId + ".txt");
