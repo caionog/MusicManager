@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
@@ -35,15 +36,15 @@ public class MainScreen {
 		PlaylistController playlistController = new PlaylistController();
 
 		MusicRepo musicRepo = new MusicRepo();
-		musicRepo.resetRepo();
+		//musicRepo.resetRepo();
 		musicController.populateMusicLibrary(musicRepo); // Preenche o array com as musicas ja guardas nos .txt
 
 		PlaylistRepo playlistRepo = new PlaylistRepo();
-		playlistRepo.resetRepo();
+		//playlistRepo.resetRepo();
 		playlistController.populatePlaylistLibrary(playlistRepo, musicRepo);
 
 		UserRepo userRepo = new UserRepo();
-		userRepo.resetRepo();
+		//userRepo.resetRepo();
 		userController.populateUsersRepo(userRepo, musicRepo, playlistRepo);
 
 		////// Inicio dos teste  //////
@@ -66,8 +67,8 @@ public class MainScreen {
 
 		// Simulando a criação da Music no repositório de musicas com base no input path
 		musicController.extractMetaData(musicRepo, pathSong1);
-		musicController.extractMetaData(musicRepo, pathSong2);
-		musicController.extractMetaData(musicRepo, pathSong3);
+		// musicController.extractMetaData(musicRepo, pathSong2);
+		// musicController.extractMetaData(musicRepo, pathSong3);
 		// musicController.extractMetaData(musicRepo, pathSong4);
 		// musicController.extractMetaData(musicRepo, pathSong5);
 
@@ -88,20 +89,20 @@ public class MainScreen {
 			}
 		}
 
-		playlistController.groupSelectedMusic(playlistRepo, selectedMusics2, defaultUser);
+		// playlistController.groupSelectedMusic(playlistRepo, selectedMusics2, defaultUser);
 
 		// Alterando visibilidade da playlist
 		Playlist selectedPlaylist = playlistRepo.getPlaylistsLibrary().get(0);
 		playlistController.togglePlaylistVisibility(playlistRepo, selectedPlaylist);
 			
 		// Adicionando musicas e playlists favoritas no loggedUser
-		Music favMusic = musicRepo.getMusicByIndex(0);
+		Music favMusic = musicRepo.getMusicById(3);
 		Playlist favPlaylist = playlistRepo.getPlaylistByIndex(0);
 
-		userController.addFavoriteMusic(userRepo, defaultUser, favMusic);
-		userController.addFavoritePlaylist(userRepo, defaultUser, favPlaylist);
+		if (favMusic != null) userController.addFavoriteMusic(userRepo, defaultUser, favMusic);
+		if (favPlaylist != null) userController.addFavoritePlaylist(userRepo, defaultUser, favPlaylist);
 		
-		// Testando a geração de ids (deletar e criar uma musica depois) + teste da função delete
+		// Testando a geração de ids (deletar e criar uma musica depois) + teste da função delete music
 		// Deleta 2 musicas selecionada
 		int id = 1;
 		Music selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong1
@@ -114,22 +115,38 @@ public class MainScreen {
 		// musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
 		
 		System.out.println("-------criando conta------");
-		login.inputEmailAndPassWord();
-		login.newAccount(userRepo);
+		
+        @SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+
+        System.out.print("E-mail :"); String email = input.nextLine();
+
+        System.out.print("senha :"); String password = input.nextLine();
+
+        System.out.print("Name :"); String name = input.nextLine();
+
+		input.close();
+
+		UserPermission permission = UserPermission.NORMAL;
+		
+		login.registerUser(userRepo, email, name, password, permission);
+		login.handleUserLogin(userRepo);
+		login.handleUserRegister();
+		// login.newAccount(userRepo);
 		System.out.println("dados salvos");
-		System.out.println("userRepo size: " + userRepo.getSize());
-		System.out.println(userRepo.getUserByIndex(0).getEmail());
-		System.out.println(userRepo.getUserByIndex(1).getEmail());
-		System.out.println(userRepo.getUserByIndex(2).getEmail());
-		System.out.println("UserRepo size: " + userRepo.getSize());
-		defaultUser.setNameUser("Jorge");
-		System.out.println("To string do user Jorge: \n" + userRepo.searchUserByName("Jorge").toString());
-		System.out.println("isso aqui; " + userRepo.searchUserByEmail("murilo@gmail.com"));
-		System.out.println("To string do user murilo@gamil.com: \n" + userRepo.searchUserByEmail("murilo@gmail.com"));
+		// System.out.println("userRepo size: " + userRepo.getSize());
+		// System.out.println(userRepo.getUserByIndex(0).getEmail());
+		// System.out.println(userRepo.getUserByIndex(1).getEmail());
+		// System.out.println(userRepo.getUserByIndex(2).getEmail());
+		// System.out.println("UserRepo size: " + userRepo.getSize());
+		// defaultUser.setNameUser("Jorge");
+		// System.out.println("To string do user Jorge: \n" + userRepo.searchUserByName("Jorge").toString());
+		// System.out.println("isso aqui; " + userRepo.searchUserByEmail("murilo@gmail.com"));
+		// System.out.println("To string do user murilo@gamil.com: \n" + userRepo.searchUserByEmail("murilo@gmail.com"));
 
 
 		System.out.println("-------testando login------");
-		login.inputEmailAndPassWord();
+		login.handleUserLogin(userRepo);
 		boolean validate = login.isValidateInput(userRepo);
 		System.out.println(validate);
 		if(validate==true) {

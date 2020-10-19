@@ -14,11 +14,24 @@ public class LoginController {
     private String name;
     private int alrightLogin;
 
-    public boolean validateInput() { // verifica se os dados do input são validos para acesso.
+    public void registerUser(UserRepo repositorioUser, String email, String name, String password, UserPermission permission)
+            throws IOException {
+
+        Boolean successfulValidation = validateInput();
+
+
+        if ( successfulValidation ) {
+            repositorioUser.createUser(permission, email, name, password);
+        }
+    }
+
+
+    private boolean validateInput() { // verifica se os dados do input são validos para acesso
         return true;
     }
 
-    public void inputEmailAndPassWord() { // trata os dados do input para teste de validação.
+    
+    public void handleUserRegister() { // trata os dados do input para teste de validação.
         @SuppressWarnings("resource")
         Scanner login = new Scanner(System.in);
         // if (login.hasNextLine()) login.nextLine(); // Esvazia o buffer do teclado
@@ -49,51 +62,12 @@ public class LoginController {
         }
     }
 
-    public void newAccount(UserRepo repositorioUser) throws IOException {
-        // com dados verificados, chama o construtor
-        // de user, para novos usuarios;
-        @SuppressWarnings("resource")
-        Scanner nameInput = new Scanner(System.in);
 
-        System.out.print("Name :");
-        this.name = nameInput.nextLine();
-
-        UserPermission permission = UserPermission.NORMAL; //TO-DO Alterar para input do usuário
-
-        repositorioUser.createUser(permission, emailInput, name, passWordInput);
-    }
-
-
-    public User loginNow(UserRepo repositorioUser) {
+    public User handleUserLogin(UserRepo repositorioUser) {
         return repositorioUser.searchUserById(this.alrightLogin);
     }
 
     ///////////////////////
-
-    public boolean validadeInput(String emailInput, String passwordInput){
-        return true;
-    }
-
-
-    public void editName(){
-
-    }
-
-
-    public void editpassword(){
-
-    }
-
-
-    public void editEmail(){
-
-    }
-
-
-    public void newAccount(){
-        
-    }
-
     
     public void saveAccount(String emailInput, String passwordInput){
 

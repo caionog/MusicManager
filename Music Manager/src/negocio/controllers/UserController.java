@@ -36,4 +36,30 @@ public class UserController {
 
         userRepo.updateUserFavoritePlaylists(u.getId(), p.getId() );
     }
+
+
+    public void editUser(String[] stringsToChange) {
+
+
+    }
+
+
+    public boolean editNome(int usuarioAtual) {
+        // User usuario = this.repositorioUsuario.getUser(usuarioAtual);
+        // usuario.
+
+        return false;
+    }
+
+
+    public boolean mudarSenha() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+
+    public boolean mudarEmail() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
