@@ -55,7 +55,7 @@ public class LoginController {
         @SuppressWarnings("resource")
         Scanner nameInput = new Scanner(System.in);
 
-        System.out.println("Name :");
+        System.out.print("Name :");
         this.name = nameInput.nextLine();
 
         UserPermission permission = UserPermission.NORMAL; //TO-DO Alterar para input do usuário

@@ -188,8 +188,10 @@ public class PlaylistRepo {
             // Str[] -> ArrayList<Music>
             ArrayList<Music> musics = new ArrayList<>();
             for (String musicId : musicsIds) {
-                Music m = musicRepo.searchMusic(Integer.valueOf(musicId));
-                if (m != null) musics.add(m);
+                if ( !musicId.isEmpty() ){ 
+                    Music m = musicRepo.searchMusic(Integer.valueOf(musicId));
+                    if (m != null) musics.add(m);
+                }
             }
 
             Playlist p = new Playlist(id, musics, creatorId, v);

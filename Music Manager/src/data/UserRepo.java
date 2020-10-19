@@ -178,7 +178,6 @@ public class UserRepo {
                     // Remove o id copiando o vetor para outro sem copiar o id que precisa ser removido
                     String newfavoritedMusicIds = "";
                     for (int i = 0; i < favoritedMusicIds.length; i++) {
-                        System.out.println(favoritedMusicIds[i]);
                         if ( !favoritedMusicIds[i].isEmpty() && currentId != Integer.valueOf(favoritedMusicIds[i]) ) {
                             newfavoritedMusicIds += favoritedMusicIds[i] + ",";
                         }
