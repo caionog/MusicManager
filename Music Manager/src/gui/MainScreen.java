@@ -35,15 +35,15 @@ public class MainScreen {
 		PlaylistController playlistController = new PlaylistController();
 
 		MusicRepo musicRepo = new MusicRepo();
-		musicRepo.resetRepo();
+		//musicRepo.resetRepo();
 		musicController.populateMusicLibrary(musicRepo); // Preenche o array com as musicas ja guardas nos .txt
 
 		PlaylistRepo playlistRepo = new PlaylistRepo();
-		playlistRepo.resetRepo();
+		//playlistRepo.resetRepo();
 		playlistController.populatePlaylistLibrary(playlistRepo, musicRepo);
 
 		UserRepo userRepo = new UserRepo();
-		userRepo.resetRepo();
+		//userRepo.resetRepo();
 		userController.populateUsersRepo(userRepo, musicRepo, playlistRepo);
 
 		////// Inicio dos teste  //////
@@ -105,11 +105,11 @@ public class MainScreen {
 		// Deleta 2 musicas selecionada
 		int id = 1;
 		Music selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong1
-		musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
+		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
 
 		id = 2;
 		selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong2
-		musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
+		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
 
 		musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
 		
@@ -117,15 +117,15 @@ public class MainScreen {
 		login.inputEmailAndPassWord();
 		login.newAccount(userRepo);
 		System.out.println("dados salvos");
-		System.out.println(userRepo.getSize());
+		System.out.println("userRepo size: " + userRepo.getSize());
 		System.out.println(userRepo.getUserByIndex(0).getEmail());
 		System.out.println(userRepo.getUserByIndex(1).getEmail());
 		System.out.println(userRepo.getUserByIndex(2).getEmail());
-		System.out.println(userRepo.getSize());
+		System.out.println("UserRepo size: " + userRepo.getSize());
 		defaultUser.setNameUser("Jorge");
-		System.out.println(userRepo.searchUserByName("Jorge"));
-		System.out.println("isso aqui; "+ userRepo.searchUserByEmail("murilo@gmail.com"));
-		System.out.println(userRepo.searchUserByEmail("murilo@gmail.com"));
+		System.out.println("To string do user Jorge: \n" + userRepo.searchUserByName("Jorge").toString());
+		System.out.println("isso aqui; " + userRepo.searchUserByEmail("murilo@gmail.com"));
+		System.out.println("To string do user murilo@gamil.com: \n" + userRepo.searchUserByEmail("murilo@gmail.com"));
 
 
 		System.out.println("-------testando login------");

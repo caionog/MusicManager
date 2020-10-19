@@ -17,7 +17,7 @@ public enum UserPermission {
         if (value) {
             return "ADM";
         } else {
-            return "NORMAL_USER";
+            return "NORMAL";
         }
     }
 }

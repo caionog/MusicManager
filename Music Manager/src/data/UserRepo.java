@@ -231,15 +231,19 @@ public class UserRepo {
             // Str[] -> ArrayList<Music>
             ArrayList<Music> musics = new ArrayList<>();
             for (String musicId : musicsIds) {
-                Music m = musicRepo.searchMusic(Integer.valueOf(musicId));
-                if (m != null) musics.add(m);
+                if (!musicId.isEmpty()){
+                    Music m = musicRepo.searchMusic(Integer.valueOf(musicId));
+                    if (m != null) musics.add(m);
+                }
             }
 
             // Str[] -> ArrayList<Playlist>
             ArrayList<Playlist> playlists = new ArrayList<>();
             for (String playlistId : playlistsIds) {
-                Playlist p = playlistRepo.searchPlaylist(Integer.valueOf(playlistId));
-                if (p != null) playlists.add(p);
+                if (!playlistId.isEmpty()) {
+                    Playlist p = playlistRepo.searchPlaylist(Integer.valueOf(playlistId));
+                    if (p != null) playlists.add(p);
+                }
             }
 
             User u = new User(id, userPermission, email, name, password, musics, playlists);
