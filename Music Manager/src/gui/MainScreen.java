@@ -23,6 +23,7 @@ import negocio.controllers.PlaylistController;
 import negocio.controllers.UserController;
 
 public class MainScreen {
+	/*
 
 	public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
 
@@ -157,5 +158,5 @@ public class MainScreen {
 		}
 	
 	} // Fim do main
-	
+	*/
 } // Fim da classe

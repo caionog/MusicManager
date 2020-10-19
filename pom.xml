@@ -13,6 +13,17 @@
           <release>13</release>
         </configuration>
       </plugin>
+      
+       <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.3</version>
+        <configuration>
+          <mainClass>gui.Applications</mainClass>
+        </configuration>
+      </plugin>
+      
+      
       <plugin>
       	<groupId>org.openjfx</groupId>
       	<artifactId>javafx-maven-plugin</artifactId>
@@ -26,6 +37,13 @@
   		<artifactId>tika-core</artifactId>
   		<version>1.24.1</version>
   	</dependency>
+  	
+  	<dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>13</version>
+    </dependency>
+  	
   	<dependency>
   		<groupId>org.apache.tika</groupId>
   		<artifactId>tika-parsers</artifactId>

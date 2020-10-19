@@ -1,20 +1,27 @@
 package gui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import negocio.Playlist;
 
-public class Applications {
-	// private Playlist ApplicationsPlaylist;
-	// private User ApplicationsUser;
+public class Applications extends Application{
 	
-	//Quantas musicas x autor existem nas playlists
-	public String searchPlaylist(Playlist playlist) {
-		//return playlist
-		return "";
-	}
+	@Override
+    public void start(Stage stage) {
+		
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        Scene scene = new Scene(new StackPane(l), 640, 480);
+        stage.setScene(scene);
+        stage.show();
+    }
 
-	
-	//Mostrar musicas com maior numero de favoritos
-	
-
+    public static void main(String[] args) {
+        launch();
+    }
 
 }
