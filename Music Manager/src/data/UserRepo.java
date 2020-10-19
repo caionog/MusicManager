@@ -12,10 +12,19 @@ import negocio.Music;
 import negocio.Playlist;
 import negocio.User;
 public class UserRepo {
+
+    private static UserRepo instance;
+
+    public static UserRepo getInstance() {
+		if (instance == null) {
+            instance = new UserRepo();
+        }
+        return instance;
+    }
+    
     private ArrayList<User> usersRepo = new ArrayList<User>();
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\Users repository\\";
     private int IDs;
-    // private int IdRemovido;
     
     //------------------construtor---------------//
     public UserRepo(int id, UserPermission userPermission, String email, String name, String password,
@@ -150,8 +159,6 @@ public class UserRepo {
         
         // Procura por um user que contenha uma musica "deletada"
         for (User user : usersRepo) {
-            
-            Music m = null;
 
             ArrayList<Music> currentArray = user.getFavoriteMusics();
             for (Music music : currentArray) {
@@ -202,7 +209,6 @@ public class UserRepo {
                 }
             } // Fim do for each music do user atual
 
-            if ( m != null ) currentArray.remove(m);
         } // Fim do for each user
 	}
 
@@ -358,4 +364,14 @@ public class UserRepo {
     public int getSize() {
         return this.usersRepo.size();
     }
+
+	public ArrayList<String> getEmails() {
+        ArrayList<String> emails = new ArrayList<>();
+        
+        for (User user : usersRepo) {
+            emails.add(user.getEmail());
+        }
+
+        return emails;
+	}
 }

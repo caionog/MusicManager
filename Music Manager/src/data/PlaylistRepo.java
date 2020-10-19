@@ -78,8 +78,6 @@ public class PlaylistRepo {
         // Procura por uma playlist que contenha ua musica "deletada"
         for (Playlist playlist : playlistsLibrary) {
 
-            Music m = null;
-
             ArrayList<Music> currentArray = playlist.getMusics();
             for (Music music : currentArray) {
 
@@ -120,7 +118,6 @@ public class PlaylistRepo {
                 }
             } // Fim do for each music da playlist atual
 
-            if ( m != null ) currentArray.remove(m);
         } // Fim do for each playlist
 	}
 

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Applications",
+            "request": "launch",
+            "mainClass": "gui.Applications",
+            "projectName": "MusicManager"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -15,7 +22,11 @@
             "name": "Debug (Launch)-MainScreen<MusicManager>",
             "request": "launch",
             "mainClass": "gui.MainScreen",
-            "projectName": "MusicManager"
+            "projectName": "MusicManager",
+            "vmArgs":  [
+                "--module-path=C:\\Users\\Victor\\Downloads\\javafx-sdk-15\\lib",
+                "--add-modules=javafx.controls,javafx.fxml"
+            ]
         }
     ]
 }
