@@ -36,15 +36,15 @@ public class MainScreen {
 		PlaylistController playlistController = new PlaylistController();
 
 		MusicRepo musicRepo = new MusicRepo();
-		//musicRepo.resetRepo();
+		musicRepo.resetRepo();
 		musicController.populateMusicLibrary(musicRepo); // Preenche o array com as musicas ja guardas nos .txt
 
 		PlaylistRepo playlistRepo = new PlaylistRepo();
-		//playlistRepo.resetRepo();
+		playlistRepo.resetRepo();
 		playlistController.populatePlaylistLibrary(playlistRepo, musicRepo);
 
 		UserRepo userRepo = new UserRepo();
-		//userRepo.resetRepo();
+		userRepo.resetRepo();
 		userController.populateUsersRepo(userRepo, musicRepo, playlistRepo);
 
 		////// Inicio dos teste  //////
@@ -67,10 +67,10 @@ public class MainScreen {
 
 		// Simulando a criação da Music no repositório de musicas com base no input path
 		musicController.extractMetaData(musicRepo, pathSong1);
-		// musicController.extractMetaData(musicRepo, pathSong2);
-		// musicController.extractMetaData(musicRepo, pathSong3);
-		// musicController.extractMetaData(musicRepo, pathSong4);
-		// musicController.extractMetaData(musicRepo, pathSong5);
+		musicController.extractMetaData(musicRepo, pathSong2);
+		musicController.extractMetaData(musicRepo, pathSong3);
+		musicController.extractMetaData(musicRepo, pathSong4);
+		musicController.extractMetaData(musicRepo, pathSong5);
 
 		// Simulando a criação de playlists
 		ArrayList<Music> selectedMusics = new ArrayList<Music>(2);
@@ -89,7 +89,7 @@ public class MainScreen {
 			}
 		}
 
-		// playlistController.groupSelectedMusic(playlistRepo, selectedMusics2, defaultUser);
+		playlistController.groupSelectedMusic(playlistRepo, selectedMusics2, defaultUser);
 
 		// Alterando visibilidade da playlist
 		Playlist selectedPlaylist = playlistRepo.getPlaylistsLibrary().get(0);
@@ -112,7 +112,7 @@ public class MainScreen {
 		selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong2
 		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
 
-		// musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
+		musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
 		
 		System.out.println("-------criando conta------");
 		
