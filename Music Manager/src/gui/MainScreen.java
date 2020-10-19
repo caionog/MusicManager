@@ -6,14 +6,17 @@ import java.util.ArrayList;
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
-import negocio.UserPermission;
-import negocio.Music;
+import negocio.UserPermission; // Enum
+
+import negocio.Music; // Classes base
 import negocio.Playlist;
 import negocio.User;
-import data.MusicRepo;
+
+import data.MusicRepo; // Repositorios
 import data.PlaylistRepo;
 import data.UserRepo;
-import negocio.controllers.LoginController;
+
+import negocio.controllers.LoginController; // Controladores
 import negocio.controllers.MusicController;
 import negocio.controllers.PlaylistController;
 import negocio.controllers.UserController;
@@ -43,6 +46,8 @@ public class MainScreen {
 		userRepo.resetRepo();
 		userController.populateUsersRepo(userRepo, musicRepo, playlistRepo);
 
+		////// Inicio dos teste  //////
+
 		// Criando 2 usuarios
 		userController.registerUser(userRepo, UserPermission.NORMAL, "maria@gmail.com", "Maria Ferreira", "123456");
 		userController.registerUser(userRepo, UserPermission.ADM, "logged@gmail.com", "usuário de teste", "1234");
@@ -65,12 +70,6 @@ public class MainScreen {
 		musicController.extractMetaData(musicRepo, pathSong3);
 		musicController.extractMetaData(musicRepo, pathSong4);
 		musicController.extractMetaData(musicRepo, pathSong5);
-
-		// Testando a geração de ids (deletar e criar uma musica depois)
-		int id = 1;
-		Music selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong1
-		musicController.deleteMusic(musicRepo, selectedMusic); // Deleta uma musica
-		musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
 
 		// Simulando a criação de playlists
 		ArrayList<Music> selectedMusics = new ArrayList<Music>(2);
@@ -102,6 +101,17 @@ public class MainScreen {
 		userController.addFavoriteMusic(userRepo, defaultUser, favMusic);
 		userController.addFavoritePlaylist(userRepo, defaultUser, favPlaylist);
 		
+		// Testando a geração de ids (deletar e criar uma musica depois) + teste da função delete
+		// Deleta 2 musicas selecionada
+		int id = 1;
+		Music selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong1
+		musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
+
+		id = 2;
+		selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong2
+		musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
+
+		musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
 		
 		System.out.println("-------criando conta------");
 		login.inputEmailAndPassWord();

@@ -11,9 +11,13 @@ import org.apache.tika.parser.mp3.Mp3Parser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
-import data.MusicRepo;
-import negocio.Genre;
+import data.MusicRepo; // classes repositorio
+import data.PlaylistRepo;
+import data.UserRepo;
+
+import negocio.Genre; // Classes base
 import negocio.Music;
+import negocio.User;
 public class MusicController {
 
     public void extractMetaData(MusicRepo musicRepo, String path) throws Exception, IOException, SAXException, TikaException {
@@ -80,8 +84,19 @@ public class MusicController {
 	}
 
 
-	public void deleteMusic(MusicRepo musicRepo, Music selectedMusic) {
-		musicRepo.deleteMusic(selectedMusic);
+	public void deleteMusic(User loggedUser, MusicRepo musicRepo, PlaylistRepo playlistRepo, UserRepo userRepo, Music selectedMusic)
+			throws IOException {
+		
+		// So permite deletar musica se o loggedUser for administrador
+		if ( loggedUser.getUserPermission().getValue() ) {
+			musicRepo.deleteMusic(selectedMusic);
+
+			playlistRepo.updateDeletedMusics(selectedMusic.getId());
+
+			userRepo.updateDeletedMusics(selectedMusic.getId());
+		} else {
+			System.out.println("O Usuário logado não tem permissão para esse ação");
+		}
 	}
 		
 	public void printMetadata(String path) throws Exception, IOException, SAXException, TikaException {

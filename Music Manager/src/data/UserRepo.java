@@ -143,6 +143,68 @@ public class UserRepo {
 
         writer.write(s); // Sobrescreve o file atualizando os ids favoritos
         writer.close();
+    }
+    
+
+    public void updateDeletedMusics(int selectedMusicId) throws IOException {
+        
+        // Procura por um user que contenha uma musica "deletada"
+        for (User user : usersRepo) {
+            
+            Music m = null;
+
+            ArrayList<Music> currentArray = user.getFavoriteMusics();
+            for (Music music : currentArray) {
+                
+                int currentId = music.getId();
+                if ( currentId == selectedMusicId ) {
+                    // Se verdade, então atualiza lista de ids do arquivo e o array desse user
+                    currentArray.remove(music);
+
+                    File userFile = new File(absolutePath + user.getId() + ".txt");
+
+                    ArrayList<String> userData = readUser(user.getId());
+
+                    String userId = userData.get(0); // Str
+                    String permission = userData.get(1); // Str
+                    String email = userData.get(2); // Str
+                    String name = userData.get(3); // Str
+                    String password = userData.get(4); // Str
+                    
+                    String favoritedMusicIds[] = userData.get(5).split(","); // Str
+                    String favoritedplaylistIds = userData.get(6); // Str
+
+                    
+                    // Remove o id copiando o vetor para outro sem copiar o id que precisa ser removido
+                    String newfavoritedMusicIds = "";
+                    for (int i = 0; i < favoritedMusicIds.length; i++) {
+                        System.out.println(favoritedMusicIds[i]);
+                        if ( !favoritedMusicIds[i].isEmpty() && currentId != Integer.valueOf(favoritedMusicIds[i]) ) {
+                            newfavoritedMusicIds += favoritedMusicIds[i] + ",";
+                        }
+                    }
+
+                    String s = "";
+                    s += userId + "\n";
+                    s += permission + "\n";
+                    s += email + "\n";
+                    s += name + "\n";
+                    s += password + "\n";
+
+                    s += newfavoritedMusicIds + "\n";
+                    s += favoritedplaylistIds + "\n";
+
+                    // Sobrescreve no file
+                    FileWriter writer = new FileWriter(userFile.getAbsolutePath());
+                    writer.write(s);
+                    writer.close();
+
+                    break;
+                }
+            } // Fim do for each music do user atual
+
+            if ( m != null ) currentArray.remove(m);
+        } // Fim do for each user
 	}
 
 
@@ -236,7 +298,7 @@ public class UserRepo {
         int achou = usersRepo.size();
         for (int posicao = 0 ; posicao < achou ; posicao++) {
             User comparUser = usersRepo.get(posicao);
-            if (comparUser.getName() == nomeUsuario){
+            if (comparUser.getName().equalsIgnoreCase(nomeUsuario)){
                 return comparUser;
             }
         }

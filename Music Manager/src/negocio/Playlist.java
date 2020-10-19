@@ -49,7 +49,7 @@ public class Playlist {
 	//--------------------metodos-------------------\\
 
 	public void addMusicPlaylist(Music m) {
-		this.musics.add(m);
+		musics.add(m);
 	}
 
 	public void removeMusicPlaylist(Music m) {

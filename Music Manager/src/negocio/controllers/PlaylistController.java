@@ -6,15 +6,17 @@ import java.util.ArrayList;
 
 import data.MusicRepo;
 import data.PlaylistRepo;
+
+import negocio.Playlist; // Classes base
 import negocio.Music;
-import negocio.Playlist;
 import negocio.User;
-import negocio._Visibility;
+
+import negocio._Visibility; // Enum
 
 public class PlaylistController {
 
     public void groupSelectedMusic(PlaylistRepo pRepo, ArrayList<Music> selected, User creator) throws IOException {
-        pRepo.createPlaylist(selected, creator);
+        pRepo.createPlaylist(selected, creator.getId());
     }
 
 

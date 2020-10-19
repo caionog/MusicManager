@@ -1,5 +1,6 @@
 package negocio.controllers;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import data.UserRepo;
@@ -7,23 +8,21 @@ import negocio.User;
 import negocio.UserPermission;
 
 public class LoginController {
-    
+
     private String emailInput = "";
-    private String passWordInput = "";  
+    private String passWordInput = "";
     private String name;
     private int alrightLogin;
 
-    
     public boolean validateInput() { // verifica se os dados do input são validos para acesso.
         return true;
     }
-
 
     public void inputEmailAndPassWord() { // trata os dados do input para teste de validação.
         @SuppressWarnings("resource")
         Scanner login = new Scanner(System.in);
         // if (login.hasNextLine()) login.nextLine(); // Esvazia o buffer do teclado
-        
+
         System.out.print("E-mail :");
         this.emailInput = login.nextLine();
 
@@ -33,30 +32,35 @@ public class LoginController {
 
 
     public boolean isValidateInput(UserRepo repositorioUser) { // verifica se os dados do input são validos para acesso.
-        User login = repositorioUser.searchUserByEmail(this.emailInput);// caso seja encontrado login = usuario caso contratio login = null;
+        // caso seja encontrado login = usuario caso
+        // contratio login = null;
+        User login = repositorioUser.searchUserByEmail(this.emailInput);
+        
         if (login == null) {// se login == null email nao encontrado.
-            System.out.println("email nao encontrado");   
+            System.out.println("email nao encontrado");
             return false;
         }
 
-        if (login.getPassword().equals(this.passWordInput) ) {
+        if (login.getPassword().equals(this.passWordInput)) {
             this.alrightLogin = login.getId();
             return true;
         } else {
-            return false; 
+            return false;
         }
     }
 
-
-    public void newAccount(UserRepo repositorioUser) { // com dados verificados, chama o construtor de user, cara novos usuarios;
+    public void newAccount(UserRepo repositorioUser) throws IOException {
+        // com dados verificados, chama o construtor
+        // de user, para novos usuarios;
         @SuppressWarnings("resource")
         Scanner nameInput = new Scanner(System.in);
 
         System.out.println("Name :");
         this.name = nameInput.nextLine();
 
-        User newUser = new User(1, UserPermission.NORMAL, emailInput, name, passWordInput);
-        repositorioUser.addUser(newUser);
+        UserPermission permission = UserPermission.NORMAL; //TO-DO Alterar para input do usuário
+
+        repositorioUser.createUser(permission, emailInput, name, passWordInput);
     }
 
 

@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import negocio._Visibility; // Enum
+
+import negocio.Playlist; // Classe base
 import negocio.Music;
-import negocio.Playlist;
-import negocio.User;
-import negocio._Visibility;
 
 public class PlaylistRepo {
 
@@ -22,11 +22,11 @@ public class PlaylistRepo {
     // CRUD
 
     // Create Music no ArrayList e cria um .txt no repositorio
-    public void createPlaylist(ArrayList<Music> musics, User creator) throws IOException {
+    public void createPlaylist(ArrayList<Music> musics, int creatorId) throws IOException {
 
         // Cria a playlist
         int id = generateId(); // Gera um id unico, ou seja, nao se repete
-        Playlist p = new Playlist(id, musics, creator.getId(), _Visibility.INVISIBLE);
+        Playlist p = new Playlist(id, musics, creatorId, _Visibility.INVISIBLE);
 
         // Adiciona na biblioteca
         playlistsLibrary.add(p);
@@ -72,10 +72,57 @@ public class PlaylistRepo {
 
 
     // Updaters no .txt
-    // Update palylist no Arraylist e no .txt ?
-    public void updatePlaylist(int[] selectedToRemoveMusicIds) {
+     
+    public void updateDeletedMusics(int selectedMusicId) throws IOException {
 
-    }
+        // Procura por uma playlist que contenha ua musica "deletada"
+        for (Playlist playlist : playlistsLibrary) {
+
+            Music m = null;
+
+            ArrayList<Music> currentArray = playlist.getMusics();
+            for (Music music : currentArray) {
+
+                int currentId = music.getId();
+                if ( currentId == selectedMusicId ) {
+                    // Se verdade, então atualiza lista de ids do arquivo e o array dessa playlist
+                    currentArray.remove(music);
+
+                    File playlistFile = new File(absolutePath + playlist.getId() + ".txt");
+
+                    ArrayList<String> playlistData = readPlaylist(playlist.getId());
+
+                    String playlistId = playlistData.get(0); // Str
+                    String creatorId = playlistData.get(1); // str
+                    String visibility = playlistData.get(2); // Str
+                    String musicIds[] = playlistData.get(3).split(","); // Str -> Str[] / ",2,3" -> [2, 3]
+
+                    // Remove o id copiando o vetor para outro sem copiar o id que precisa ser removido
+                    String newMusicIds = "";
+                    for (int i = 0; i < musicIds.length; i++) {
+                        if ( !musicIds[i].isEmpty() && currentId != Integer.valueOf(musicIds[i]) ) {
+                            newMusicIds += musicIds[i] + ",";
+                        }
+                    }
+
+                    String s = "";
+                    s += playlistId + "\n";
+                    s += creatorId + "\n";
+                    s += visibility + "\n";
+                    s += newMusicIds + "\n";
+
+                    // Sobrescreve no file
+                    FileWriter writer = new FileWriter(playlistFile.getAbsolutePath());
+                    writer.write(s);
+                    writer.close();
+
+                    break;
+                }
+            } // Fim do for each music da playlist atual
+
+            if ( m != null ) currentArray.remove(m);
+        } // Fim do for each playlist
+	}
 
     public void updateVisibility(String newVisibility, int playlistId) throws IOException {
 
@@ -93,12 +140,12 @@ public class PlaylistRepo {
         s += musicsIds + "\n";
 
         File playlist = new File(absolutePath + playlistId + ".txt");
-        FileWriter writer = new FileWriter(playlist.getAbsolutePath());
 
+        FileWriter writer = new FileWriter(playlist.getAbsolutePath());
         writer.write(s); // Sobrescreve o .txt atualizando a visibilidade
         writer.close();
-	}
-
+    }
+    
 
     // Delete Playlist no ArrayList e deleta um .txt
     public void deletePlaylist(Playlist p) {
