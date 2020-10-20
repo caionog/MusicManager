@@ -1,4 +1,4 @@
-package gui;
+package gui.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

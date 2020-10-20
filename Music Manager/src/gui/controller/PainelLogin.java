@@ -1,4 +1,4 @@
-package gui;
+package gui.controller;
 
 public class PainelLogin {
 
