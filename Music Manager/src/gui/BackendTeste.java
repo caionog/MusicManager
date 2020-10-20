@@ -21,7 +21,7 @@ import negocio.controllers.MusicController; // Controladores
 import negocio.controllers.PlaylistController;
 import negocio.controllers.UserController;
 
-public class MainScreen {
+public class BackendTeste {
 	/*
 
 	public static void backendTeste(String[] args) throws IOException, SAXException, TikaException, Exception {
