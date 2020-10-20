@@ -1,4 +1,4 @@
-package gui.controller;
+package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,21 +17,19 @@ import data.MusicRepo; // Repositorios
 import data.PlaylistRepo;
 import data.UserRepo;
 
-//import negocio.controllers.LoginController; // Controladores
-import negocio.controllers.MusicController;
+import negocio.controllers.MusicController; // Controladores
 import negocio.controllers.PlaylistController;
 import negocio.controllers.UserController;
 
 public class MainScreen {
 	/*
 
-	public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
+	public static void backendTeste(String[] args) throws IOException, SAXException, TikaException, Exception {
 
 		System.out.println("[ ('¬')_Ll Loading Program... ]");
 
 		// Instanciando o básico para inicializar o sistema
 
-		LoginController login = new LoginController();
 		UserController userController = new UserController();
 		MusicController musicController = new MusicController();
 		PlaylistController playlistController = new PlaylistController();
@@ -116,23 +114,18 @@ public class MainScreen {
 		musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
 		
 		System.out.println("-------criando conta------");
-		
-        @SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
-
         System.out.print("E-mail :"); String email = input.nextLine();
-
         System.out.print("senha :"); String password = input.nextLine();
-
-        System.out.print("Name :"); String name = input.nextLine();
-
-		input.close();
-
+		System.out.print("Name :"); String name = input.nextLine();
 		UserPermission permission = UserPermission.NORMAL;
+		input.close();
 		
-		login.registerUser(userRepo, email, name, password, permission);
-		login.handleUserLogin(userRepo);
-		login.handleUserRegister();
+		userController.handleUserRegister(email, name, password, permission);
+		// userController.registerUser(userRepo, email, name, password, permission);
+		userController.handleUserLogin(name, password);
+		userController.handleUserLogin(email, password);
+		
 		// login.newAccount(userRepo);
 		System.out.println("dados salvos");
 		// System.out.println("userRepo size: " + userRepo.getSize());
@@ -147,8 +140,8 @@ public class MainScreen {
 
 
 		System.out.println("-------testando login------");
-		login.handleUserLogin(userRepo);
-		boolean validate = login.isValidateInput(userRepo);
+		// userController.handleUserLogin(userRepo);
+		boolean validate = userController.isValidateInput(userRepo);
 		System.out.println(validate);
 		if(validate==true) {
 			System.out.println(" bem vindo");
@@ -158,5 +151,5 @@ public class MainScreen {
 		}
 	
 	} // Fim do main
-	*/
+*/
 } // Fim da classe

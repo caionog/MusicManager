@@ -14,12 +14,17 @@ import javafx.fxml.FXMLLoader;
 
 
 public class Applications extends Application{
+	
+	//COMEÇO DOS COMENTÁRIOS
 	private Stage primaryStage;
 	private BorderPane rootScene;
 
 	
 	@Override
     public void start(Stage primaryStage)throws Exception {
+	
+		
+		
 		
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Music Manager");
@@ -71,5 +76,7 @@ public class Applications extends Application{
     public static void main(String[] args) {
         launch();
     }
-
+//FIM DOS COMENTARIOS
+  
+ 
 }

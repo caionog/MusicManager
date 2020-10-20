@@ -12,6 +12,49 @@ import negocio.UserPermission;
 
 public class UserController {
 
+    private UserRepo userRepo;
+
+    public UserController() {
+        this.userRepo = UserRepo.getInstance(); 
+    }
+
+
+    public void handleUserLogin(String nameOrEmail, String password) {
+
+        Boolean flag = false;
+
+        // Explora os emails
+        for (String email : userRepo.getEmails()) {
+            if (nameOrEmail.equalsIgnoreCase(email)) {
+                flag = true;
+                break;
+            }
+        }
+
+        // Explora os nomes caso não encontre um email
+        if (flag == false) {
+            for (String name : userRepo.getEmails()) {
+                if (nameOrEmail.equalsIgnoreCase(name)) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+
+
+
+        
+    }
+
+
+    public void handleUserRegister(String email, String name, String password, UserPermission permission) {
+        // Checa se o email já foi utilizado por outro user
+        
+
+        // Checa se o name já foi utilizado por outro user
+    }
+
+
     public void registerUser(UserRepo userRepo, UserPermission userPermission, String email, String name, String password)
             throws IOException {
         userRepo.createUser(userPermission, email, name, password);
@@ -61,5 +104,43 @@ public class UserController {
     public boolean mudarEmail() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+
+    public void registerUser(UserRepo repositorioUser, String email, String name, String password, UserPermission permission)
+            throws IOException {
+
+        Boolean successfulValidation = validateInput();
+
+
+        if ( successfulValidation ) {
+            repositorioUser.createUser(permission, email, name, password);
+        }
+    }
+
+
+    private boolean validateInput() { // verifica se os dados do input são validos para acesso
+        return true;
+    }
+
+
+    public boolean isValidateInput(UserRepo repositorioUser) { // verifica se os dados do input são validos para acesso.
+        // caso seja encontrado login = usuario caso
+        // contratio login = null;
+        // User login = repositorioUser.searchUserByEmail(this.emailInput);
+        
+        // if (login == null) {// se login == null email nao encontrado.
+        //     System.out.println("email nao encontrado");
+        //     return false;
+        // }
+
+        // if (login.getPassword().equals(this.passWordInput)) {
+        //     this.alrightLogin = login.getId();
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+
+        return true;
     }
 }
