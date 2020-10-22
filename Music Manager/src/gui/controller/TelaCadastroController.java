@@ -22,7 +22,7 @@ public class TelaCadastroController {
     @FXML
     void cadastrarConta(ActionEvent event)throws IOException {
     	
-    	System.out.println("Cadastro feito com sucesso");
+    	System.out.println("Cadastro feito com sucesso!");
 
     }
 
