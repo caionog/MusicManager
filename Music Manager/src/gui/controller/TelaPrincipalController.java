@@ -21,6 +21,7 @@ public class TelaPrincipalController {
 
 	    @FXML
 	    void irMeuPerfilTelaPrincipal(ActionEvent event)throws IOException  {
+	    	System.out.println("Botão meu perfil funciona ");
 	    	Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAlterarPerfil.fxml"));
 	    	Scene tabbleViewScene = new Scene(tabbleViewParent);
 	    	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -31,6 +32,7 @@ public class TelaPrincipalController {
 
 	    @FXML
 	    void sairTelaPrincipal(ActionEvent event)throws IOException {
+	    	System.out.println("Botão sair funciona");
 	       	Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaLogin.fxml"));
 	    	Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
 	    	Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();

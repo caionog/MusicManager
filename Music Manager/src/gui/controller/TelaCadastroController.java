@@ -29,6 +29,7 @@ public class TelaCadastroController {
     @FXML
     void cancelarCadastroConta(ActionEvent event)throws IOException {
     	
+    	System.out.println("Botão cancelar funciona");
     	Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaLogin.fxml"));
     	Scene tabbleViewScene = new Scene(tabbleViewParent);
     	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
