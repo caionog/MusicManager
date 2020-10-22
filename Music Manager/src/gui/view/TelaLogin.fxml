@@ -9,12 +9,12 @@
 
 <AnchorPane prefHeight="219.0" prefWidth="328.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaLoginController">
    <children>
-      <Button fx:id="botaoCadastro" layoutX="14.0" layoutY="172.0" mnemonicParsing="false" text="Cadastro" />
+      <Button fx:id="botaoCadastrar" layoutX="14.0" layoutY="172.0" mnemonicParsing="false" onAction="#irBotaoCadastrar" text="Cadastro" />
       <TextField layoutX="22.0" layoutY="73.0" prefHeight="25.0" prefWidth="48.0" text="Email" />
       <TextField layoutX="22.0" layoutY="110.0" prefHeight="25.0" prefWidth="48.0" text="Senha" />
       <TextField layoutX="149.0" layoutY="73.0" promptText="Email" />
       <PasswordField layoutX="149.0" layoutY="110.0" promptText="Senha" />
-      <Button layoutX="244.0" layoutY="147.0" mnemonicParsing="false" text="Entrar" />
+      <Button fx:id="botaoEntrar" layoutX="244.0" layoutY="147.0" mnemonicParsing="false" onAction="#irBotaoEntrar" text="Entrar" />
       <Label layoutX="66.0" layoutY="14.0" prefHeight="27.0" prefWidth="197.0" text="Music Manager - Login">
          <font>
             <Font size="18.0" />

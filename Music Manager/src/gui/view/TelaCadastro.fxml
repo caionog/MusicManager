@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="232.0" prefWidth="338.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="232.0" prefWidth="338.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaCadastroController">
    <children>
-      <Button layoutX="20.0" layoutY="182.0" mnemonicParsing="false" text="Cadastrar" />
+      <Button fx:id="botaoCadastrarTelaCadastro" layoutX="20.0" layoutY="182.0" mnemonicParsing="false" onAction="#cadastrarConta" text="Cadastrar" />
       <PasswordField layoutX="176.0" layoutY="133.0" promptText="Senha" />
       <TextField layoutX="176.0" layoutY="94.0" promptText="Email" />
-      <Button layoutX="250.0" layoutY="182.0" mnemonicParsing="false" text="cancelar" />
+      <Button fx:id="botaoCancelarTelaCadastro" layoutX="250.0" layoutY="182.0" mnemonicParsing="false" onAction="#cancelarCadastroConta" text="cancelar" />
       <Label layoutX="36.0" layoutY="57.0" text="nome">
          <font>
             <Font size="14.0" />

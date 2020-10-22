@@ -35,6 +35,8 @@ public class Applications extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		carregarTelaLogin();
+	//	carregarTelaCadastro();
+		
       //  String javaVersion = System.getProperty("java.version");
        // String javafxVersion = System.getProperty("javafx.version");
       //  Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
@@ -67,6 +69,33 @@ public class Applications extends Application{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void carregarTelaCadastro() 
+	{
+		try 
+		{
+			//carrega a tela de login no centro da tela inicial
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Applications.class.getResource("view/TelaCadastro.fxml"));
+			AnchorPane cadastroView = (AnchorPane) loader.load();
+			
+			
+			// seta a tela de conta no centro da tela principal
+			this.rootScene.setCenter(cadastroView);
+			
+	        // seta uma referencia do bancoApp no ContaController
+	       // ContaPaneController contaController = loader.getController();
+	       // contaController.setBancoApp(this);
+		   // seta a lista de contas
+	       //  ObservableList<Conta> dados = FXCollections.observableArrayList();
+	       //  FachadaBanco.getInstance().listar().stream().forEach(c -> dados.add(c));
+	       //  contaController.setDados(dados);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public Stage getPrimaryStage() {
