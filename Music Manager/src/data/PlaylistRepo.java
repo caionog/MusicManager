@@ -13,13 +13,26 @@ import negocio.Playlist; // Classe base
 import negocio.Music;
 
 public class PlaylistRepo {
+	
+	private static PlaylistRepo instance;
 
     private ArrayList<Playlist> playlistsLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\playlists repository\\";
 
     // TO-DO alterar id dentro do .txt ou visibilidade (U)
+    
+    //------------------ Singleton + Construtor ---------------//
+    
+    public static PlaylistRepo getInstance() {
+		if (instance == null) {
+            instance = new PlaylistRepo();
+        }
+        return instance;
+    }
+    
+    private PlaylistRepo() {}
 
-    // CRUD
+    //------------------ CRUD de playlists ---------------//
 
     // Create Music no ArrayList e cria um .txt no repositorio
     public void createPlaylist(ArrayList<Music> musics, int creatorId) throws IOException {
@@ -166,7 +179,7 @@ public class PlaylistRepo {
     }
 
 
-    // Funções auxiliares
+    //------------------ Funções auxiliares ---------------//
 
     // Read todas as Playlist.txt e coloca tds no arraylist playlistLibrary
     public void populatePlaylistLibrary(MusicRepo musicRepo) throws FileNotFoundException {

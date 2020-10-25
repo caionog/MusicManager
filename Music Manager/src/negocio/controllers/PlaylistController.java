@@ -14,18 +14,28 @@ import negocio.User;
 import negocio._Visibility; // Enum
 
 public class PlaylistController {
+	
+	private PlaylistRepo playlistRepoInstance = PlaylistRepo.getInstance();
+	
+	private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 
-    public void groupSelectedMusic(PlaylistRepo pRepo, ArrayList<Music> selected, User creator) throws IOException {
-        pRepo.createPlaylist(selected, creator.getId());
+
+    public void groupSelectedMusic(ArrayList<Music> selected, User creator) throws IOException {
+    	playlistRepoInstance.createPlaylist(selected, creator.getId());
+    }
+    
+    
+    public void resetRepo() {
+    	playlistRepoInstance.resetRepo();
     }
 
 
-    public void populatePlaylistLibrary(PlaylistRepo playlistRepo, MusicRepo musicRepo) throws FileNotFoundException {
-        playlistRepo.populatePlaylistLibrary(musicRepo);
+    public void populatePlaylistLibrary() throws FileNotFoundException {
+        playlistRepoInstance.populatePlaylistLibrary(musicRepoInstance);
     }
     
 
-    public void togglePlaylistVisibility(PlaylistRepo playlistRepo, Playlist p) throws IOException {
+    public void togglePlaylistVisibility(Playlist p) throws IOException {
 
         _Visibility newVisibility;
 
@@ -37,16 +47,26 @@ public class PlaylistController {
 
         p.setVisibility(newVisibility);
 
-        playlistRepo.updateVisibility(newVisibility.getStrValue(), p.getId() );
+        playlistRepoInstance.updateVisibility(newVisibility.getStrValue(), p.getId() );
     }
 
 
-	public void editPlaylist(PlaylistRepo playlistRepo, Music selectedMusic) {
-
+	public void editPlaylist(Music selectedMusic) {
+		// playlistRepoInstance
     }
 
     
     public void deletePlaylist() {
         
     }
+
+
+	public ArrayList<Playlist> getPlaylistsLibrary() {
+		return playlistRepoInstance.getPlaylistsLibrary();
+	}
+
+
+	public Playlist getPlaylistByIndex(int index) {
+		return playlistRepoInstance.getPlaylistByIndex(index);
+	}
 }

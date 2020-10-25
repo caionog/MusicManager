@@ -1,5 +1,5 @@
 package negocio.interfaces;
 
-public class IMusicController {
+public interface IMusicController {
   
 }

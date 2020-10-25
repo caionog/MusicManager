@@ -14,14 +14,14 @@ import javafx.stage.Stage;
 public class TelaPrincipalController {
 	
 	 @FXML
-	    private Button botãoPerfilTelaPrincipal;
+	    private Button botaoPerfilTelaPrincipal;
 
 	    @FXML
-	    private Button botãoSairTelaPrincipal;
+	    private Button botaoSairTelaPrincipal;
 
 	    @FXML
 	    void irMeuPerfilTelaPrincipal(ActionEvent event)throws IOException  {
-	    	System.out.println("Botão meu perfil funciona ");
+	    	System.out.println("Botï¿½o meu perfil funciona ");
 	    	Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAlterarPerfil.fxml"));
 	    	Scene tabbleViewScene = new Scene(tabbleViewParent);
 	    	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -32,7 +32,7 @@ public class TelaPrincipalController {
 
 	    @FXML
 	    void sairTelaPrincipal(ActionEvent event)throws IOException {
-	    	System.out.println("Botão sair funciona");
+	    	System.out.println("BotÃ£o sair funciona");
 	       	Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaLogin.fxml"));
 	    	Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
 	    	Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();

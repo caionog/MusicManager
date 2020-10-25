@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class User {
 
-	private int id;
-	private UserPermission userPermission;
+	private int id; // único
+	private UserPermission userPermission; // ADM ou NORMAL
 	private String email;
 	private String name;
 	private String password;
@@ -121,7 +121,7 @@ public class User {
 
 		ArrayList<Music> musics = new ArrayList<Music>(0);
 
-		// Acessa repositório de Musicas <---------- falta completar
+		// TODO Acessa repositório de Musicas <---------- falta completar
 
 		return musics;
 	}
@@ -130,7 +130,7 @@ public class User {
 
 		ArrayList<Playlist> playlists = new ArrayList<Playlist>(0);
 
-		// Acessa repositório de Musicas <---------- falta completar
+		// TODO Acessa repositório de Musicas <---------- falta completar
 
 		return playlists;
 	}

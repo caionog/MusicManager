@@ -3,6 +3,7 @@ package negocio.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
@@ -12,15 +13,19 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
 import data.MusicRepo; // classes repositorio
-import data.PlaylistRepo;
 import data.UserRepo;
 
 import negocio.Genre; // Classes base
 import negocio.Music;
 import negocio.User;
-public class MusicController {
 
-    public void extractMetaData(MusicRepo musicRepo, String path) throws Exception, IOException, SAXException, TikaException {
+public class MusicController {
+	
+	private MusicRepo musicRepoInstance = MusicRepo.getInstance();
+	
+	private UserRepo userRepoInstance = UserRepo.getInstance();
+
+    public void extractMetaData(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  
@@ -75,25 +80,30 @@ public class MusicController {
 			}
 		}
 		
-		musicRepo.createMusic(title, artist, genre, comprimentoStr);
+		musicRepoInstance.createMusic(title, artist, genre, comprimentoStr);
+	}
+    
+    
+    public void resetRepo() {
+    	musicRepoInstance.resetRepo();
+    }
+
+
+	public void populateMusicLibrary() throws IOException {
+		musicRepoInstance.populateMusicLibrary();
 	}
 
 
-	public void populateMusicLibrary(MusicRepo musicRepo) throws IOException {
-		musicRepo.populateMusicLibrary();
-	}
-
-
-	public void deleteMusic(User loggedUser, MusicRepo musicRepo, PlaylistRepo playlistRepo, UserRepo userRepo, Music selectedMusic)
+	public void deleteMusic(User loggedUser, Music selectedMusic)
 			throws IOException {
 		
 		// So permite deletar musica se o loggedUser for administrador
 		if ( selectedMusic != null && loggedUser.getUserPermission().getValue() ) {
-			musicRepo.deleteMusic(selectedMusic);
+			musicRepoInstance.deleteMusic(selectedMusic);
 
-			playlistRepo.updateDeletedMusics(selectedMusic.getId());
+			userRepoInstance.updateDeletedMusics(selectedMusic.getId());
 
-			userRepo.updateDeletedMusics(selectedMusic.getId());
+			userRepoInstance.updateDeletedMusics(selectedMusic.getId());
 		} else {
 			System.out.println("O Usuário logado não tem permissão para esse ação OU selected music é null");
 		}
@@ -119,5 +129,15 @@ public class MusicController {
 	    Mp3Parser  Mp3Parser = new  Mp3Parser(); 
 	    Mp3Parser.parse(inputstream, handler, metadata, pcontext);
 	    System.out.println("Summary:\n"+ handler.toString());
+	}
+
+
+	public ArrayList<Music> getMusicLibrary() {
+		return musicRepoInstance.getMusicLibrary();
+	}
+
+
+	public Music getMusicById(int id) {
+		return musicRepoInstance.getMusicById(id);
 	}
 }

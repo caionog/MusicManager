@@ -12,11 +12,10 @@ import negocio.UserPermission;
 
 public class UserController {
 
-    private UserRepo userRepo;
-
-    public UserController() {
-        this.userRepo = UserRepo.getInstance(); 
-    }
+    private UserRepo userRepoInstance = UserRepo.getInstance();
+    
+    private PlaylistRepo playlistRepoInstance = PlaylistRepo.getInstance();
+    private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 
 
     public void handleUserLogin(String nameOrEmail, String password) {
@@ -24,7 +23,7 @@ public class UserController {
         Boolean flag = false;
 
         // Explora os emails
-        for (String email : userRepo.getEmails()) {
+        for (String email : userRepoInstance.getEmails()) {
             if (nameOrEmail.equalsIgnoreCase(email)) {
                 flag = true;
                 break;
@@ -33,7 +32,7 @@ public class UserController {
 
         // Explora os nomes caso não encontre um email
         if (flag == false) {
-            for (String name : userRepo.getEmails()) {
+            for (String name : userRepoInstance.getEmails()) {
                 if (nameOrEmail.equalsIgnoreCase(name)) {
                     flag = true;
                     break;
@@ -55,29 +54,32 @@ public class UserController {
     }
 
 
-    public void registerUser(UserRepo userRepo, UserPermission userPermission, String email, String name, String password)
-            throws IOException {
-        userRepo.createUser(userPermission, email, name, password);
+    public void registerUser(UserPermission userPermission, String email, String name, String password) throws IOException {
+        userRepoInstance.createUser(userPermission, email, name, password);
+    }
+    
+    
+    public void resetRepo() {
+    	userRepoInstance.resetRepo();
     }
 
 
-    public void populateUsersRepo(UserRepo userRepo, MusicRepo musicRepo, PlaylistRepo playlistRepo)
-            throws IOException {
-        userRepo.populateUserRepo(musicRepo, playlistRepo);
+    public void populateUsersRepo() throws IOException {
+        userRepoInstance.populateUserRepo(musicRepoInstance, playlistRepoInstance);
     }
     
 
-    public void addFavoriteMusic(UserRepo userRepo, User u, Music m) throws IOException {
+    public void addFavoriteMusic(User u, Music m) throws IOException {
+    	
         u.addFavMusic(m);
-
-        userRepo.updateUserFavoriteMusics(u.getId(), m.getId() );
+        userRepoInstance.updateUserFavoriteMusics(u.getId(), m.getId() );
     }
     
 
-    public void addFavoritePlaylist(UserRepo userRepo, User u, Playlist p) throws IOException {
+    public void addFavoritePlaylist(User u, Playlist p) throws IOException {
+    	
         u.addFavPlaylist(p);
-
-        userRepo.updateUserFavoritePlaylists(u.getId(), p.getId() );
+        userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId() );
     }
 
 
@@ -124,10 +126,10 @@ public class UserController {
     }
 
 
-    public boolean isValidateInput(UserRepo repositorioUser) { // verifica se os dados do input são validos para acesso.
+    public boolean isValidateInput() { // verifica se os dados do input são validos para acesso.
         // caso seja encontrado login = usuario caso
         // contratio login = null;
-        // User login = repositorioUser.searchUserByEmail(this.emailInput);
+        // User login = userRepoInstance.searchUserByEmail(this.emailInput);
         
         // if (login == null) {// se login == null email nao encontrado.
         //     System.out.println("email nao encontrado");
@@ -143,4 +145,9 @@ public class UserController {
 
         return true;
     }
+
+
+	public User getUserByIndex(int index) {
+		return userRepoInstance.getUserByIndex(index);
+	}
 }

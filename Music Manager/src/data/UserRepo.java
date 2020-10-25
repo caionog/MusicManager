@@ -14,7 +14,13 @@ import negocio.User;
 public class UserRepo {
 
     private static UserRepo instance;
-
+    
+    private ArrayList<User> usersRepo = new ArrayList<User>();
+    private String absolutePath = "Music Manager\\src\\data\\txt storage\\Users repository\\";
+    private int IDs; // Somente usado na função addUser <--- revisar isso, da pra melhorar
+    
+    //------------------ Singleton + Construtor ---------------//
+    
     public static UserRepo getInstance() {
 		if (instance == null) {
             instance = new UserRepo();
@@ -22,21 +28,9 @@ public class UserRepo {
         return instance;
     }
     
-    private ArrayList<User> usersRepo = new ArrayList<User>();
-    private String absolutePath = "Music Manager\\src\\data\\txt storage\\Users repository\\";
-    private int IDs;
-    
-    //------------------construtor---------------//
-    public UserRepo(int id, UserPermission userPermission, String email, String name, String password,
-            ArrayList<Music> favMusics, ArrayList<Playlist> favPlaylist) {
+    private UserRepo() {}
 
-        User defaultUSer = new User(id, userPermission, email, name, password, favMusics, favPlaylist);
-        usersRepo.add(defaultUSer);
-    }
-
-    public UserRepo() {}
-
-    // CRUD de users
+    //------------------ CRUD de users ---------------//
 
     // Create user no ArrayList e cria um .txt no repositorio
     public void createUser(UserPermission userPermission, String email, String name, String password) throws IOException {
@@ -213,7 +207,7 @@ public class UserRepo {
 	}
 
 
-    // Funções auxiliares
+    //------------------ Funções auxiliares ---------------//
 
     // Read todas os Users.txt e coloca tds no arraylist userRepo
     public void populateUserRepo(MusicRepo musicRepo, PlaylistRepo playlistRepo) throws IOException {

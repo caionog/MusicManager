@@ -13,47 +13,39 @@ import negocio.Music; // Classes base
 import negocio.Playlist;
 import negocio.User;
 
-import data.MusicRepo; // Repositorios
-import data.PlaylistRepo;
-import data.UserRepo;
-
 import negocio.controllers.MusicController; // Controladores
 import negocio.controllers.PlaylistController;
 import negocio.controllers.UserController;
 
 public class BackendTeste {
-	/*
 
-	public static void backendTeste(String[] args) throws IOException, SAXException, TikaException, Exception {
+	public static void backendTeste() throws IOException, SAXException, TikaException, Exception {
 
 		System.out.println("[ ('¬')_Ll Loading Program... ]");
 
-		// Instanciando o básico para inicializar o sistema
+		// Instanciando os controladores para testar o sistema
 
-		UserController userController = new UserController();
 		MusicController musicController = new MusicController();
 		PlaylistController playlistController = new PlaylistController();
+		UserController userController = new UserController();
 
-		MusicRepo musicRepo = new MusicRepo();
-		musicRepo.resetRepo();
-		musicController.populateMusicLibrary(musicRepo); // Preenche o array com as musicas ja guardas nos .txt
+		musicController.resetRepo();
+		musicController.populateMusicLibrary(); // Preenche o array com as musicas ja guardadas nos .txt
 
-		PlaylistRepo playlistRepo = new PlaylistRepo();
-		playlistRepo.resetRepo();
-		playlistController.populatePlaylistLibrary(playlistRepo, musicRepo);
+		playlistController.resetRepo();
+		playlistController.populatePlaylistLibrary();
 
-		UserRepo userRepo = new UserRepo();
-		userRepo.resetRepo();
-		userController.populateUsersRepo(userRepo, musicRepo, playlistRepo);
+		userController.resetRepo();
+		userController.populateUsersRepo();
 
-		////// Inicio dos teste  //////
+		////// Início dos teste  //////
 
-		// Criando 2 usuarios
-		userController.registerUser(userRepo, UserPermission.NORMAL, "maria@gmail.com", "Maria Ferreira", "123456");
-		userController.registerUser(userRepo, UserPermission.ADM, "logged@gmail.com", "usuário de teste", "1234");
+		// Criando 2 usuários
+		userController.registerUser(UserPermission.NORMAL, "maria@gmail.com", "Maria Ferreira", "123456");
+		userController.registerUser(UserPermission.ADM, "logged@gmail.com", "usuário de teste", "1234");
 		
-		User defaultUser = userRepo.getUserByIndex(0);
-		User loggedUser = userRepo.getUserByIndex(1);
+		User defaultUser = userController.getUserByIndex(0);
+		User loggedUser = userController.getUserByIndex(1);
 
 
 		// Simulando o input do path duma música
@@ -65,53 +57,53 @@ public class BackendTeste {
 		String pathSong5 = mp3StoragePath + "ADOFAI\\The Midnight Train" + ".mp3";
 
 		// Simulando a criação da Music no repositório de musicas com base no input path
-		musicController.extractMetaData(musicRepo, pathSong1);
-		musicController.extractMetaData(musicRepo, pathSong2);
-		musicController.extractMetaData(musicRepo, pathSong3);
-		musicController.extractMetaData(musicRepo, pathSong4);
-		musicController.extractMetaData(musicRepo, pathSong5);
+		musicController.extractMetaData(pathSong1);
+		musicController.extractMetaData(pathSong2);
+		musicController.extractMetaData(pathSong3);
+		musicController.extractMetaData(pathSong4);
+		musicController.extractMetaData(pathSong5);
 
 		// Simulando a criação de playlists
 		ArrayList<Music> selectedMusics = new ArrayList<Music>(2);
-		for (Music music : musicRepo.getMusicLibrary()) {
+		for (Music music : musicController.getMusicLibrary()) {
 			if (selectedMusics.size() < 2) {
 				selectedMusics.add(music);
 			}
 		}
 
-		playlistController.groupSelectedMusic(playlistRepo, selectedMusics, defaultUser);
+		playlistController.groupSelectedMusic(selectedMusics, defaultUser);
 
 		ArrayList<Music> selectedMusics2 = new ArrayList<Music>(2);
-		for (Music music : musicRepo.getMusicLibrary()) {
+		for (Music music : musicController.getMusicLibrary()) {
 			if (selectedMusics2.size() < 2) {
 				selectedMusics2.add(music);
 			}
 		}
 
-		playlistController.groupSelectedMusic(playlistRepo, selectedMusics2, defaultUser);
+		playlistController.groupSelectedMusic(selectedMusics2, defaultUser);
 
 		// Alterando visibilidade da playlist
-		Playlist selectedPlaylist = playlistRepo.getPlaylistsLibrary().get(0);
-		playlistController.togglePlaylistVisibility(playlistRepo, selectedPlaylist);
+		Playlist selectedPlaylist = playlistController.getPlaylistsLibrary().get(0);
+		playlistController.togglePlaylistVisibility(selectedPlaylist);
 			
 		// Adicionando musicas e playlists favoritas no loggedUser
-		Music favMusic = musicRepo.getMusicById(3);
-		Playlist favPlaylist = playlistRepo.getPlaylistByIndex(0);
+		Music favMusic = musicController.getMusicById(3);
+		Playlist favPlaylist = playlistController.getPlaylistByIndex(0);
 
-		if (favMusic != null) userController.addFavoriteMusic(userRepo, defaultUser, favMusic);
-		if (favPlaylist != null) userController.addFavoritePlaylist(userRepo, defaultUser, favPlaylist);
+		if (favMusic != null) userController.addFavoriteMusic(defaultUser, favMusic);
+		if (favPlaylist != null) userController.addFavoritePlaylist(defaultUser, favPlaylist);
 		
 		// Testando a geração de ids (deletar e criar uma musica depois) + teste da função delete music
 		// Deleta 2 musicas selecionada
 		int id = 1;
-		Music selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong1
-		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
+		Music selectedMusic = musicController.getMusicById(id); // id da musica criada com o pathSong1
+		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, selectedMusic);
 
 		id = 2;
-		selectedMusic = musicRepo.getMusicById(id); // id da musica criada com o pathSong2
-		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, musicRepo, playlistRepo, userRepo, selectedMusic);
+		selectedMusic = musicController.getMusicById(id); // id da musica criada com o pathSong2
+		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, selectedMusic);
 
-		musicController.extractMetaData(musicRepo, pathSong1); // Cria uma musica depois de deletar
+		musicController.extractMetaData(pathSong1); // Cria uma musica depois de deletar
 		
 		System.out.println("-------criando conta------");
 		Scanner input = new Scanner(System.in);
@@ -141,9 +133,9 @@ public class BackendTeste {
 
 		System.out.println("-------testando login------");
 		// userController.handleUserLogin(userRepo);
-		boolean validate = userController.isValidateInput(userRepo);
-		System.out.println(validate);
-		if(validate==true) {
+		boolean validated = userController.isValidateInput();
+		System.out.println(validated);
+		if(validated) {
 			System.out.println(" bem vindo");
 
 		} else {
@@ -151,5 +143,5 @@ public class BackendTeste {
 		}
 	
 	} // Fim do main
-*/
+
 } // Fim da classe

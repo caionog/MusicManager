@@ -13,17 +13,30 @@ import negocio.Genre; // Enum
 import negocio.Music; // Classe base
 
 public class MusicRepo {
+	
+	private static MusicRepo instance;
 
     private ArrayList<Music> musicLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\musics repository\\";
 
-    // CRD (o U é Update, e editar música não faz sentido)
+    //------------------ Singleton + Construtor ---------------//
+    
+    public static MusicRepo getInstance() {
+		if (instance == null) {
+            instance = new MusicRepo();
+        }
+        return instance;
+    }
+    
+    private MusicRepo() {}
+    
+    //------------------ CRD de musics ---------------//
 
     // Create Music no ArrayList e cria um .txt no repositorio
     public void createMusic(String title, String artist, Genre genre, String duration) throws IOException, FileNotFoundException {
 
         // Cria a musica
-        int id = generateId(); // Gera um id unico, ou seja, nao se repete
+        int id = generateId(); // Gera um id único
         Music m = new Music(id, title, artist, genre, duration);
 
         // Adiciona na biblioteca
@@ -100,7 +113,7 @@ public class MusicRepo {
     }
 
 
-    // Funções auxiliares
+    //------------------ Funções auxiliares ---------------//
 
     // Read todas as Musics.txt e coloca tds no arraylist musicLibrary
     public void populateMusicLibrary() throws IOException {

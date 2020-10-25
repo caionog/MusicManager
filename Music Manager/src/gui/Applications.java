@@ -2,20 +2,22 @@ package gui;
 
 import java.io.IOException;
 
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+// import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+// import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import negocio.Playlist;
 import javafx.fxml.FXMLLoader;
 
 
 public class Applications extends Application{
 	
-	//COMEÇO DOS COMENTÁRIOS
+	//COMEï¿½O DOS COMENTï¿½RIOS
 	private Stage primaryStage;
 	private BorderPane rootScene;
 
@@ -102,7 +104,8 @@ public class Applications extends Application{
 		return primaryStage;
 	}
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
+    	// BackendTeste.backendTeste();
         launch();
     }
 //FIM DOS COMENTARIOS
