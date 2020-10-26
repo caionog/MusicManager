@@ -2,6 +2,7 @@ package gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -19,11 +20,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import negocio.Music;
+import negocio.controllers.MusicController;
 import negocio.Genre;
 import data.MusicRepo;
 
 public class TelaPrincipalController implements Initializable{
-	//configurar table view m�sica da tela principal
+	//configurar table view m�sica da tela principal
 	 @FXML
 	    private TableView<Music> tableViewTelaPrincipal;
 	 @FXML
@@ -92,7 +94,19 @@ public class TelaPrincipalController implements Initializable{
 			
 			ObservableList<Music> musica = FXCollections.observableArrayList();
 			Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
+			
 			//ADICIONAR MUSICAS AQUI
+			MusicController musicControler = new MusicController(); // provavelmente é melhor mudar essa linha criando uma classe que enxerga todos os controladores e chamando essa classe
+			
+			Music m = musicControler.getMusicById(1); // Retorna a música que tem id 1, se não existir retorna null
+			ArrayList<Music> musicLibrary = musicControler.getMusicLibrary(); // Retorna o array inteiro com todas as músicas
+			
+			// Adiciona todas as músicas do repositório no array musica
+			for (Music music : musicLibrary) {
+				musica.add(music);
+			}
+			//////////////////////////
+			
 			musica.add(new Music(1, "title", "testeArtist", genre, "TesteDuration"));
 			return musica;
 		}
