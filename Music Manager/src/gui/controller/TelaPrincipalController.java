@@ -1,17 +1,47 @@
 package gui.controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import negocio.Music;
+import negocio.Genre;
+import data.MusicRepo;
 
-public class TelaPrincipalController {
+public class TelaPrincipalController implements Initializable{
+	//configurar table view música da tela principal
+	 @FXML
+	    private TableView<Music> tableViewTelaPrincipal;
+	 @FXML
+	    private TableColumn<Music, String> titleColumn;
+	 @FXML
+	    private TableColumn<Music, String> artistColumn;
+
+	    @FXML
+	    private TableColumn<Music, Genre> genreColumn;
+
+	    @FXML
+	    private TableColumn<Music, String> idColumn;
+
+	    @FXML
+	    private TableColumn<Music, String> durationColumn;
+
+	
+	
 	
 	 @FXML
 	    private Button botaoPerfilTelaPrincipal;
@@ -40,6 +70,33 @@ public class TelaPrincipalController {
 	    	window2.show();
 
 	    }
+	    
+	 
+
+		@Override
+		public void initialize(URL location, ResourceBundle resources) {
+			// TODO Auto-generated method stub
+			//configurar colunas do tableview
+			titleColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
+			artistColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("artist"));
+			durationColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("duration"));
+			genreColumn.setCellValueFactory(new PropertyValueFactory<Music, Genre>("genre"));
+			idColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("id"));
+			//carregar data
+			tableViewTelaPrincipal.setItems(getMusic());
+			
+		}
+		
+		public ObservableList<Music> getMusic()
+		{
+			
+			ObservableList<Music> musica = FXCollections.observableArrayList();
+			Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
+			//ADICIONAR MUSICAS AQUI
+			musica.add(new Music(1, "title", "testeArtist", genre, "TesteDuration"));
+			return musica;
+		}
+	    
 
 
 }
