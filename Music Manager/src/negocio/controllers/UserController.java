@@ -115,10 +115,13 @@ public class UserController {
     }
 
 
-    public void editUser(String[] stringsToChange) {
+    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) {
+        if (newEmail != "") loggedUser.setEmail(newEmail);
+        
+		if (newName != "") loggedUser.setName(newName);
 
-
-    }
+		if (newPassword != "") loggedUser.setPassword(newPassword);
+	}
 
 
     public boolean editNome(int usuarioAtual) {
