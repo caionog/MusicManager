@@ -20,7 +20,7 @@ import negocio.controllers.UserController;
 public class BackendTeste {
 
 	public static void backendTeste() throws IOException, SAXException, TikaException, Exception {
-
+		
 		System.out.println("[ ('¬')_Ll Loading Program... ]");
 
 		// Instanciando os controladores para testar o sistema
@@ -41,8 +41,8 @@ public class BackendTeste {
 		////// Início dos teste  //////
 
 		// Criando 2 usuários
-		userController.registerUser(UserPermission.NORMAL, "maria@gmail.com", "Maria Ferreira", "123456");
-		userController.registerUser(UserPermission.ADM, "logged@gmail.com", "usuário de teste", "1234");
+		userController.handleUserRegister(UserPermission.NORMAL, "maria@gmail.com", "Maria Ferreira", "123456");
+		userController.handleUserRegister(UserPermission.ADM, "logged@gmail.com", "usuário de teste", "1234");
 		
 		User defaultUser = userController.getUserByIndex(0);
 		User loggedUser = userController.getUserByIndex(1);
@@ -113,8 +113,8 @@ public class BackendTeste {
 		UserPermission permission = UserPermission.NORMAL;
 		input.close();
 		
-		userController.handleUserRegister(email, name, password, permission);
-		// userController.registerUser(userRepo, email, name, password, permission);
+		userController.handleUserRegister(permission, email, name, password);
+		
 		userController.handleUserLogin(name, password);
 		userController.handleUserLogin(email, password);
 		

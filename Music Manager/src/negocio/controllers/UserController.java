@@ -1,6 +1,7 @@
 package negocio.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import data.MusicRepo; // Repositórios
 import data.PlaylistRepo;
@@ -20,47 +21,6 @@ public class UserController {
     private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 
 
-    public void handleUserLogin(String nameOrEmail, String password) {
-
-        Boolean flag = false;
-
-        // Explora os emails
-        for (String email : userRepoInstance.getEmails()) {
-            if (nameOrEmail.equalsIgnoreCase(email)) {
-                flag = true;
-                break;
-            }
-        }
-
-        // Explora os nomes caso não encontre um email
-        if (flag == false) {
-            for (String name : userRepoInstance.getEmails()) {
-                if (nameOrEmail.equalsIgnoreCase(name)) {
-                    flag = true;
-                    break;
-                }
-            }
-        }
-
-
-
-        
-    }
-
-
-    public void handleUserRegister(String email, String name, String password, UserPermission permission) {
-        // Checa se o email já foi utilizado por outro user
-        
-
-        // Checa se o name já foi utilizado por outro user
-    }
-
-
-    public void registerUser(UserPermission userPermission, String email, String name, String password) throws IOException {
-        userRepoInstance.createUser(userPermission, email, name, password);
-    }
-    
-    
     public void resetRepo() {
     	userRepoInstance.resetRepo();
     }
@@ -68,6 +28,76 @@ public class UserController {
 
     public void populateUsersRepo() throws IOException {
         userRepoInstance.populateUserRepo(musicRepoInstance, playlistRepoInstance);
+    }
+
+
+    public void handleUserRegister(UserPermission permission, String email, String name, String password) throws IOException {
+        
+    	Boolean emailAlreadyExist = false;
+    	Boolean nameAlreadyExist = false;
+    	
+    	// TODO Checa se existe um @ no email e não existe um @ no name ( caracter que diferencia email de nome )
+    	
+    	
+    	// Checa se o email já foi utilizado por outro user
+        ArrayList<String> emails = userRepoInstance.getEmails();
+        
+        for (String eachEmail : emails) {
+			if ( email.equalsIgnoreCase(eachEmail) ) {
+				emailAlreadyExist = true;
+				break;
+			}
+		}
+        
+
+        // Checa se o name já foi utilizado por outro user
+        ArrayList<String> names = userRepoInstance.getNames();
+        
+        for (String eachName : names) {
+			if ( name.equalsIgnoreCase(eachName) ) {
+				nameAlreadyExist = true;
+				break;
+			}
+		}
+        
+        if ( emailAlreadyExist || nameAlreadyExist ) {
+        	// Não cria conta
+        } else {
+        	registerUser(permission, email, name, password);
+        }
+    }
+
+    
+    private void registerUser(UserPermission userPermission, String email, String name, String password) throws IOException {
+        userRepoInstance.createUser(userPermission, email, name, password);
+    }
+    
+    
+    public void handleUserLogin(String nameOrEmail, String password) {
+
+        Boolean exist = false;
+
+        // Explora os emails
+        for (String email : userRepoInstance.getEmails()) {
+            if (nameOrEmail.equalsIgnoreCase(email)) {
+                exist = true;
+                break;
+            }
+        }
+
+        // Explora os nomes caso não encontre um email
+        if ( !exist ) {
+            for (String name : userRepoInstance.getEmails()) {
+                if (nameOrEmail.equalsIgnoreCase(name)) {
+                    exist = true;
+                    break;
+                }
+            }
+        }
+
+        if (exist) {
+        	// TODO Faz login
+        }
     }
     
 
@@ -92,9 +122,9 @@ public class UserController {
 
 
     public boolean editNome(int usuarioAtual) {
-        // User usuario = this.repositorioUsuario.getUser(usuarioAtual);
+        // User usuario = userRepoInstance.getUser(usuarioAtual);
         // usuario.
-
+    	
         return false;
     }
 
@@ -111,24 +141,10 @@ public class UserController {
     }
 
 
-    public void registerUser(UserRepo repositorioUser, String email, String name, String password, UserPermission permission)
-            throws IOException {
-
-        Boolean successfulValidation = validateInput();
-
-
-        if ( successfulValidation ) {
-            repositorioUser.createUser(permission, email, name, password);
-        }
-    }
-
-
-    private boolean validateInput() { // verifica se os dados do input são validos para acesso
-        return true;
-    }
-
-
     public boolean isValidateInput() { // verifica se os dados do input são validos para acesso.
+    	
+    	// // Função antiga que nem sei se pode apagar, então comentei // //
+    	
         // caso seja encontrado login = usuario caso
         // contratio login = null;
         // User login = userRepoInstance.searchUserByEmail(this.emailInput);
@@ -147,9 +163,9 @@ public class UserController {
 
         return true;
     }
-
-
-	public User getUserByIndex(int index) {
+    
+    
+    public User getUserByIndex(int index) {
 		return userRepoInstance.getUserByIndex(index);
 	}
 }

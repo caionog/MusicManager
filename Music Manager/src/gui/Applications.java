@@ -105,7 +105,7 @@ public class Applications extends Application{
 	}
 
     public static void main(String[] args) throws IOException, SAXException, TikaException, Exception {
-    	// BackendTeste.backendTeste();
+    	BackendTeste.backendTeste();
         launch();
     }
 //FIM DOS COMENTARIOS

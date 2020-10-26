@@ -13,13 +13,13 @@ import negocio.Genre; // Enum
 import negocio.Music; // Classe base
 
 public class MusicRepo {
-	
-	private static MusicRepo instance;
 
     private ArrayList<Music> musicLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\musics repository\\";
 
     //------------------ Singleton + Construtor ---------------//
+    
+    private static MusicRepo instance;
     
     public static MusicRepo getInstance() {
 		if (instance == null) {
@@ -153,19 +153,28 @@ public class MusicRepo {
 
 
     private int generateId() throws FileNotFoundException {
-        File musicRepoFolder = new File(absolutePath);
 
-        int greaterId = 0;
+        int greaterId = 0, currentId;
+        
+//        File musicRepoFolder = new File(absolutePath);
 
-        for (final File music : musicRepoFolder.listFiles()) {
-            Scanner reader = new Scanner(music);
-            int compareId = Integer.valueOf(reader.nextLine());
-            reader.close();
-
-            if (compareId >= greaterId) {
-                greaterId = compareId;
-            }
-        }
+//        for (final File music : musicRepoFolder.listFiles()) {
+//            Scanner reader = new Scanner(music);
+//            int compareId = Integer.valueOf(reader.nextLine());
+//            reader.close();
+//
+//            if (compareId >= greaterId) {
+//                greaterId = compareId;
+//            }
+//        }
+        
+        for (Music music : musicLibrary) {
+			currentId = music.getId();
+			
+			if ( currentId >= greaterId ) {
+				greaterId = currentId;
+			}
+		}
 
         return greaterId+1;
     }

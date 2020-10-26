@@ -13,8 +13,6 @@ import negocio.Playlist; // Classes base
 import negocio.Music;
 
 public class PlaylistRepo {
-	
-	private static PlaylistRepo instance;
 
     private ArrayList<Playlist> playlistsLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\playlists repository\\";
@@ -22,6 +20,8 @@ public class PlaylistRepo {
     // TO-DO alterar id dentro do .txt ou visibilidade (U)
     
     //------------------ Singleton + Construtor ---------------//
+    
+    private static PlaylistRepo instance;
     
     public static PlaylistRepo getInstance() {
 		if (instance == null) {
@@ -226,19 +226,27 @@ public class PlaylistRepo {
 
 
     private int generateId() throws FileNotFoundException {
-        File musicRepoFolder = new File(absolutePath);
 
-        int greaterId = 0;
+        int greaterId = 0, currentId;
 
-        for (final File playlist : musicRepoFolder.listFiles()) {
-            Scanner reader = new Scanner(playlist);
-            int compareId = Integer.valueOf(reader.nextLine());
-            reader.close();
-
-            if (compareId >= greaterId) {
-                greaterId = compareId;
-            }
-        }
+//        File musicRepoFolder = new File(absolutePath);
+//        for (final File playlist : musicRepoFolder.listFiles()) {
+//            Scanner reader = new Scanner(playlist);
+//            int compareId = Integer.valueOf(reader.nextLine());
+//            reader.close();
+//
+//            if (compareId >= greaterId) {
+//                greaterId = compareId;
+//            }
+//        }
+        
+		for (Playlist playlist : playlistsLibrary) {
+			currentId = playlist.getId();
+			
+			if ( currentId >= greaterId ) {
+				greaterId = currentId;
+			}
+		}
 
         return greaterId+1;
     }

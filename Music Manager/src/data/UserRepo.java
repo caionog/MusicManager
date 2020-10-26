@@ -14,14 +14,14 @@ import negocio.Playlist;
 import negocio.User;
 
 public class UserRepo {
-
-    private static UserRepo instance;
     
     private ArrayList<User> usersRepo = new ArrayList<User>();
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\Users repository\\";
     private int IDs; // Somente usado na função addUser <--- revisar isso, da pra melhorar
     
     //------------------ Singleton + Construtor ---------------//
+    
+    private static UserRepo instance;
     
     public static UserRepo getInstance() {
 		if (instance == null) {
@@ -270,19 +270,30 @@ public class UserRepo {
 
 
     private int generateId() throws FileNotFoundException {
+
+        int greaterId = 0, currentId;
+
+        /*
         File userRepoFolder = new File(absolutePath);
-
-        int greaterId = 0;
-
+        
         for (final File user : userRepoFolder.listFiles()) {
             Scanner reader = new Scanner(user);
-            int compareId = Integer.valueOf(reader.nextLine());
+            int currentId = Integer.valueOf(reader.nextLine());
             reader.close();
 
-            if (compareId >= greaterId) {
-                greaterId = compareId;
+            if ( currentId >= greaterId ) {
+                greaterId = currentId;
             }
         }
+        */
+        
+        for (User user : usersRepo) {
+        	currentId = user.getId();
+        	
+			if ( currentId >= greaterId) {
+				greaterId = currentId;
+			}
+		}
 
         return greaterId+1;
     }
@@ -361,6 +372,7 @@ public class UserRepo {
         return this.usersRepo.size();
     }
 
+    
 	public ArrayList<String> getEmails() {
         ArrayList<String> emails = new ArrayList<>();
         
@@ -369,5 +381,15 @@ public class UserRepo {
         }
 
         return emails;
+	}
+
+	public ArrayList<String> getNames() {
+		ArrayList<String> names = new ArrayList<>();
+        
+        for (User user : usersRepo) {
+            names.add(user.getName());
+        }
+
+        return names;
 	}
 }
