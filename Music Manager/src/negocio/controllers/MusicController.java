@@ -147,7 +147,7 @@ public class MusicController {
 
 		ArrayList<Music> musics = new ArrayList<Music>(0);
 
-		// TODO Acessa repositório de Musicas <---------- falta completar
+		// TODO Acessa repositório de Musicas e buscar músicas compatíveis
 
 		return musics;
 	}

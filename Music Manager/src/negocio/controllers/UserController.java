@@ -31,40 +31,42 @@ public class UserController {
     }
 
 
-    public void handleUserRegister(UserPermission permission, String email, String name, String password) throws IOException {
+    public Boolean handleUserRegister(UserPermission permission, String email, String name, String password) throws IOException {
+    	
+        // Checa se o email e nome estão no formato correto
+        if ( email.indexOf('@') == -1 ) { 
+            System.out.println("Email inválido! Problema: email não possui @");
+            return false;
+        }
         
-    	Boolean emailAlreadyExist = false;
-    	Boolean nameAlreadyExist = false;
-    	
-    	// TODO Checa se existe um @ no email e não existe um @ no name ( caracter que diferencia email de nome )
-    	
-    	
+        if ( name.indexOf('@') != -1 ) {
+            System.out.println("Nome inválido! Problema: nome possui @");
+            return false;
+        }
+
     	// Checa se o email já foi utilizado por outro user
         ArrayList<String> emails = userRepoInstance.getEmails();
         
         for (String eachEmail : emails) {
 			if ( email.equalsIgnoreCase(eachEmail) ) {
-				emailAlreadyExist = true;
-				break;
+                System.out.println("Email inválido! problema: email já está cadastrado");
+                return false;
 			}
 		}
-        
 
         // Checa se o name já foi utilizado por outro user
         ArrayList<String> names = userRepoInstance.getNames();
         
         for (String eachName : names) {
 			if ( name.equalsIgnoreCase(eachName) ) {
-				nameAlreadyExist = true;
-				break;
+				System.out.println("Nome inválido! problema: nome já está cadastrado");
+				return false;
 			}
 		}
         
-        if ( emailAlreadyExist || nameAlreadyExist ) {
-        	// Não cria conta
-        } else {
-        	registerUser(permission, email, name, password);
-        }
+        // Se passar nos 4 testes, então retorna true e registra o user
+        registerUser(permission, email, name, password);
+        return true;
     }
 
     
@@ -87,7 +89,7 @@ public class UserController {
 
         // Explora os nomes caso não encontre um email
         if ( !exist ) {
-            for (String name : userRepoInstance.getEmails()) {
+            for (String name : userRepoInstance.getNames()) {
                 if (nameOrEmail.equalsIgnoreCase(name)) {
                     exist = true;
                     break;
@@ -121,54 +123,13 @@ public class UserController {
     }
 
 
-    public void editUser(String[] stringsToChange) {
-
-
-    }
-
-
-    public boolean editNome(int usuarioAtual) {
-        // User usuario = userRepoInstance.getUser(usuarioAtual);
-        // usuario.
-    	
-        return false;
-    }
-
-
-    public boolean mudarSenha() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-
-    public boolean mudarEmail() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-
-    public boolean isValidateInput() { // verifica se os dados do input são validos para acesso.
-    	
-    	// // Função antiga que nem sei se pode apagar, então comentei // //
-    	
-        // caso seja encontrado login = usuario caso
-        // contratio login = null;
-        // User login = userRepoInstance.searchUserByEmail(this.emailInput);
+    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) {
+        if (newEmail != "") loggedUser.setEmail(newEmail);
         
-        // if (login == null) {// se login == null email nao encontrado.
-        //     System.out.println("email nao encontrado");
-        //     return false;
-        // }
+		if (newName != "") loggedUser.setName(newName);
 
-        // if (login.getPassword().equals(this.passWordInput)) {
-        //     this.alrightLogin = login.getId();
-        //     return true;
-        // } else {
-        //     return false;
-        // }
-
-        return true;
-    }
+		if (newPassword != "") loggedUser.setPassword(newPassword);
+	}
     
     
     public User getUserByIndex(int index) {

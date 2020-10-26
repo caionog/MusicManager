@@ -68,14 +68,14 @@ public class User {
 	public void setUserPermission(UserPermission userPermission) {
 		this.userPermission = userPermission;
 	}
-	public void setEmail(String newEmailUser) {
-		this.email = newEmailUser;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public void setNameUser(String newNameUser) {
-		this.name = newNameUser;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setPasswordUser(String newPasswordUser) {
-		this.password = newPasswordUser;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public ArrayList<Playlist> getFavoritePlaylists() {
@@ -86,20 +86,6 @@ public class User {
 	}
 
 	//--------------------metodos-------------------\\
-
-	public void modifyUser(String newName, String newPassword, String newEmail) {
-		if (newName != "") {
-			this.name = newName;
-		} 
-
-		if (newPassword != "") {
-			this.password = newPassword;
-		}
-
-		if (newEmail != "") {
-			this.email = newEmail;
-		}
-	}
 
 	public void addFavMusic(Music m) {
 		favoriteMusics.add(m);
@@ -115,6 +101,18 @@ public class User {
 
 	public void removeFavPlaylist(Playlist p) {
 		favoritePlaylists.remove(p);
+	}
+
+
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+
+		User other = (User) obj;
+		if (id != other.id) return false;
+
+		return true;
 	}
 
 

@@ -54,6 +54,19 @@ public class Music {
 
 	//--------------------metodos-------------------\\
 	
+
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+
+		Music other = (Music) obj;
+		if (id != other.id)  return false;
+		
+		return true;
+	}
+
+
 	public String toString() {
 		String s = "[";
 		s += "id= " + id;
@@ -67,5 +80,4 @@ public class Music {
 
 		return s;
 	}
-
 }

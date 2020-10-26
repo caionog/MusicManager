@@ -66,7 +66,7 @@ public class PlaylistController {
 
 		ArrayList<Playlist> playlists = new ArrayList<Playlist>(0);
 
-		// TODO Acessa repositório de Musicas <---------- falta completar
+		// TODO Acessa repositório de Musicas e buscar as playlists compatíveis
 
 		return playlists;
 	}
