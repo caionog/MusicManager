@@ -96,7 +96,7 @@ public class TelaPrincipalController implements Initializable{
 			Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
 			
 			//ADICIONAR MUSICAS AQUI
-			MusicController musicControler = new MusicController(); // provavelmente é melhor mudar essa linha criando uma classe que enxerga todos os controladores e chamando essa classe
+			MusicController musicControler = new MusicController(); // provavelmente é melhor mudar essa linha criando uma classe facadeMusicManager que enxerga todos os controladores
 			
 			Music m = musicControler.getMusicById(1); // Retorna a música que tem id 1, se não existir retorna null
 			ArrayList<Music> musicLibrary = musicControler.getMusicLibrary(); // Retorna o array inteiro com todas as músicas

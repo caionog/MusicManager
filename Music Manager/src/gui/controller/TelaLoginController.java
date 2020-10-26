@@ -52,7 +52,7 @@ public class TelaLoginController  {
 
 	    }
 	
-	    //método de trocar de cenas
+	    //metodo de trocar de cenas
 	    
 	    
 	
