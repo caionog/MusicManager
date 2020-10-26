@@ -73,7 +73,7 @@ public class UserController {
     }
     
     
-    public void handleUserLogin(String nameOrEmail, String password) {
+    public boolean handleUserLogin(String nameOrEmail, String password) {
 
         Boolean exist = false;
 
@@ -96,7 +96,13 @@ public class UserController {
         }
 
         if (exist) {
+        	return true;
         	// TODO Faz login
+        }
+        else 
+        {
+        	System.out.println("Nao existe");
+        	return false;
         }
     }
     
