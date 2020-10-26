@@ -86,13 +86,7 @@ public class Applications extends Application{
 			// seta a tela de conta no centro da tela principal
 			this.rootScene.setCenter(cadastroView);
 			
-	        // seta uma referencia do bancoApp no ContaController
-	       // ContaPaneController contaController = loader.getController();
-	       // contaController.setBancoApp(this);
-		   // seta a lista de contas
-	       //  ObservableList<Conta> dados = FXCollections.observableArrayList();
-	       //  FachadaBanco.getInstance().listar().stream().forEach(c -> dados.add(c));
-	       //  contaController.setDados(dados);
+	        
 			
 		} catch (IOException e) {
 			e.printStackTrace();
