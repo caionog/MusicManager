@@ -117,24 +117,6 @@ public class User {
 		favoritePlaylists.remove(p);
 	}
 
-	public ArrayList<Music> filterMusic(ArrayList<Genre> genres, String title) {
-
-		ArrayList<Music> musics = new ArrayList<Music>(0);
-
-		// TODO Acessa repositório de Musicas <---------- falta completar
-
-		return musics;
-	}
-
-	public ArrayList<Playlist> filterPlaylist(ArrayList<Genre> genres, String title) {
-
-		ArrayList<Playlist> playlists = new ArrayList<Playlist>(0);
-
-		// TODO Acessa repositório de Musicas <---------- falta completar
-
-		return playlists;
-	}
-
 
 	public String toString() {
 		//nao mostrar senha

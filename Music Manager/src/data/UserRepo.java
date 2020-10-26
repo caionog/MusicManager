@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import negocio.UserPermission;
-import negocio.Music;
+import negocio.UserPermission; // Enum
+
+import negocio.Music; // Classes base
 import negocio.Playlist;
 import negocio.User;
+
 public class UserRepo {
 
     private static UserRepo instance;

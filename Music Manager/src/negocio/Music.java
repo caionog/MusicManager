@@ -1,4 +1,5 @@
 package negocio;
+
 public class Music {
 
 	private int id;

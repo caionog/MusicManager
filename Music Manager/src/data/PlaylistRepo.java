@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import negocio._Visibility; // Enum
 
-import negocio.Playlist; // Classe base
+import negocio.Playlist; // Classes base
 import negocio.Music;
 
 public class PlaylistRepo {

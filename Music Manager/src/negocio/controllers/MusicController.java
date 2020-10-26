@@ -12,11 +12,12 @@ import org.apache.tika.parser.mp3.Mp3Parser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 
-import data.MusicRepo; // classes repositorio
+import data.MusicRepo; // Repositórios
 import data.UserRepo;
 
-import negocio.Genre; // Classes base
-import negocio.Music;
+import negocio.Genre; // Enum
+
+import negocio.Music; // Classes base
 import negocio.User;
 
 public class MusicController {
@@ -139,5 +140,15 @@ public class MusicController {
 
 	public Music getMusicById(int id) {
 		return musicRepoInstance.getMusicById(id);
+	}
+	
+	
+	public ArrayList<Music> filterMusic(Genre genre, String title) {
+
+		ArrayList<Music> musics = new ArrayList<Music>(0);
+
+		// TODO Acessa repositório de Musicas <---------- falta completar
+
+		return musics;
 	}
 }

@@ -2,13 +2,15 @@ package negocio.controllers;
 
 import java.io.IOException;
 
-import data.MusicRepo;
+import data.MusicRepo; // Repositórios
 import data.PlaylistRepo;
 import data.UserRepo;
-import negocio.Music;
+
+import negocio.Music; // Classes base
 import negocio.Playlist;
 import negocio.User;
-import negocio.UserPermission;
+
+import negocio.UserPermission; // Enum
 
 public class UserController {
 

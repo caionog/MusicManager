@@ -7,7 +7,7 @@ public class Playlist {
 	private int id;
 	private ArrayList<Music> musics;
 	private int creatorId;
-	private _Visibility visibility = _Visibility.INVISIBLE;
+	private _Visibility visibility = _Visibility.INVISIBLE; // VISIBLE ou INVISIBLE
 	
 	public Playlist(int id, ArrayList<Music> musics, int creatorId, _Visibility visibility) {
 		this.id = id;
@@ -55,6 +55,16 @@ public class Playlist {
 	public void removeMusicPlaylist(Music m) {
 		musics.remove(m);
 	}
+	
+	
+	public void toogleVisibility() {
+		if ( visibility.getValue() ) {
+			visibility = _Visibility.INVISIBLE;
+		} else {
+			visibility = _Visibility.VISIBLE;
+		}
+	}
+	
 
 	public String toString() {
 		String s = "=-= Dados do usuario =-=" + "\n";

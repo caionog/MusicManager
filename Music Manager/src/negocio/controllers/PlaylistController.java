@@ -4,14 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import data.MusicRepo;
+import data.MusicRepo; // Repositórios
 import data.PlaylistRepo;
 
 import negocio.Playlist; // Classes base
+import negocio.Genre;
 import negocio.Music;
 import negocio.User;
-
-import negocio._Visibility; // Enum
 
 public class PlaylistController {
 	
@@ -37,17 +36,9 @@ public class PlaylistController {
 
     public void togglePlaylistVisibility(Playlist p) throws IOException {
 
-        _Visibility newVisibility;
-
-        if (p.getVisibility().getValue()) {
-            newVisibility = _Visibility.INVISIBLE;
-        } else {
-            newVisibility = _Visibility.VISIBLE;
-        }
-
-        p.setVisibility(newVisibility);
-
-        playlistRepoInstance.updateVisibility(newVisibility.getStrValue(), p.getId() );
+    	p.toogleVisibility();
+    	
+        playlistRepoInstance.updateVisibility(p.getVisibility().getStrValue(), p.getId() );
     }
 
 
@@ -68,5 +59,15 @@ public class PlaylistController {
 
 	public Playlist getPlaylistByIndex(int index) {
 		return playlistRepoInstance.getPlaylistByIndex(index);
+	}
+	
+	
+	public ArrayList<Playlist> filterPlaylist(Genre genre, String title) {
+
+		ArrayList<Playlist> playlists = new ArrayList<Playlist>(0);
+
+		// TODO Acessa repositório de Musicas <---------- falta completar
+
+		return playlists;
 	}
 }
