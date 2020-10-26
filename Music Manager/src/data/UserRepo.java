@@ -392,4 +392,14 @@ public class UserRepo {
 
         return names;
 	}
+
+	public ArrayList<String> getPasswords() {
+        ArrayList<String> passwords = new ArrayList<>();
+        
+        for (User user : usersRepo) {
+            passwords.add(user.getPassword());
+        }
+
+        return passwords;
+	}
 }

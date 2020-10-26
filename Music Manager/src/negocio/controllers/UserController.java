@@ -77,29 +77,40 @@ public class UserController {
     
     public boolean handleUserLogin(String nameOrEmail, String password) {
 
-        Boolean exist = false;
+        Boolean nameOrEmailExist = false, passwordExist = false;
 
-        // Explora os emails
+        // Explora e verifica os emails
         for (String email : userRepoInstance.getEmails()) {
             if (nameOrEmail.equalsIgnoreCase(email)) {
-                exist = true;
+                nameOrEmailExist = true;
                 break;
             }
         }
 
-        // Explora os nomes caso não encontre um email
-        if ( !exist ) {
+        // Explora e verifica os nomes caso não encontre um email
+        if ( !nameOrEmailExist ) {
             for (String name : userRepoInstance.getNames()) {
                 if (nameOrEmail.equalsIgnoreCase(name)) {
-                    exist = true;
+                    nameOrEmailExist = true;
                     break;
                 }
             }
         }
 
-        if (exist) {
+        // Explora e verfica as senhas se encontrou um email ou nome
+        if (nameOrEmailExist) {
+            for (String eachPassword : userRepoInstance.getPasswords()) {
+                if ( password.equals(eachPassword) ) {
+                    passwordExist = true;
+                    break;
+                }
+            }
+        }
+
+
+        if (nameOrEmailExist && passwordExist) {
+            // TODO Faz login
         	return true;
-        	// TODO Faz login
         }
         else 
         {
