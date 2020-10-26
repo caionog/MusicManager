@@ -129,18 +129,6 @@ public class BackendTeste {
 		// System.out.println("To string do user Jorge: \n" + userRepo.searchUserByName("Jorge").toString());
 		// System.out.println("isso aqui; " + userRepo.searchUserByEmail("murilo@gmail.com"));
 		// System.out.println("To string do user murilo@gamil.com: \n" + userRepo.searchUserByEmail("murilo@gmail.com"));
-
-
-		System.out.println("-------testando login------");
-		// userController.handleUserLogin(userRepo);
-		boolean validated = userController.isValidateInput();
-		System.out.println(validated);
-		if(validated) {
-			System.out.println(" bem vindo");
-
-		} else {
-			System.out.println("email invalido ou senha incorreta");
-		}
 	
 	} // Fim do main
 
