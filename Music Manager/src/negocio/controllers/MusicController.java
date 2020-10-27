@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.google.j2objc.annotations.ObjectiveCName;
+
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.ParseContext;
@@ -15,17 +17,21 @@ import org.xml.sax.SAXException;
 import data.MusicRepo; // Repositórios
 import data.UserRepo;
 
-import negocio.Genre; // Enum
-
 import negocio.Music; // Classes base
 import negocio.User;
 
-public class MusicController {
+import negocio.Genre; // Enum
+
+import negocio.interfaces.IMusicController; // Interface
+
+public class MusicController implements IMusicController {
 	
 	private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 	
 	private UserRepo userRepoInstance = UserRepo.getInstance();
 
+
+	@Override
     public void extractMetaData(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();
 	    Metadata metadata = new Metadata();  
@@ -84,19 +90,21 @@ public class MusicController {
 		musicRepoInstance.createMusic(title, artist, genre, comprimentoStr);
 	}
     
-    
+	
+	@Override
     public void resetRepo() {
     	musicRepoInstance.resetRepo();
     }
 
 
+	@Override
 	public void populateMusicLibrary() throws IOException {
 		musicRepoInstance.populateMusicLibrary();
 	}
 
 
-	public void deleteMusic(User loggedUser, Music selectedMusic)
-			throws IOException {
+	@Override
+	public void deleteMusic(User loggedUser, Music selectedMusic) throws IOException {
 		
 		// So permite deletar musica se o loggedUser for administrador
 		if ( selectedMusic != null && loggedUser.getUserPermission().getValue() ) {
@@ -110,6 +118,8 @@ public class MusicController {
 		}
 	}
 		
+
+	@Override
 	public void printMetadata(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
@@ -122,6 +132,7 @@ public class MusicController {
 	}
 	
 	
+	@Override
 	public void printSummary(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
@@ -133,16 +144,19 @@ public class MusicController {
 	}
 
 
+	@Override
 	public ArrayList<Music> getMusicLibrary() {
 		return musicRepoInstance.getMusicLibrary();
 	}
 
 
+	@Override
 	public Music getMusicById(int id) {
 		return musicRepoInstance.getMusicById(id);
 	}
 	
 	
+	@Override
 	public ArrayList<Music> filterMusic(Genre genre, String title) {
 
 		ArrayList<Music> musics = new ArrayList<Music>(0);

@@ -13,7 +13,9 @@ import negocio.User;
 
 import negocio.UserPermission; // Enum
 
-public class UserController {
+import negocio.interfaces.IUserController; // Interface
+
+public class UserController implements IUserController {
 
     private UserRepo userRepoInstance = UserRepo.getInstance();
     
@@ -21,16 +23,19 @@ public class UserController {
     private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 
 
+    @Override
     public void resetRepo() {
     	userRepoInstance.resetRepo();
     }
 
 
+    @Override
     public void populateUsersRepo() throws IOException {
         userRepoInstance.populateUserRepo(musicRepoInstance, playlistRepoInstance);
     }
 
 
+    @Override
     public Boolean handleUserRegister(UserPermission permission, String email, String name, String password) throws IOException {
     	
         // Checa se o email e nome estão no formato correto
@@ -75,6 +80,7 @@ public class UserController {
     }
     
     
+    @Override
     public boolean handleUserLogin(String nameOrEmail, String password) {
 
         Boolean nameOrEmailExist = false, passwordExist = false;
@@ -120,6 +126,7 @@ public class UserController {
     }
     
 
+    @Override
     public void addFavoriteMusic(User u, Music m) throws IOException {
     	
         u.addFavMusic(m);
@@ -127,6 +134,7 @@ public class UserController {
     }
     
 
+    @Override
     public void addFavoritePlaylist(User u, Playlist p) throws IOException {
     	
         u.addFavPlaylist(p);
@@ -134,6 +142,7 @@ public class UserController {
     }
 
 
+    @Override
     public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) {
         if (newEmail != "") loggedUser.setEmail(newEmail);
         
@@ -143,6 +152,7 @@ public class UserController {
 	}
     
     
+    @Override
     public User getUserByIndex(int index) {
 		return userRepoInstance.getUserByIndex(index);
 	}
