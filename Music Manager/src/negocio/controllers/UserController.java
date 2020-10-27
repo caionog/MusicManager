@@ -13,7 +13,9 @@ import negocio.User;
 
 import negocio.UserPermission; // Enum
 
-public class UserController {
+import negocio.interfaces.IUserController; // Interface
+
+public class UserController implements IUserController {
 
     private UserRepo userRepoInstance = UserRepo.getInstance();
     
@@ -21,16 +23,19 @@ public class UserController {
     private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 
 
+    @Override
     public void resetRepo() {
     	userRepoInstance.resetRepo();
     }
 
 
+    @Override
     public void populateUsersRepo() throws IOException {
         userRepoInstance.populateUserRepo(musicRepoInstance, playlistRepoInstance);
     }
 
 
+    @Override
     public Boolean handleUserRegister(UserPermission permission, String email, String name, String password) throws IOException {
     	
         // Checa se o email e nome estão no formato correto
@@ -75,31 +80,43 @@ public class UserController {
     }
     
     
+    @Override
     public boolean handleUserLogin(String nameOrEmail, String password) {
 
-        Boolean exist = false;
+        Boolean nameOrEmailExist = false, passwordExist = false;
 
-        // Explora os emails
+        // Explora e verifica os emails
         for (String email : userRepoInstance.getEmails()) {
             if (nameOrEmail.equalsIgnoreCase(email)) {
-                exist = true;
+                nameOrEmailExist = true;
                 break;
             }
         }
 
-        // Explora os nomes caso não encontre um email
-        if ( !exist ) {
+        // Explora e verifica os nomes caso não encontre um email
+        if ( !nameOrEmailExist ) {
             for (String name : userRepoInstance.getNames()) {
                 if (nameOrEmail.equalsIgnoreCase(name)) {
-                    exist = true;
+                    nameOrEmailExist = true;
                     break;
                 }
             }
         }
 
-        if (exist) {
+        // Explora e verfica as senhas se encontrou um email ou nome
+        if (nameOrEmailExist) {
+            for (String eachPassword : userRepoInstance.getPasswords()) {
+                if ( password.equals(eachPassword) ) {
+                    passwordExist = true;
+                    break;
+                }
+            }
+        }
+
+
+        if (nameOrEmailExist && passwordExist) {
+            // TODO Faz login
         	return true;
-        	// TODO Faz login
         }
         else 
         {
@@ -109,6 +126,7 @@ public class UserController {
     }
     
 
+    @Override
     public void addFavoriteMusic(User u, Music m) throws IOException {
     	
         u.addFavMusic(m);
@@ -116,6 +134,7 @@ public class UserController {
     }
     
 
+    @Override
     public void addFavoritePlaylist(User u, Playlist p) throws IOException {
     	
         u.addFavPlaylist(p);
@@ -123,6 +142,7 @@ public class UserController {
     }
 
 
+    @Override
     public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) {
         if (newEmail != "") loggedUser.setEmail(newEmail);
         
@@ -132,6 +152,7 @@ public class UserController {
 	}
     
     
+    @Override
     public User getUserByIndex(int index) {
 		return userRepoInstance.getUserByIndex(index);
 	}
