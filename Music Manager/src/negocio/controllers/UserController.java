@@ -115,7 +115,7 @@ public class UserController implements IUserController {
 
 
         if (nameOrEmailExist && passwordExist) {
-            // TODO Faz login
+            // TODO guarda loggedUser em algum lugar
         	return true;
         }
         else 

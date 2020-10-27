@@ -1,17 +1,17 @@
 package gui.controller;
 
-import java.io.IOException;
+//import java.io.IOException;
 
 //import gui.Applications;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+// import javafx.application.Application;
+// import javafx.fxml.FXMLLoader;
+// import javafx.scene.Parent;
+// import javafx.scene.Scene;
+// import javafx.scene.image.Image;
+// import javafx.scene.layout.AnchorPane;
+// import javafx.scene.layout.BorderPane;
+// import javafx.stage.Stage;
 
 public class TelaCadastro/* extends Application*/{
 	/*

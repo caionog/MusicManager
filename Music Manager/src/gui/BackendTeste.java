@@ -2,7 +2,6 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
@@ -93,7 +92,7 @@ public class BackendTeste {
 		if (favMusic != null) userController.addFavoriteMusic(defaultUser, favMusic);
 		if (favPlaylist != null) userController.addFavoritePlaylist(defaultUser, favPlaylist);
 		
-		// Testando a geração de ids (deletar e criar uma musica depois) + teste da função delete music
+		// Testando da função delete e do gerador de ids (deletar e criar uma musica depois)
 		// Deleta 2 musicas selecionada
 		int id = 1;
 		Music selectedMusic = musicController.getMusicById(id); // id da musica criada com o pathSong1
@@ -104,31 +103,6 @@ public class BackendTeste {
 		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, selectedMusic);
 
 		musicController.extractMetaData(pathSong1); // Cria uma musica depois de deletar
-		
-		System.out.println("-------criando conta------");
-		Scanner input = new Scanner(System.in);
-        System.out.print("E-mail :"); String email = input.nextLine();
-        System.out.print("senha :"); String password = input.nextLine();
-		System.out.print("Name :"); String name = input.nextLine();
-		UserPermission permission = UserPermission.NORMAL;
-		input.close();
-		
-		userController.handleUserRegister(permission, email, name, password);
-		
-		userController.handleUserLogin(name, password);
-		userController.handleUserLogin(email, password);
-		
-		// login.newAccount(userRepo);
-		System.out.println("dados salvos");
-		// System.out.println("userRepo size: " + userRepo.getSize());
-		// System.out.println(userRepo.getUserByIndex(0).getEmail());
-		// System.out.println(userRepo.getUserByIndex(1).getEmail());
-		// System.out.println(userRepo.getUserByIndex(2).getEmail());
-		// System.out.println("UserRepo size: " + userRepo.getSize());
-		// defaultUser.setNameUser("Jorge");
-		// System.out.println("To string do user Jorge: \n" + userRepo.searchUserByName("Jorge").toString());
-		// System.out.println("isso aqui; " + userRepo.searchUserByEmail("murilo@gmail.com"));
-		// System.out.println("To string do user murilo@gamil.com: \n" + userRepo.searchUserByEmail("murilo@gmail.com"));
 	
 	} // Fim do main
 
