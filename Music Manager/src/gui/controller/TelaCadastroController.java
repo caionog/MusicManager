@@ -50,7 +50,7 @@ public class TelaCadastroController {
     @FXML
     void cancelarCadastroConta(ActionEvent event)throws IOException {
     	
-    	System.out.println("Botão cancelar funciona");
+    	System.out.println("BotÃ£o cancelar funciona");
     	Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaLogin.fxml"));
     	Scene tabbleViewScene = new Scene(tabbleViewParent);
     	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -109,7 +109,7 @@ public class TelaCadastroController {
     	
    
     	
-    	//MEXER AQUI TBM²
+    	//MEXER AQUI TBMï¿½
     	//UserPermission adm2 = checkAdminTelaCadastro.
     	//MEXER AQUI TBM
     	//User teste = new User(0, NORMAL, "email", "name"," password")
@@ -135,7 +135,7 @@ public class TelaCadastroController {
     	 		errorMessageLabelTelaCadastro.setText("Cadastro feito com sucesso"); 
     	 	}else 
     	 	{
-    	 		errorMessageLabelTelaCadastro.setText("Cadastro não pode ser feito\nUma ou mais informaçoes já cadastradas"); 
+    	 		errorMessageLabelTelaCadastro.setText("Cadastro nao pode ser feito\nUma ou mais informacoes ja cadastradas"); 
     	 	}
     		
     		
