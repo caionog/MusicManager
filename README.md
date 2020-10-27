@@ -1,3 +1,5 @@
+![logo-provisória](https://github.com/caionog/MusicManager/blob/master/music-manager-logo.png)
+
 # MusicManager
 
 Projeto feito utilizando:
@@ -8,9 +10,9 @@ Construa o projeto antes de rodar para baixar as dependências pelo maven.
 
 O main do código está em gui/Applications.java
 
-As classes base no pacote negócio.
-Os repositórios das classes base estão em pacote data/MusicRepo, data/PlaylistRepo e data/UserRepo.
-Os métodos das classes base como por exemplo: Criar música, criar playlist, criar usuário, editar playlist, gerar metadados, etc
+As classes base estão no pacote negócio.
+Os repositórios das classes base estão no pacote data/MusicRepo, data/PlaylistRepo e data/UserRepo.
+Os métodos das classes base como por exemplo: Criar música, criar playlist, registrar ou logar usuário, editar playlist, gerar metadados, etc
 estão no pacote negócio.controllers
 
 Os arquivos mp3 que são usados para gerar a classe música está em data/mp3Storage.
