@@ -14,7 +14,7 @@
       <Pane layoutX="71.0" layoutY="35.0" prefHeight="247.0" prefWidth="599.0">
          <children>
             <Button layoutX="332.0" layoutY="204.0" mnemonicParsing="false" text="Gerar Relatório" />
-            <Button layoutX="477.0" layoutY="204.0" mnemonicParsing="false" text="Gerar Metadados" />
+            <Button fx:id="botaoGerarMetadados" layoutX="477.0" layoutY="204.0" mnemonicParsing="false" onAction="#irGerarMetadados" text="Gerar Metadados" />
             <Button layoutX="183.0" layoutY="204.0" mnemonicParsing="false" text="Adicionar Música" />
             <TableView fx:id="tableViewTelaPrincipal" layoutX="7.0" layoutY="15.0" prefHeight="178.0" prefWidth="588.0">
               <columns>
@@ -28,7 +28,7 @@
          </children>
       </Pane>
       <Button fx:id="botãoSairTelaPrincipal" layoutX="558.0" layoutY="14.0" mnemonicParsing="false" onAction="#sairTelaPrincipal" text="Sair" />
-      <Button layoutX="263.0" layoutY="14.0" mnemonicParsing="false" text="Minhas Playlists" />
+      <Button fx:id="botãoMinhasPlaylists" layoutX="263.0" layoutY="14.0" mnemonicParsing="false" onAction="#irMinhasPlaylists" text="Minhas Playlists" />
       <Label layoutX="35.0" layoutY="12.0" text="Music Manager" textFill="#c64b4b">
          <font>
             <Font size="20.0" />
