@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import negocio.User; // Classes base
-import negocio.Music;
-import negocio.Playlist;
+import negocio.beans.User; // Classes base
+import negocio.beans.Music;
+import negocio.beans.Playlist;
 
-import negocio.Genre; // Enum
+import negocio.beans.Genre; // Enum
 
 public interface IPlaylistController {
   

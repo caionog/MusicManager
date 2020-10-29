@@ -19,9 +19,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import negocio.Music;
-import negocio.controllers.MusicController;
-import negocio.Genre;
+
+import negocio.controllers.MusicController; // Controlador
+
+import negocio.beans.Music; // Classe base
+
+import negocio.beans.Genre; // Enum
 
 public class TelaPrincipalController implements Initializable{
 	//configurar table view música da tela principal
@@ -52,7 +55,7 @@ public class TelaPrincipalController implements Initializable{
 
 	@FXML
 	void irMeuPerfilTelaPrincipal(ActionEvent event)throws IOException  {
-		System.out.println("Bot�o meu perfil funciona ");
+		System.out.println("Botão meu perfil funciona ");
 		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAlterarPerfil.fxml"));
 		Scene tabbleViewScene = new Scene(tabbleViewParent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

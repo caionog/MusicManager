@@ -8,9 +8,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import negocio.Genre; // Enum
+import negocio.beans.Music; // Classe base
 
-import negocio.Music; // Classe base
+import negocio.beans.Genre; // Enum
 
 public class MusicRepo {
 
