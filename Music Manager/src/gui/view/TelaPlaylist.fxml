@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="538.0" prefWidth="948.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane prefHeight="1000.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
    <children>
       <SplitPane dividerPositions="0.5" layoutY="139.0" prefHeight="306.0" prefWidth="266.0">
         <items>

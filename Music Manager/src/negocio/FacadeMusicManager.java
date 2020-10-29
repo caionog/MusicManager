@@ -1,8 +1,14 @@
 package negocio;
 
-import negocio.controllers.MusicController;
+import java.util.ArrayList;
+
+import negocio.controllers.MusicController; // Controladores
 import negocio.controllers.PlaylistController;
 import negocio.controllers.UserController;
+
+import negocio.beans.Music; // Classe base
+import negocio.beans.Playlist;
+import negocio.beans.User;
 
 public class FacadeMusicManager {
 
@@ -27,5 +33,13 @@ public class FacadeMusicManager {
 
     //---------------------------------------------------------//
 
-    // TODO interligar os controladores das telas e das calsses base com essa classe
+    public ArrayList<Music> getMusicLibrary() {
+		
+		return musicController.getMusicLibrary(); // Retorna o array inteiro com todas as músicas;
+	}
+
+	public ArrayList<Playlist> getPlaylistLibrary() {
+        
+        return playlistContrtoller.getPlaylistsLibrary();
+	}
 }

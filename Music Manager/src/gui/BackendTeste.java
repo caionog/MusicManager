@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
-import negocio.UserPermission; // Enum
+import negocio.beans.UserPermission; // Enum
 
-import negocio.Music; // Classes base
-import negocio.Playlist;
-import negocio.User;
+import negocio.beans.Music; // Classes base
+import negocio.beans.Playlist;
+import negocio.beans.User;
 
 import negocio.controllers.MusicController; // Controladores
 import negocio.controllers.PlaylistController;

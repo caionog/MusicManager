@@ -20,13 +20,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import negocio.controllers.MusicController; // Controlador
-
 import negocio.beans.Music; // Classe base
-
+import negocio.beans.Playlist;
+import negocio.FacadeMusicManager;
 import negocio.beans.Genre; // Enum
 
 public class TelaPrincipalController implements Initializable{
+
+	FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
+
 	//configurar table view música da tela principal
 	@FXML
 	private TableView<Music> tableViewTelaPrincipal;
@@ -87,29 +89,42 @@ public class TelaPrincipalController implements Initializable{
 		genreColumn.setCellValueFactory(new PropertyValueFactory<Music, Genre>("genre"));
 		idColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("id"));
 		//carregar data
-		tableViewTelaPrincipal.setItems(getMusic());
+		tableViewTelaPrincipal.setItems(populateMusicTable());
 		
 	}
 	
-	public ObservableList<Music> getMusic()
+	public ObservableList<Music> populateMusicTable()
 	{
 		
-		ObservableList<Music> musica = FXCollections.observableArrayList();
-		Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
+		ObservableList<Music> musicTable = FXCollections.observableArrayList();
 		
-		//ADICIONAR MUSICAS AQUI
-		MusicController musicControler = new MusicController();
-		
-		ArrayList<Music> musicLibrary = musicControler.getMusicLibrary(); // Retorna o array inteiro com todas as músicas
-		
-		// Adiciona todas as músicas do repositório no array musica
+		ArrayList<Music> musicLibrary = musicManager.getMusicLibrary();
+
+		// Adiciona todas as músicas do repositório na tabela da GUI
 		for (Music music : musicLibrary) {
-			musica.add(music);
+			musicTable.add(music);
 		}
-		//////////////////////////
 		
-		musica.add(new Music(1, "Fur Elise", "Betoven", genre, "0.0"));
-		return musica;
+		
+
+		Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
+		musicTable.add(new Music(1, "Fur Elise", "Betoven", genre, "0.0"));
+
+		return musicTable;
+	}
+
+	public ObservableList<Playlist> populatePlaylistTable() {
+
+		ObservableList<Playlist> playlistTable = FXCollections.observableArrayList();
+		
+		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
+
+		// Adiciona todas as playlists do repositório na tabela da GUI
+		for (Playlist playlist : playlistLibrary) {
+			playlistTable.add(playlist);
+		}
+
+		return playlistTable;
 	}
 
 }
