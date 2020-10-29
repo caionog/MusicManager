@@ -78,7 +78,7 @@ public class TelaPrincipalController implements Initializable{
 		 Music musicSelected = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
 		 if(musicSelected != null) {
 		 System.out.println("Gerar metadados funciona");
-		 MusicController musicControler = new MusicController();
+	//	 MusicController musicControler = new MusicController();
 		 System.out.println(musicSelected);
 		 
 		//musicControler.extractMetaData();

@@ -15,9 +15,9 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView prefHeight="304.0" prefWidth="264.0">
+                  <TableView fx:id="tableViewTelaPlaylist" prefHeight="304.0" prefWidth="264.0">
                     <columns>
-                      <TableColumn prefWidth="263.0" text="Playlists" />
+                      <TableColumn fx:id="titlePlaylist" prefWidth="263.0" text="Playlists" />
                     </columns>
                   </TableView>
                </children>
@@ -41,5 +41,6 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="botãoCriarPlaylist" layoutX="163.0" layoutY="497.0" mnemonicParsing="false" onAction="#criarPlaylistTelaPlaylist" prefHeight="25.0" prefWidth="94.0" text="Criar Playlist" />
    </children>
 </AnchorPane>
