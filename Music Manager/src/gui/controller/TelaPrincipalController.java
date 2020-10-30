@@ -51,7 +51,9 @@ public class TelaPrincipalController implements Initializable{
 	@FXML
 	private TableColumn<Music, String> durationColumn;
 
-	
+	@FXML
+    private Button botãoFavoritarTelaPrincipal;
+
 	
 	
 	@FXML
@@ -64,6 +66,31 @@ public class TelaPrincipalController implements Initializable{
 	private Button botaoGerarMetadados;
 	@FXML
 	private Button botãoMinhasPlaylists;
+	
+	//DECLARAR TABLEVIEW PLAYLIST
+	
+	@FXML
+    private TableView<Playlist> playlistTable;
+	
+	@FXML
+    private TableColumn<Playlist, String> NomeDoCriadorColumn;
+
+    @FXML
+    private TableColumn<Playlist, String> playlistIdColumn;
+
+    @FXML
+    private TableColumn<Playlist, ArrayList<Music>> nomesMusicaColumn;
+	
+
+	
+	@FXML
+    void favoritarTelaPrincipal(ActionEvent event) {
+		Music musicSelected = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
+		System.out.println(musicSelected);
+		//CÓDIGO DE FAVORITAR MÚSICA AQUI
+		
+
+    }
 	 
 	@FXML
     void irMinhasPlaylists(ActionEvent event) throws IOException {
@@ -82,8 +109,9 @@ public class TelaPrincipalController implements Initializable{
 		System.out.println("Gerar metadados funciona");
 		// MusicController musicControler = new MusicController();
 		System.out.println(musicSelected);
+		//CÓDIGO DE GERAR METADADOS AQUI
 		 
-		//musicControler.extractMetaData(); 
+		
 		 
 		}
 		else 
@@ -136,14 +164,20 @@ public class TelaPrincipalController implements Initializable{
 		genreColumn.setCellValueFactory(new PropertyValueFactory<Music, Genre>("genre"));
 		idColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("id"));
 
-		//configurar colunas do tableview das músicas
+		//configurar colunas do tableview das playlist
+		
+		
+		playlistIdColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("id"));
+		//nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist,ArrayList<Music>("id"));
+		nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist,ArrayList<Music>>("musics"));
 
 
 		// ??????? //
 
 		
-		tableViewTelaPrincipal.setItems(populateMusicTable()); // carregar os atributos na tabela de músicas
-		//.setItems(populatePlaylistTable());
+		tableViewTelaPrincipal.setItems(populateMusicTable()); // carregar os atributos na tabela música
+		//carregar os atributos na table playlist
+		playlistTable.setItems(populatePlaylistTable());
 		
 	}
 	
@@ -160,6 +194,7 @@ public class TelaPrincipalController implements Initializable{
 		
 		Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
 		musicTable.add(new Music(1, "Fur Elise", "Betoven", genre, "0.0"));
+		
 
 		return musicTable;
 	}
@@ -169,12 +204,15 @@ public class TelaPrincipalController implements Initializable{
 		ObservableList<Playlist> playlistTable = FXCollections.observableArrayList();
 		
 		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
+		System.out.println("@mostrar playlistLibrary"+ playlistLibrary.toString());
 		// ArrayList<Playlist> favPlaylists = musicManager.getLoggedUserFavPlaylists();
 
 		// Adiciona todas as playlists do repositório na tabela da GUI
 		for (Playlist playlist : playlistLibrary) {
 			playlistTable.add(playlist);
+			
 		}
+		System.out.println("@mostrar playlistTable"+playlistLibrary.toString());
 
 		return playlistTable;
 	}
