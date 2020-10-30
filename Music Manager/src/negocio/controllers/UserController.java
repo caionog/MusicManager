@@ -81,7 +81,7 @@ public class UserController implements IUserController {
     
     
     @Override
-    public boolean handleUserLogin(String nameOrEmail, String password) {
+    public User handleUserLogin(String nameOrEmail, String password) {
 
         Boolean nameOrEmailExist = false, passwordExist = false;
         int i = 0, j = 0;
@@ -120,13 +120,12 @@ public class UserController implements IUserController {
 
 
         if (nameOrEmailExist && passwordExist && (i == j) ) {
-            // TODO guarda loggedUser
-            return true;
+            return userRepoInstance.getUserByIndex(i-1);
         }
         else 
         {
         	System.out.println("Nao existe");
-        	return false;
+        	return null;
         }
     }
     
@@ -160,5 +159,10 @@ public class UserController implements IUserController {
     @Override
     public User getUserByIndex(int index) {
 		return userRepoInstance.getUserByIndex(index);
+	}
+
+
+	public String getUserNameById(int id) {
+        return userRepoInstance.getUserById(id).getName();
 	}
 }

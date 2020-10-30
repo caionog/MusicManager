@@ -16,8 +16,6 @@ import javafx.stage.Stage;
 
 import negocio.FacadeMusicManager; // Fachada
 
-import negocio.controllers.UserController; // Controlador
-
 
 public class TelaLoginController  {
 
@@ -55,31 +53,26 @@ public class TelaLoginController  {
 	@FXML
 	void irBotaoEntrar(ActionEvent event) throws IOException{
 		
-		UserController controller = new UserController();
-		
 		String email = loginFieldTelaLogin.getText();
 		String senha = senhaFieldTelaLogin.getText();
 		
-		
-		
-		if(isFieldFilled()) {
+		if ( isFieldFilled() ) {
 			
 			
-			if(controller.handleUserLogin(email, senha)) {
-		
-		System.out.println("O botao entrar funciona");
-		Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
-		Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
-		Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window2.setScene(tabbleViewScene2);
-		window2.show();
-		}
+			if ( musicManager.handleUserLogin(email, senha) ) {
+			
+				System.out.println("O botao entrar funciona");
+				Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
+				Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
+				Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				window2.setScene(tabbleViewScene2);
+				window2.show();
+			}
 		}
 		else 
 		{
 			errorMessage = "Login ou senha incorretos";
 		}
-		
 
 	}
 	

@@ -2,9 +2,6 @@ package negocio;
 
 import java.util.ArrayList;
 
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.util.Callback;
 import negocio.controllers.MusicController; // Controladores
 import negocio.controllers.PlaylistController;
 import negocio.controllers.UserController;
@@ -71,9 +68,26 @@ public class FacadeMusicManager {
 	public int getLoggedUserId() {
 		return loggedUser.getId();
 	}
-//FUÇÃO CRIADA
-	public String getUserNameById() {
-		// TODO Auto-generated method stub
+
+
+	public String getLoggedUserName() {
 		return loggedUser.getName();
+	}
+
+
+	public String getUserNameById(int id) {
+		return UserController.getUserNameById(id);
+	}
+
+
+	public boolean handleUserLogin(String nameOrEmail, String password) {
+
+		User user = UserController.handleUserLogin(nameOrEmail, password);
+		
+		if ( user != null ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

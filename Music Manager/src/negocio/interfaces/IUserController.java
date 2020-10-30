@@ -16,7 +16,7 @@ public interface IUserController {
 
     public Boolean handleUserRegister(UserPermission permission, String email, String name, String password) throws IOException;
 
-    public boolean handleUserLogin(String nameOrEmail, String password);
+    public User handleUserLogin(String nameOrEmail, String password);
 
     public void addFavoriteMusic(User u, Music m) throws IOException;
 
