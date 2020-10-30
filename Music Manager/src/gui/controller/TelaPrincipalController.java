@@ -170,6 +170,13 @@ public class TelaPrincipalController implements Initializable{
 		playlistIdColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("id"));
 		//nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist,ArrayList<Music>("id"));
 		nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist,ArrayList<Music>>("musics"));
+		
+		//TENTANDO PEGAR O NOME DO USUARIO POR ID
+	//	String nomePlaylist ="" ;
+	//	nomePlaylist = musicManager.getUserNameById();
+	//	System.out.println("O nome do usuario por id e"+nomePlaylist);
+		//NomeDoCriadorColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>(musicManager.getUserNameById()));
+
 
 
 		// ??????? //
