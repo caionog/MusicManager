@@ -67,42 +67,40 @@ public class TelaPrincipalController implements Initializable{
 	 
 	@FXML
     void irMinhasPlaylists(ActionEvent event) throws IOException {
-		 System.out.println("Botão minhas playlists funciona ");
-		  Parent tabbleViewParent3 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
-			Scene tabbleViewScene3 = new Scene(tabbleViewParent3);
-			Stage window3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window3.setScene(tabbleViewScene3);
-			window3.show();
+		System.out.println("Botão minhas playlists funciona ");
+		Parent tabbleViewParent3 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
+		Scene tabbleViewScene3 = new Scene(tabbleViewParent3);
+		Stage window3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window3.setScene(tabbleViewScene3);
+		window3.show();
     }
 	 
-	 @FXML
-	    void irGerarMetadados(ActionEvent event) {
-		 Music musicSelected = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
-		 if(musicSelected != null) {
-		 System.out.println("Gerar metadados funciona");
-	//	 MusicController musicControler = new MusicController();
-		 System.out.println(musicSelected);
+	@FXML
+	void irGerarMetadados(ActionEvent event) {
+		Music musicSelected = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
+		if(musicSelected != null) {
+		System.out.println("Gerar metadados funciona");
+		// MusicController musicControler = new MusicController();
+		System.out.println(musicSelected);
 		 
-		//musicControler.extractMetaData();
-		
+		//musicControler.extractMetaData(); 
 		 
-		 
-		 }
-		 else 
-		 {
-			 String msgErro = "Selecione uma musica para gerar metadados";
-			 Alert alert = new Alert(AlertType.ERROR);
-			 alert.setContentText(msgErro);
-			 alert.initOwner(metadadosStage);;
-			 alert.showAndWait();
+		}
+		else 
+		{
+			String msgErro = "Selecione uma musica para gerar metadados";
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(msgErro);
+			alert.initOwner(metadadosStage);;
+			alert.showAndWait();
 			 
-		 }
-	    }
+		}
+	}
 	 
 	
-	 public boolean isOkClicked() {
-	        return okClicked;
-	    }
+	public boolean isOkClicked() {
+	    return okClicked;
+	}
 
 	@FXML
 	void irMeuPerfilTelaPrincipal(ActionEvent event)throws IOException  {
@@ -130,21 +128,27 @@ public class TelaPrincipalController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		//configurar colunas do tableview
+
+		//configurar colunas do tableview das músicas
 		titleColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
 		artistColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("artist"));
 		durationColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("duration"));
 		genreColumn.setCellValueFactory(new PropertyValueFactory<Music, Genre>("genre"));
 		idColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("id"));
-		//carregar data
-		tableViewTelaPrincipal.setItems(populateMusicTable());
+
+		//configurar colunas do tableview das músicas
+
+
+		// ??????? //
+
+		
+		tableViewTelaPrincipal.setItems(populateMusicTable()); // carregar os atributos na tabela de músicas
+		//.setItems(populatePlaylistTable());
 		
 	}
 	
 	public ObservableList<Music> populateMusicTable()
 	{
-		
 		ObservableList<Music> musicTable = FXCollections.observableArrayList();
 		
 		ArrayList<Music> musicLibrary = musicManager.getMusicLibrary();
@@ -154,8 +158,6 @@ public class TelaPrincipalController implements Initializable{
 			musicTable.add(music);
 		}
 		
-		
-
 		Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
 		musicTable.add(new Music(1, "Fur Elise", "Betoven", genre, "0.0"));
 
@@ -167,6 +169,7 @@ public class TelaPrincipalController implements Initializable{
 		ObservableList<Playlist> playlistTable = FXCollections.observableArrayList();
 		
 		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
+		// ArrayList<Playlist> favPlaylists = musicManager.getLoggedUserFavPlaylists();
 
 		// Adiciona todas as playlists do repositório na tabela da GUI
 		for (Playlist playlist : playlistLibrary) {

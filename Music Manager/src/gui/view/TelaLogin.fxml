@@ -14,11 +14,11 @@
 
 <AnchorPane prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaLoginController">
    <children>
-      <Button fx:id="botaoCadastrar" layoutX="95.0" layoutY="297.0" mnemonicParsing="false" onAction="#irBotaoCadastrar" text="Cadastro" />
-      <TextField fx:id="loginFieldTelaLogin" layoutX="330.0" layoutY="167.0" promptText="Email" />
+      <Button fx:id="botaoCadastrar" layoutX="88.0" layoutY="297.0" mnemonicParsing="false" onAction="#irBotaoCadastrar" text="Cadastro" />
+      <TextField fx:id="loginFieldTelaLogin" layoutX="330.0" layoutY="167.0" promptText="Email ou nome" />
       <PasswordField fx:id="senhaFieldTelaLogin" layoutX="330.0" layoutY="234.0" promptText="Senha" />
       <Button fx:id="botaoEntrar" layoutX="418.0" layoutY="297.0" mnemonicParsing="false" onAction="#irBotaoEntrar" text="Entrar" />
-      <Label layoutX="66.0" layoutY="14.0" prefHeight="27.0" prefWidth="197.0" text="Music Manager - Login">
+      <Label layoutX="325.0" layoutY="65.0" prefHeight="27.0" prefWidth="197.0" text="Music Manager - Login">
          <font>
             <Font size="18.0" />
          </font>
@@ -33,9 +33,9 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Pane layoutX="286.0" layoutY="14.0" prefHeight="118.0" prefWidth="265.0">
+      <Pane layoutX="573.0" layoutY="188.0" prefHeight="118.0" prefWidth="265.0">
          <children>
-            <Label fx:id="errorMessageLabelTelaLogin" alignment="CENTER" layoutX="4.0" layoutY="-4.0" prefHeight="118.0" prefWidth="258.0" text="Mensagem de Erro" />
+            <Label fx:id="errorMessageLabelTelaLogin" alignment="CENTER" layoutX="4.0" prefHeight="118.0" prefWidth="258.0" text="Mensagem de Erro: nenhum" />
          </children></Pane>
    </children>
 </AnchorPane>

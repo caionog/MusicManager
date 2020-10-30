@@ -3,7 +3,7 @@ package gui.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import negocio.Music;
+import negocio.beans.Music;
 
 public class TelaGerarMetadadosController {
 

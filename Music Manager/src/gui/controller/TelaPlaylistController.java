@@ -20,23 +20,26 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import negocio.Music;
-import negocio.Playlist;
-import negocio.User;
-import negocio.controllers.MusicController;
-import negocio.controllers.PlaylistController;
-import negocio.controllers.UserController;
+
+import negocio.FacadeMusicManager;
+
+import negocio.beans.Music; // Classes base
+import negocio.beans.Playlist;
+
 
 public class TelaPlaylistController implements Initializable{
+
+	FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
+	
 	@FXML
     private Button botãoVoltarTelaPlaylist;
-	 @FXML
-	    private Button botãoCriarPlaylist;
-	 @FXML
-	    private TableView<Playlist> tableViewTelaPlaylist;
-	 
-	 @FXML
-	    private TableColumn<Playlist, String> titlePlaylist;
+	@FXML
+	private Button botãoCriarPlaylist;
+	@FXML
+	private TableView<Playlist> tableViewTelaPlaylist;
+	
+	@FXML
+	private TableColumn<Playlist, String> titlePlaylist; // Modifica pra creatorName
 
 
     @FXML
@@ -60,45 +63,33 @@ public class TelaPlaylistController implements Initializable{
     }
     
     
-    /*COMEÇO DOS COMENTÁRIOS
-    public ObservableList<Playlist> getPlaylist(ArrayList<Music> selectedMusics) throws IOException
+    public ObservableList<Playlist> populateFavPlaylistTable()
 	{
-    	ObservableList<Playlist> playlist = FXCollections.observableArrayList();
-        MusicController musicControler = new MusicController();
-		//ArrayList<Music> musicLibrary = musicControler.getMusicLibrary();
-        //playlist.add;
-	    //	ArrayList<Music> musicLibrary = musicControler.getMusicLibrary();
+		ObservableList<Playlist> playlists = FXCollections.observableArrayList();
+		
+		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
+		int loggedUserId = musicManager.getLoggedUserId();
     	
-    	
-    	
-    	//ArrayList<Music> selectedMusics = new ArrayList<Music>(2);
-		for (Music music : musicControler.getMusicLibrary()) {
-			if (selectedMusics.size() < 2) {
-				selectedMusics.add(music);
+		for (Playlist playlist : playlistLibrary) {
+			if (playlist.getCreatorId() == loggedUserId) {
+				playlists.add(playlist);		
 			}
 		}
-    	
-    	
-    	return playlist;
+    	return playlists;
 	}
-
-FIM DOS COMENTÁRIOS*/
     
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		titlePlaylist.setCellValueFactory(new PropertyValueFactory<Playlist,String>("title"));
-		//carregar data
-		/*
-		ArrayList<Music> selectedMusics = new ArrayList<Music>(2);
-		try {
-			tableViewTelaPlaylist.setItems(getPlaylist(selectedMusics));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	*/	
+
+		// Configura as colunas da table view de playlists
+		//creatorName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("Nome do criador"));
+		//idPlaylistColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("id"));
+		//musicsNamesColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("Nome das músicas")); // Exemplo: "Nome_A ; Nome_B ; Nome_C"
+
+		// carregar playlist criadas pelo usuário logado
+		//tableViewTelaPlaylist.setItems(populateFavPlaylistTable());
+
 	}
 	
 

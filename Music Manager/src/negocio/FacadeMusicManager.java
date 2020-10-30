@@ -34,12 +34,38 @@ public class FacadeMusicManager {
     //---------------------------------------------------------//
 
     public ArrayList<Music> getMusicLibrary() {
-		
-		return musicController.getMusicLibrary(); // Retorna o array inteiro com todas as músicas;
-	}
+      
+    	return musicController.getMusicLibrary(); // Retorna o array inteiro com todas as músicas;
+    }
+
 
 	public ArrayList<Playlist> getPlaylistLibrary() {
         
         return playlistContrtoller.getPlaylistsLibrary();
+	}
+  
+
+	public ArrayList<Music> getLoggedUserFavMusics() {
+
+    	return loggedUser.getFavoriteMusics();
+  	}
+  
+
+	public ArrayList<Playlist> getLoggedUserFavPlaylists() {
+
+    	return loggedUser.getFavoritePlaylists();
+  	}
+  
+
+	public void addMusicToTable() {
+
+	}
+
+	public void addPlaylistToTable() {
+
+  	}
+
+	public int getLoggedUserId() {
+		return loggedUser.getId();
 	}
 }
