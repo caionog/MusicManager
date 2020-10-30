@@ -1,4 +1,5 @@
 package gui.controller;
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -12,10 +13,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import negocio.controllers.UserController;
+
+import negocio.FacadeMusicManager; // Fachada
+
+import negocio.controllers.UserController; // Controlador
 
 
 public class TelaLoginController  {
+
+	FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
 	
 	@FXML
 	private Button botaoCadastrar;

@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import negocio._Visibility; // Enum
+import negocio.beans.Playlist; // Classes base
+import negocio.beans.Music;
 
-import negocio.Playlist; // Classes base
-import negocio.Music;
+import negocio.beans._Visibility; // Enum
 
 public class PlaylistRepo {
 

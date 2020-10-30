@@ -15,10 +15,10 @@ import org.xml.sax.SAXException;
 import data.MusicRepo; // Repositórios
 import data.UserRepo;
 
-import negocio.Music; // Classes base
-import negocio.User;
+import negocio.beans.Music; // Classes base
+import negocio.beans.User;
 
-import negocio.Genre; // Enum
+import negocio.beans.Genre; // Enum
 
 import negocio.interfaces.IMusicController; // Interface
 

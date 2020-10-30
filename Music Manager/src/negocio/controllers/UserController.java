@@ -7,11 +7,11 @@ import data.MusicRepo; // Repositórios
 import data.PlaylistRepo;
 import data.UserRepo;
 
-import negocio.Music; // Classes base
-import negocio.Playlist;
-import negocio.User;
+import negocio.beans.Music; // Classes base
+import negocio.beans.Playlist;
+import negocio.beans.User;
 
-import negocio.UserPermission; // Enum
+import negocio.beans.UserPermission; // Enum
 
 import negocio.interfaces.IUserController; // Interface
 
@@ -84,9 +84,11 @@ public class UserController implements IUserController {
     public boolean handleUserLogin(String nameOrEmail, String password) {
 
         Boolean nameOrEmailExist = false, passwordExist = false;
+        int i = 0, j = 0;
 
         // Explora e verifica os emails
         for (String email : userRepoInstance.getEmails()) {
+            i++;
             if (nameOrEmail.equalsIgnoreCase(email)) {
                 nameOrEmailExist = true;
                 break;
@@ -95,7 +97,9 @@ public class UserController implements IUserController {
 
         // Explora e verifica os nomes caso não encontre um email
         if ( !nameOrEmailExist ) {
+            i = 0;
             for (String name : userRepoInstance.getNames()) {
+                i++;
                 if (nameOrEmail.equalsIgnoreCase(name)) {
                     nameOrEmailExist = true;
                     break;
@@ -106,6 +110,7 @@ public class UserController implements IUserController {
         // Explora e verfica as senhas se encontrou um email ou nome
         if (nameOrEmailExist) {
             for (String eachPassword : userRepoInstance.getPasswords()) {
+                j++;
                 if ( password.equals(eachPassword) ) {
                     passwordExist = true;
                     break;
@@ -114,9 +119,9 @@ public class UserController implements IUserController {
         }
 
 
-        if (nameOrEmailExist && passwordExist) {
-            // TODO guarda loggedUser em algum lugar
-        	return true;
+        if (nameOrEmailExist && passwordExist && (i == j) ) {
+            // TODO guarda loggedUser
+            return true;
         }
         else 
         {

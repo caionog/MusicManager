@@ -17,7 +17,7 @@ import javafx.fxml.FXMLLoader;
 
 public class Applications extends Application{
 	
-	//COME�O DOS COMENT�RIOS
+	//COMEÇO DOS COMENTÁRIOS
 	private Stage primaryStage;
 	private BorderPane rootScene;
 

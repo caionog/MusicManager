@@ -1,4 +1,4 @@
-	package gui.controller;
+package gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,17 +21,19 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import negocio.Music;
-import negocio.controllers.MusicController;
-import negocio.Genre;
+
+import negocio.beans.Music; // Classe base
+import negocio.beans.Playlist;
+import negocio.FacadeMusicManager;
+import negocio.beans.Genre; // Enum
 
 public class TelaPrincipalController implements Initializable{
+
+	FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
 	
-	
-	 private boolean okClicked;
-	 private Stage metadadosStage;
-	
-	
+	private boolean okClicked;
+	private Stage metadadosStage;
+
 	//configurar table view música da tela principal
 	@FXML
 	private TableView<Music> tableViewTelaPrincipal;
@@ -58,20 +60,20 @@ public class TelaPrincipalController implements Initializable{
 	@FXML
 	private Button botaoSairTelaPrincipal;
 	
-	 @FXML
-	    private Button botaoGerarMetadados;
-	 @FXML
-	    private Button botãoMinhasPlaylists;
+	@FXML
+	private Button botaoGerarMetadados;
+	@FXML
+	private Button botãoMinhasPlaylists;
 	 
-	 @FXML
-	    void irMinhasPlaylists(ActionEvent event) throws IOException {
+	@FXML
+    void irMinhasPlaylists(ActionEvent event) throws IOException {
 		 System.out.println("Botão minhas playlists funciona ");
 		  Parent tabbleViewParent3 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
 			Scene tabbleViewScene3 = new Scene(tabbleViewParent3);
 			Stage window3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			window3.setScene(tabbleViewScene3);
 			window3.show();
-	    }
+    }
 	 
 	 @FXML
 	    void irGerarMetadados(ActionEvent event) {
@@ -136,29 +138,42 @@ public class TelaPrincipalController implements Initializable{
 		genreColumn.setCellValueFactory(new PropertyValueFactory<Music, Genre>("genre"));
 		idColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("id"));
 		//carregar data
-		tableViewTelaPrincipal.setItems(getMusic());
+		tableViewTelaPrincipal.setItems(populateMusicTable());
 		
 	}
 	
-	public ObservableList<Music> getMusic()
+	public ObservableList<Music> populateMusicTable()
 	{
 		
-		ObservableList<Music> musica = FXCollections.observableArrayList();
-		Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
+		ObservableList<Music> musicTable = FXCollections.observableArrayList();
 		
-		//ADICIONAR MUSICAS AQUI
-		MusicController musicControler = new MusicController();
-		
-		ArrayList<Music> musicLibrary = musicControler.getMusicLibrary(); // Retorna o array inteiro com todas as músicas
-		
-		// Adiciona todas as músicas do repositório no array musica
+		ArrayList<Music> musicLibrary = musicManager.getMusicLibrary();
+
+		// Adiciona todas as músicas do repositório na tabela da GUI
 		for (Music music : musicLibrary) {
-			musica.add(music);
+			musicTable.add(music);
 		}
-		//////////////////////////
 		
-		musica.add(new Music(1, "Fur Elise", "Betoven", genre, "0.0"));
-		return musica;
+		
+
+		Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
+		musicTable.add(new Music(1, "Fur Elise", "Betoven", genre, "0.0"));
+
+		return musicTable;
+	}
+
+	public ObservableList<Playlist> populatePlaylistTable() {
+
+		ObservableList<Playlist> playlistTable = FXCollections.observableArrayList();
+		
+		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
+
+		// Adiciona todas as playlists do repositório na tabela da GUI
+		for (Playlist playlist : playlistLibrary) {
+			playlistTable.add(playlist);
+		}
+
+		return playlistTable;
 	}
 
 }

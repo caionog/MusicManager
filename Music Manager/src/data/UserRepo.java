@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import negocio.UserPermission; // Enum
+import negocio.beans.Music; // Classes base
+import negocio.beans.Playlist;
+import negocio.beans.User;
 
-import negocio.Music; // Classes base
-import negocio.Playlist;
-import negocio.User;
+import negocio.beans.UserPermission; // Enum
 
 public class UserRepo {
     

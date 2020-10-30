@@ -11,7 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import negocio.FacadeMusicManager;
+
 public class TelaAlterarPerfilController {
+
+    FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
 
     @FXML
     private Button botaoAlterarDadosTelaAlterarPerfil;

@@ -1,11 +1,12 @@
-package negocio;
+package negocio.beans;
 
-public enum UserPermission {
-    ADM(true), NORMAL(false);
+public enum _Visibility {
+
+    VISIBLE(true), INVISIBLE(false);
 
     private Boolean value;
 
-    UserPermission(Boolean value) {
+    _Visibility(Boolean value) {
         this.value = value;
     }
 
@@ -15,9 +16,9 @@ public enum UserPermission {
 
     public String getStrValue() {
         if (value) {
-            return "ADM";
+            return "VISIBLE";
         } else {
-            return "NORMAL";
+            return "INVISIBLE";
         }
     }
 }

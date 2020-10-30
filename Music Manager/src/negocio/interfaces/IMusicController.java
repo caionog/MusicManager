@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
-import negocio.Genre; // Enum
+import negocio.beans.Music; // Classes base
+import negocio.beans.User;
 
-import negocio.Music; // Classes base
-import negocio.User;
+import negocio.beans.Genre; // Enum
 
 public interface IMusicController {
   

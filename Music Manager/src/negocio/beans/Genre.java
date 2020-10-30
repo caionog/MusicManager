@@ -1,4 +1,4 @@
-package negocio;
+package negocio.beans;
 
 public enum Genre {
   NULL(-1), NOT_LISTED(0), 

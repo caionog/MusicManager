@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import data.MusicRepo; // Repositórios
 import data.PlaylistRepo;
 
-import negocio.Playlist; // Classes base
-import negocio.Music;
-import negocio.User;
+import negocio.beans.Playlist; // Classes base
+import negocio.beans.Music;
+import negocio.beans.User;
 
-import negocio.Genre; // Enum
+import negocio.beans.Genre; // Enum
 
 import negocio.interfaces.IPlaylistController; // Interface
 

@@ -9,7 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="538.0" prefWidth="948.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaPlaylistController">
+
+
+<AnchorPane prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaPlaylistController">
    <children>
       <SplitPane layoutY="139.0" prefHeight="306.0" prefWidth="266.0">
         <items>
