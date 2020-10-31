@@ -7,26 +7,20 @@ import org.xml.sax.SAXException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-// import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-// import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
 
 public class Applications extends Application{
 	
-	//COMEÇO DOS COMENTÁRIOS
 	private Stage primaryStage;
 	private BorderPane rootScene;
 
 	
 	@Override
     public void start(Stage primaryStage)throws Exception {
-	
-		
-		
 		
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Music Manager");
@@ -37,14 +31,14 @@ public class Applications extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		carregarTelaLogin();
-	//	carregarTelaCadastro();
-		
-      //  String javaVersion = System.getProperty("java.version");
-       // String javafxVersion = System.getProperty("javafx.version");
-      //  Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-      //  Scene scene = new Scene(new StackPane(l), 640, 480);
-      //  stage.setScene(scene);
-      //  stage.show();
+		//	carregarTelaCadastro();
+			
+		//  String javaVersion = System.getProperty("java.version");
+		// String javafxVersion = System.getProperty("javafx.version");
+		//  Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+		//  Scene scene = new Scene(new StackPane(l), 640, 480);
+		//  stage.setScene(scene);
+		//  stage.show();
     }
 	
 	public void carregarTelaLogin() 
@@ -60,13 +54,13 @@ public class Applications extends Application{
 			// seta a tela de conta no centro da tela principal
 			this.rootScene.setCenter(loginView);
 			
-	        // seta uma referencia do bancoApp no ContaController
-	       // ContaPaneController contaController = loader.getController();
-	       // contaController.setBancoApp(this);
-		   // seta a lista de contas
-	       //  ObservableList<Conta> dados = FXCollections.observableArrayList();
-	       //  FachadaBanco.getInstance().listar().stream().forEach(c -> dados.add(c));
-	       //  contaController.setDados(dados);
+			// seta uma referencia do bancoApp no ContaController
+			// ContaPaneController contaController = loader.getController();
+			// contaController.setBancoApp(this);
+			// seta a lista de contas
+			//  ObservableList<Conta> dados = FXCollections.observableArrayList();
+			//  FachadaBanco.getInstance().listar().stream().forEach(c -> dados.add(c));
+			//  contaController.setDados(dados);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -102,7 +96,5 @@ public class Applications extends Application{
     	BackendTeste.backendTeste();
         launch();
     }
-//FIM DOS COMENTARIOS
-  
  
 }

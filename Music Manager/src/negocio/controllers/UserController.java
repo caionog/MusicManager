@@ -131,29 +131,54 @@ public class UserController implements IUserController {
     
 
     @Override
-    public void addFavoriteMusic(User u, Music m) throws IOException {
-    	
-        u.addFavMusic(m);
-        userRepoInstance.updateUserFavoriteMusics(u.getId(), m.getId() );
+    public void addFavoriteMusic(User u, Music m) {
+        
+        try {
+            userRepoInstance.updateUserFavoriteMusics(u.getId(), m.getId());
+            u.addFavMusic(m);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 
     @Override
-    public void addFavoritePlaylist(User u, Playlist p) throws IOException {
-    	
-        u.addFavPlaylist(p);
-        userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId() );
+    public void addFavoritePlaylist(User u, Playlist p) {
+        
+        try {
+            userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId());
+            u.addFavPlaylist(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
-    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) {
-        if (newEmail != "") loggedUser.setEmail(newEmail);
+    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail, int newMusicId)
+            throws IOException {
         
-		if (newName != "") loggedUser.setName(newName);
+        Boolean needRepoUpdated = false;
 
-		if (newPassword != "") loggedUser.setPassword(newPassword);
-	}
+        if (newEmail != "") {
+            loggedUser.setEmail(newEmail);
+            needRepoUpdated = true;
+        }
+
+		if (newName != "") {
+            loggedUser.setName(newName);
+            needRepoUpdated = true;
+        }
+
+        if (newPassword != "") {
+            loggedUser.setPassword(newPassword);
+            needRepoUpdated = true;
+        }
+
+        if ( needRepoUpdated ) {
+            userRepoInstance.updateUserFavoriteMusics(loggedUser.getId(), newMusicId);
+        }
+    }
     
     
     @Override
@@ -168,7 +193,6 @@ public class UserController implements IUserController {
 
 
 	public ArrayList<User> getUserLibrary() {
-		// TODO Auto-generated method stub
 		return userRepoInstance.getUserLibrary();
 	}
 }
