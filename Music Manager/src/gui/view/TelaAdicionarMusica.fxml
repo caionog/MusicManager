@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="206.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaAdicionarMusicaController">
+   <children>
+      <TextField fx:id="pathFieldTelaAdiconarMusica" layoutX="104.0" layoutY="91.0" promptText="path" />
+      <Label layoutX="56.0" layoutY="25.0" text="digite o caminho do arquivo .mp3 a ser adicionado" />
+      <Button fx:id="botaoAdicionarTelaAdicionarMusica" layoutX="253.0" layoutY="145.0" mnemonicParsing="false" onAction="#adicionarAdicionarMusica" text="adicionar" />
+   </children>
+</AnchorPane>

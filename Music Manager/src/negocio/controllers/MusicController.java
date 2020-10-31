@@ -37,12 +37,14 @@ public class MusicController implements IMusicController {
 	    ParseContext pcontext = new ParseContext();  
 		Mp3Parser  Mp3Parser = new  Mp3Parser(); 
 		
+		
 		Mp3Parser.parse(inputstream, handler, metadata, pcontext); // Extrai metadata nesse metodo
 		
 		String title =  metadata.get("title");
 		String artist = metadata.get("creator");
 		String genreStr = metadata.get("xmpDM:genre");
 		String comprimentoStr = metadata.get("xmpDM:duration");
+		
 		
 		// Tratamento dos dados extraidos
 

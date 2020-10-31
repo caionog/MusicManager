@@ -17,6 +17,7 @@ public class Applications extends Application{
 	
 	private Stage primaryStage;
 	private BorderPane rootScene;
+	public static final String mainTheme = "gui/resources/MainTheme.css";
 
 	
 	@Override
@@ -30,6 +31,8 @@ public class Applications extends Application{
 		Scene scene = new Scene(rootScene, 1280, 720);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		scene.getStylesheets().add(mainTheme);
 		carregarTelaLogin();
 		//	carregarTelaCadastro();
 			
@@ -79,6 +82,7 @@ public class Applications extends Application{
 			
 			// seta a tela de conta no centro da tela principal
 			this.rootScene.setCenter(cadastroView);
+			
 			
 	        
 			

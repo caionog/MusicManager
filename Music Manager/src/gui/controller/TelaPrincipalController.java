@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import negocio.beans.Music; // Classe base
@@ -230,10 +231,20 @@ public class TelaPrincipalController implements Initializable{
 
 
 	@FXML
-	void addMusic(ActionEvent event) {
+	void addMusic(ActionEvent event) throws IOException {
 		// TODO
 		// Popup duma janela pedindo pro usuário digitar um path de MP3
 		// Com o input da janela chamar a função generate Metadata passando path
+		//JANELA POP UP LIGADO A UM BOTÃO
+
+				Stage stage;
+				Parent root;
+				stage = new Stage();
+				root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAdicionarMusica.fxml"));
+				stage.setScene(new Scene(root));
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.initOwner(addMusicButton.getScene().getWindow());
+				stage.showAndWait();
 	}
 	
 	// =-= // Funções que interagem com a tabela playlist // =-= //
