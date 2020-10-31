@@ -119,9 +119,9 @@ public class TelaPrincipalController implements Initializable{
 
 		Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaLogin.fxml"));
 		Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
-		Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window2.setScene(tabbleViewScene2);
-		window2.show();
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(tabbleViewScene2);
+		window.show();
 	}
 
 	// =-= // Funções das features do Music Manager // =-= //
@@ -162,18 +162,18 @@ public class TelaPrincipalController implements Initializable{
 	 
 	@FXML
     void irMinhasPlaylists(ActionEvent event) throws IOException {
-		System.out.println("Botão minhas playlists funciona ");
+
 		Parent tabbleViewParent3 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
 		Scene tabbleViewScene3 = new Scene(tabbleViewParent3);
-		Stage window3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window3.setScene(tabbleViewScene3);
-		window3.show();
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(tabbleViewScene3);
+		window.show();
 	}
 
 
 	@FXML
-	void irMeuPerfilTelaPrincipal(ActionEvent event)throws IOException  {
-		System.out.println("Botão meu perfil funciona ");
+	void irMeuPerfilTelaPrincipal(ActionEvent event) throws IOException  {
+
 		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAlterarPerfil.fxml"));
 		Scene tabbleViewScene = new Scene(tabbleViewParent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

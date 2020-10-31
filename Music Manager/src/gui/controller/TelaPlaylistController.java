@@ -1,6 +1,5 @@
 package gui.controller;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,13 +17,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import negocio.FacadeMusicManager;
+import negocio.FacadeMusicManager; // Fachada
 
-import negocio.beans.Music; // Classes base
-import negocio.beans.Playlist;
+import negocio.beans.Playlist; // Classes base
 
 
 public class TelaPlaylistController implements Initializable{

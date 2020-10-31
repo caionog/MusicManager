@@ -155,8 +155,7 @@ public class UserController implements IUserController {
 
 
     @Override
-    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail, int newMusicId)
-            throws IOException {
+    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) throws IOException {
         
         Boolean needRepoUpdated = false;
 
@@ -176,7 +175,9 @@ public class UserController implements IUserController {
         }
 
         if ( needRepoUpdated ) {
-            userRepoInstance.updateUserFavoriteMusics(loggedUser.getId(), newMusicId);
+            // TODO
+            // função que altera txt
+            // userRepoInstance.updateUserData(newName, newPassword, newEmail);
         }
     }
     

@@ -10,6 +10,7 @@ import negocio.controllers.UserController;
 import negocio.beans.Music; // Classe base
 import negocio.beans.Playlist;
 import negocio.beans.User;
+import negocio.beans.UserPermission;
 
 public class FacadeMusicManager {
 
@@ -30,8 +31,7 @@ public class FacadeMusicManager {
 		return instance;
 	}
 
-	private FacadeMusicManager() {
-	}
+	private FacadeMusicManager() {}
 
 	// ---------------------------------------------------------//
 
@@ -97,6 +97,11 @@ public class FacadeMusicManager {
 	}
 
 
+	public boolean handleUserRegister(UserPermission adm, String email, String name, String password) throws IOException {
+		return userController.handleUserRegister(adm, email, name, password);
+	}
+
+
 	public void favMusic(Music selectedMusic) {
 		userController.addFavoriteMusic(loggedUser, selectedMusic);
 	}
@@ -104,6 +109,10 @@ public class FacadeMusicManager {
 
 	public void favPlaylist(Playlist selectedPlaylist) throws IOException {
 		userController.addFavoritePlaylist(loggedUser, selectedPlaylist);
+	}
+
+	public void editLoggedUser(String email, String password, String name) throws IOException {
+		userController.modifyUser(loggedUser, name, password, email);
 	}
 
 }

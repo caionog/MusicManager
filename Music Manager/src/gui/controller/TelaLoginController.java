@@ -52,43 +52,37 @@ public class TelaLoginController  {
 	
 	@FXML
 	void irBotaoEntrar(ActionEvent event) throws IOException{
-		
+
 		String email = loginFieldTelaLogin.getText();
 		String senha = senhaFieldTelaLogin.getText();
 		
-		if ( isFieldFilled() ) {
+		if ( isFieldFilled() && musicManager.handleUserLogin(email, senha) ) {
 			
-			
-			if ( musicManager.handleUserLogin(email, senha) ) {
-			
-				System.out.println("O botao entrar funciona");
-				Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
-				Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
-				Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				window2.setScene(tabbleViewScene2);
-				window2.show();
-			}
-		}
-		else 
-		{
-			errorMessage = "Login ou senha incorretos";
-		}
+			Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
+			Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
+			Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window2.setScene(tabbleViewScene2);
+			window2.show();
 
+		} else {
+			errorMessageLabelTelaLogin.setText("Login ou senha incorretos");
+		}
 	}
 	
-	private String errorMessage = "";
-	private boolean isFieldFilled() 
-	{
+
+	private boolean isFieldFilled() {
+
+		String errorMessage = "";
 		boolean isFilled = true;
-		if(loginFieldTelaLogin.getText().isEmpty()) 
-		{
+
+		if ( loginFieldTelaLogin.getText().isEmpty() ) {
 			isFilled = false;
 			errorMessage = "O campo do email esta vazio";
 		}
-		if(senhaFieldTelaLogin.getText().isEmpty()) 
-		{
+		
+		if ( senhaFieldTelaLogin.getText().isEmpty() ) {
 			isFilled = false;
-			if(errorMessage.isEmpty()) 
+			if( errorMessage.isEmpty() ) 
 			{
 				errorMessage = "O campo da senha esta vazio";
 			}
@@ -100,21 +94,6 @@ public class TelaLoginController  {
 		
 		errorMessageLabelTelaLogin.setText(errorMessage);
 		return isFilled;
-		
-		
 	}
 
 }
-
-	    
-	    
-	    
-	    
-
-	    
-	    
-	
-
-	 
-
-

@@ -13,9 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import negocio.FacadeMusicManager;
-import negocio.beans.UserPermission;
-import negocio.controllers.UserController;
+import negocio.FacadeMusicManager; // Fachada
 
 public class TelaAlterarPerfilController {
 
@@ -38,15 +36,12 @@ public class TelaAlterarPerfilController {
 
     @FXML
     void alterarDados(ActionEvent event)throws IOException {
-    	System.out.println("Alterar dados funciona");
-    	UserController controller = new UserController();
-    	String email = emailFieldTelaAlterarPerfil.getText();
-    	String senha = senhaFieldTelaAlterarPerfil.getText();
-    	String nome = nomeFieldTelaAlterarPerfil.getText();
-    	//AQUI FUNÇÃO DE ALTERAR DADOS
-
     	
-
+    	String email = emailFieldTelaAlterarPerfil.getText();
+    	String password = senhaFieldTelaAlterarPerfil.getText();
+    	String name = nomeFieldTelaAlterarPerfil.getText();
+        
+        musicManager.editLoggedUser(email, password, name);
     }
 
     @FXML
@@ -56,7 +51,6 @@ public class TelaAlterarPerfilController {
     	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
      	window.setScene(tabbleViewScene);
     	window.show();
-
     }
 
 }

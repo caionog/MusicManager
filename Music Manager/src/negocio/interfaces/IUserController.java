@@ -22,7 +22,7 @@ public interface IUserController {
 
     public void addFavoritePlaylist(User u, Playlist p) throws IOException;
 
-    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail, int newMusicId) throws IOException;
+    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) throws IOException;
 
     public User getUserByIndex(int index);
 }
