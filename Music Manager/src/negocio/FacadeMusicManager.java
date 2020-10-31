@@ -42,7 +42,14 @@ public class FacadeMusicManager {
 	public ArrayList<Playlist> getPlaylistLibrary() {
         
         return playlistContrtoller.getPlaylistsLibrary();
+        
 	}
+	
+	public ArrayList<User> getUserLibrary() {
+		// TODO Auto-generated method stub
+		return UserController.getUserLibrary();
+	}
+
   
 
 	public ArrayList<Music> getLoggedUserFavMusics() {
@@ -90,4 +97,6 @@ public class FacadeMusicManager {
 			return false;
 		}
 	}
+
+
 }

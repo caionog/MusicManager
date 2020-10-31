@@ -165,4 +165,10 @@ public class UserController implements IUserController {
 	public String getUserNameById(int id) {
         return userRepoInstance.getUserById(id).getName();
 	}
+
+
+	public ArrayList<User> getUserLibrary() {
+		// TODO Auto-generated method stub
+		return userRepoInstance.getUserLibrary();
+	}
 }

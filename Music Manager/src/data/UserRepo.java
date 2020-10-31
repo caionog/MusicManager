@@ -402,4 +402,9 @@ public class UserRepo {
 
         return passwords;
 	}
+
+	public ArrayList<User> getUserLibrary() {
+		// TODO Auto-generated method stub
+		return usersRepo;
+	}
 }

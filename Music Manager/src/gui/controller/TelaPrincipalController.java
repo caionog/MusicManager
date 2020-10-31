@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 
 import negocio.beans.Music; // Classe base
 import negocio.beans.Playlist;
+import negocio.beans.User;
 import negocio.FacadeMusicManager;
 import negocio.beans.Genre; // Enum
 
@@ -81,6 +82,12 @@ public class TelaPrincipalController implements Initializable{
     @FXML
     private TableColumn<Playlist, ArrayList<Music>> nomesMusicaColumn;
 	
+    //TABLEVIEW USER
+    @FXML
+    private TableView<User> userTableViewTelaPrincipal;
+    
+    @FXML
+    private TableColumn<User, String> NomeColumn;
 
 	
 	@FXML
@@ -107,6 +114,7 @@ public class TelaPrincipalController implements Initializable{
 		Music musicSelected = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
 		if(musicSelected != null) {
 		System.out.println("Gerar metadados funciona");
+		//musicManager.
 		// MusicController musicControler = new MusicController();
 		System.out.println(musicSelected);
 		//CÓDIGO DE GERAR METADADOS AQUI
@@ -171,13 +179,15 @@ public class TelaPrincipalController implements Initializable{
 		//nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist,ArrayList<Music>("id"));
 		nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist,ArrayList<Music>>("musics"));
 		
+		
 		//TENTANDO PEGAR O NOME DO USUARIO POR ID
-	//	String nomePlaylist ="" ;
-	//	nomePlaylist = musicManager.getUserNameById();
-	//	System.out.println("O nome do usuario por id e"+nomePlaylist);
-		//NomeDoCriadorColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>(musicManager.getUserNameById()));
+		String nomePlaylist = musicManager.getUserNameById(1);
+		System.out.println("O nome do usuario por id e "+nomePlaylist);
+	
 
-
+      // configurar coluna da tableview usuário
+		NomeColumn.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
+		
 
 		// ??????? //
 
@@ -185,6 +195,8 @@ public class TelaPrincipalController implements Initializable{
 		tableViewTelaPrincipal.setItems(populateMusicTable()); // carregar os atributos na tabela música
 		//carregar os atributos na table playlist
 		playlistTable.setItems(populatePlaylistTable());
+		//carrega os atributos na table user
+		userTableViewTelaPrincipal.setItems(populateUserTable());
 		
 	}
 	
@@ -211,7 +223,7 @@ public class TelaPrincipalController implements Initializable{
 		ObservableList<Playlist> playlistTable = FXCollections.observableArrayList();
 		
 		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
-		System.out.println("@mostrar playlistLibrary"+ playlistLibrary.toString());
+	//	System.out.println("@mostrar playlistLibrary"+ playlistLibrary.toString());
 		// ArrayList<Playlist> favPlaylists = musicManager.getLoggedUserFavPlaylists();
 
 		// Adiciona todas as playlists do repositório na tabela da GUI
@@ -223,5 +235,25 @@ public class TelaPrincipalController implements Initializable{
 
 		return playlistTable;
 	}
+	public ObservableList<User> populateUserTable() 
+	{
+		ObservableList<User> userTable = FXCollections.observableArrayList();
+		ArrayList<User> userLibrary = musicManager.getUserLibrary();
+		for (User user : userLibrary) {
+			userTable.add(user);
+			
+		}
+		System.out.println("@mostrar userTable"+userLibrary.toString());
+
+		return userTable;
+				
+		
+	}
+	
+	
+	
+	
+	
+	
 
 }

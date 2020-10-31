@@ -9,12 +9,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaPrincipalController">
+<AnchorPane prefHeight="655.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaPrincipalController">
    <children>
-      <Button fx:id="botãoPerfilTelaPrincipal" layoutX="848.0" layoutY="23.0" mnemonicParsing="false" onAction="#irMeuPerfilTelaPrincipal" prefHeight="31.0" prefWidth="125.0" text="Editar Perfil" />
-      <Pane layoutX="68.0" layoutY="129.0" prefHeight="291.0" prefWidth="759.0">
+      <Button fx:id="botãoPerfilTelaPrincipal" layoutX="417.0" layoutY="40.0" mnemonicParsing="false" onAction="#irMeuPerfilTelaPrincipal" prefHeight="31.0" prefWidth="125.0" text="Editar Perfil" />
+      <Pane layoutX="14.0" layoutY="131.0" prefHeight="216.0" prefWidth="717.0">
          <children>
-            <TableView fx:id="tableViewTelaPrincipal" layoutX="149.0" layoutY="16.0" prefHeight="256.0" prefWidth="588.0">
+            <TableView fx:id="tableViewTelaPrincipal" layoutX="95.0" layoutY="14.0" prefHeight="147.0" prefWidth="588.0">
               <columns>
                 <TableColumn fx:id="titleColumn" prefWidth="146.0" text="Nome" />
                 <TableColumn fx:id="artistColumn" prefWidth="98.0" text="Artista" />
@@ -23,48 +23,52 @@
                   <TableColumn fx:id="durationColumn" prefWidth="141.0" text="Duração" />
               </columns>
             </TableView>
-            <Label layoutX="70.0" layoutY="14.0" text="Músicas">
+            <Label layoutX="22.0" layoutY="16.0" text="Músicas">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+            <Button layoutX="555.0" layoutY="175.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" text="Adicionar Música" />
+            <Button layoutX="487.0" layoutY="178.0" mnemonicParsing="false" text="Deletar" />
+            <Button layoutX="371.0" layoutY="178.0" mnemonicParsing="false" text="Mostrar Favoritos" />
+            <Button layoutX="316.0" layoutY="178.0" mnemonicParsing="false" text="Filtro" />
+            <Button layoutX="217.0" layoutY="178.0" mnemonicParsing="false" text="Desfavoritar" />
+            <Button fx:id="botãoFavoritarTelaPrincipal" layoutX="124.0" layoutY="178.0" mnemonicParsing="false" onAction="#favoritarTelaPrincipal" text="Favoritar" />
          </children>
       </Pane>
-      <Button fx:id="botãoSairTelaPrincipal" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#sairTelaPrincipal" text="Sair" />
-      <Button fx:id="botãoMinhasPlaylists" layoutX="848.0" layoutY="67.0" mnemonicParsing="false" onAction="#irMinhasPlaylists" text="Minhas Playlists" />
-      <Label layoutX="443.0" layoutY="23.0" text="Music Manager" textFill="#c64b4b">
+      <Button fx:id="botãoSairTelaPrincipal" layoutX="54.0" layoutY="55.0" mnemonicParsing="false" onAction="#sairTelaPrincipal" text="Sair" />
+      <Button fx:id="botãoMinhasPlaylists" layoutX="444.0" layoutY="82.0" mnemonicParsing="false" onAction="#irMinhasPlaylists" text="Minhas Playlists" />
+      <Label layoutX="193.0" layoutY="52.0" text="Music Manager" textFill="#c64b4b">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="playlistTable" layoutX="217.0" layoutY="498.0" prefHeight="256.0" prefWidth="588.0">
+      <TableView fx:id="playlistTable" layoutX="213.0" layoutY="379.0" prefHeight="106.0" prefWidth="463.0">
          <columns>
-            <TableColumn fx:id="NomeDoCriadorColumn" prefWidth="146.0" text="Nome do criador" />
-            <TableColumn fx:id="playlistIdColumn" prefWidth="55.0" text="Id" />
-            <TableColumn fx:id="nomesMusicaColumn" prefWidth="386.0" text="Nome das Músicas" />
+            <TableColumn fx:id="NomeDoCriadorColumn" prefWidth="10.0" text="Nome do criador" />
+            <TableColumn fx:id="playlistIdColumn" prefWidth="88.0" text="Id" />
+            <TableColumn fx:id="nomesMusicaColumn" prefWidth="478.0" text="Nome das Músicas" />
          </columns>
       </TableView>
-      <Label layoutX="143.0" layoutY="498.0" text="Playlists">
+      <Label layoutX="22.0" layoutY="379.0" text="Playlists">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="404.0" layoutY="407.0" mnemonicParsing="false" text="Filtro" />
-      <Button fx:id="botãoFavoritarTelaPrincipal" layoutX="218.0" layoutY="407.0" mnemonicParsing="false" onAction="#favoritarTelaPrincipal" text="Favoritar" />
-      <Button layoutX="606.0" layoutY="407.0" mnemonicParsing="false" text="Deletar" />
-      <Button layoutX="300.0" layoutY="407.0" mnemonicParsing="false" text="Desfavoritar" />
-      <Button layoutX="218.0" layoutY="765.0" mnemonicParsing="false" text="Favoritar" />
-      <Button layoutX="305.0" layoutY="765.0" mnemonicParsing="false" text="Desfavoritar" />
-      <Button layoutX="416.0" layoutY="765.0" mnemonicParsing="false" text="Filtro" />
-      <Button layoutX="625.0" layoutY="765.0" mnemonicParsing="false" text="Deletar" />
-      <Button layoutX="700.0" layoutY="765.0" mnemonicParsing="false" text="Criar playlist" />
-      <Text layoutX="26.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copia essa tabela na tabela de minhas playlists" />
-      <Text layoutX="472.0" layoutY="828.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TextPara criar uma playlist, o usuario precisa DIGITAR vários ids de música" />
-      <Text layoutX="485.0" layoutY="856.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se possível, seleciona multiplas músicas e clica no botão criar playlist" />
-      <Button layoutX="479.0" layoutY="765.0" mnemonicParsing="false" text="Mostrar Favoritos" />
-      <Button layoutX="464.0" layoutY="407.0" mnemonicParsing="false" text="Mostrar Favoritos" />
-      <Button layoutX="345.0" layoutY="897.0" mnemonicParsing="false" text="Gerar Relatório" />
-      <Button fx:id="botaoGerarMetadados" layoutX="548.0" layoutY="897.0" mnemonicParsing="false" onAction="#irGerarMetadados" text="Gerar Metadados" />
-      <Button layoutX="684.0" layoutY="407.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" text="Adicionar Música" />
+      <Button layoutX="54.0" layoutY="512.0" mnemonicParsing="false" text="Favoritar" />
+      <Button layoutX="141.0" layoutY="512.0" mnemonicParsing="false" text="Desfavoritar" />
+      <Button layoutX="240.0" layoutY="512.0" mnemonicParsing="false" text="Filtro" />
+      <Button layoutX="424.0" layoutY="512.0" mnemonicParsing="false" text="Deletar" />
+      <Button layoutX="494.0" layoutY="512.0" mnemonicParsing="false" text="Criar playlist" />
+      <Text layoutX="88.0" layoutY="603.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TextPara criar uma playlist, o usuario precisa DIGITAR vários ids de música" />
+      <Text layoutX="80.0" layoutY="630.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se possível, seleciona multiplas músicas e clica no botão criar playlist" />
+      <Button layoutX="299.0" layoutY="512.0" mnemonicParsing="false" text="Mostrar Favoritos" />
+      <Button layoutX="115.0" layoutY="558.0" mnemonicParsing="false" text="Gerar Relatório" />
+      <Button fx:id="botaoGerarMetadados" layoutX="254.0" layoutY="558.0" mnemonicParsing="false" onAction="#irGerarMetadados" text="Gerar Metadados" />
+      <TableView fx:id="userTableViewTelaPrincipal" layoutX="110.0" layoutY="379.0" prefHeight="106.0" prefWidth="100.0">
+        <columns>
+          <TableColumn fx:id="NomeColumn" prefWidth="99.0" text="Nome" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

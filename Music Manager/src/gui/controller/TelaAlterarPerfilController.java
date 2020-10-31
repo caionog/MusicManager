@@ -9,9 +9,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import negocio.FacadeMusicManager;
+import negocio.beans.UserPermission;
+import negocio.controllers.UserController;
 
 public class TelaAlterarPerfilController {
 
@@ -22,10 +26,26 @@ public class TelaAlterarPerfilController {
 
     @FXML
     private Button botaoCancelarTelaAlterarPerfil;
+    
+    @FXML
+    private TextField emailFieldTelaAlterarPerfil;
+
+    @FXML
+    private TextField nomeFieldTelaAlterarPerfil;
+
+    @FXML
+    private PasswordField senhaFieldTelaAlterarPerfil;
 
     @FXML
     void alterarDados(ActionEvent event)throws IOException {
-    	System.out.println("Dados alterados com sucesso");
+    	System.out.println("Alterar dados funciona");
+    	UserController controller = new UserController();
+    	String email = emailFieldTelaAlterarPerfil.getText();
+    	String senha = senhaFieldTelaAlterarPerfil.getText();
+    	String nome = nomeFieldTelaAlterarPerfil.getText();
+    	//AQUI FUNÇÃO DE ALTERAR DADOS
+
+    	
 
     }
 
