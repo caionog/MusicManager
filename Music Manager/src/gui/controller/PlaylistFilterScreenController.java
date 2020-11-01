@@ -49,27 +49,17 @@ public class PlaylistFilterScreenController  implements Initializable {
     }
 
     @FXML
-    private void applyFilter(ActionEvent event) {
+    private void applyFilter(ActionEvent event) throws IOException {
         String creatorName = creatorNameField.getText();
         String genreStr = genreChoice.getValue();
 
-        PlaylistFilter settings = new PlaylistFilter(creatorName, genreStr);
-        
-        Node node = (Node) event.getSource();
+        musicManager.setFilterSettings(creatorName, genreStr);
 
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
-
-        try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/TelaPrincipal.fxml"));
-            stage.setUserData(settings);
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            System.err.println(String.format("Error: %s", e.getMessage()));
-        }
+        Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
+		Scene tabbleViewScene = new Scene(tabbleViewParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(tabbleViewScene);
+		window.show();
     }
 
     @Override

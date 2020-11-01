@@ -59,7 +59,7 @@ public class MusicFilterScreenController  implements Initializable {
 
 
     @FXML
-    private void applyFilter(ActionEvent event) {
+    private void applyFilter(ActionEvent event) throws IOException {
 
         String title = titleField.getText();
         String artist = artistField.getText();
@@ -67,23 +67,13 @@ public class MusicFilterScreenController  implements Initializable {
         String genreStr = genreChoice.getValue();
         String durationStr = durationChoice.getValue();
 
-        MusicFilter settings = new MusicFilter(title, artist, genreStr, durationStr);
+        musicManager.setFilterSettings(title, artist, genreStr, durationStr);
 
-        Node node = (Node) event.getSource();
-
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
-
-        try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/TelaPrincipal.fxml"));
-            stage.setUserData(settings);
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            System.err.println(String.format("Error: %s", e.getMessage()));
-        }
+        Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
+        Scene tabbleViewScene = new Scene(tabbleViewParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(tabbleViewScene);
+		window.show();
     }
 
 
@@ -104,7 +94,7 @@ public class MusicFilterScreenController  implements Initializable {
         durationChoice.setItems(FXCollections.observableArrayList(
             "Todas as durações", 
             "Curto (0-4 min)", 
-            "Médio (4-20 min)", 
+            "Medio (4-20 min)", 
             "Longo (20 min ou mais)"
         ));
 

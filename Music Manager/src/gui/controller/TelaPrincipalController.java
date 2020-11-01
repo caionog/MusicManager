@@ -22,7 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import javafx.stage.Window;
 import negocio.FacadeMusicManager; // Fachada
 
 import negocio.beans.Music; // Classe base
@@ -235,19 +235,15 @@ public class TelaPrincipalController implements Initializable {
 
 	@FXML
 	void addMusic(ActionEvent event) throws IOException {
-		// TODO
-		// Popup duma janela pedindo pro usuário digitar um path de MP3
-		// Com o input da janela chamar a função generate Metadata passando path
-		//JANELA POP UP LIGADO A UM BOTÃO
 
-				Stage stage;
-				Parent root;
-				stage = new Stage();
-				root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAdicionarMusica.fxml"));
-				stage.setScene(new Scene(root));
-				stage.initModality(Modality.APPLICATION_MODAL);
-				stage.initOwner(addMusicButton.getScene().getWindow());
-				stage.showAndWait();
+		Stage stage;
+		Parent root;
+		stage = new Stage();
+		root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAdicionarMusica.fxml"));
+		stage.setScene(new Scene(root));
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(addMusicButton.getScene().getWindow());
+		stage.showAndWait();
 	}
 	
 	// =-= // Funções que interagem com a tabela playlist // =-= //
@@ -301,7 +297,7 @@ public class TelaPrincipalController implements Initializable {
 		// Verificar se esse código está certo
 		// Somente popular a table de playlist com playlists públicas
 		// Melhorar o visual + colunas da table de playlists
-		// Adicionar os filtros padão na hora de preencher as tabelas <--- somente após fterminar a filterScreen
+		// Adicionar os filtros padão na hora de preencher as tabelas
 
 		// configurar colunas do tableview das músicas
 		titleColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("title"));
@@ -312,23 +308,14 @@ public class TelaPrincipalController implements Initializable {
 
 		// configurar colunas do tableview das playlist
 		playlistIdColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("id"));
-		//nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist,ArrayList<Music>("id"));
-		nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist,ArrayList<Music>>("musics"));
-		
-		
-		//TENTANDO PEGAR O NOME DO USUARIO POR ID
-		String nomePlaylist = musicManager.getUserNameById(1);
-		System.out.println("O nome do usuario por id é " + nomePlaylist);
+		nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist, ArrayList<Music>>("musics"));
 
     	// configurar coluna da tableview usuário
 		NomeColumn.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
 
-		
 		tableViewTelaPrincipal.setItems(populateMusicTable()); // carregar os atributos na tabela música
-		//carregar os atributos na table playlist
-		playlistTable.setItems(populatePlaylistTable());
-		//carrega os atributos na table user
-		userTableViewTelaPrincipal.setItems(populateUserTable());
+		userTableViewTelaPrincipal.setItems(populateUserTable()); // carrega os atributos na table user
+		playlistTable.setItems(populatePlaylistTable()); //carregar os atributos na table playlist
 	}
 
 	// =-= // Funções auxiliares // =-= //
@@ -339,13 +326,48 @@ public class TelaPrincipalController implements Initializable {
 		
 		ArrayList<Music> musicLibrary = musicManager.getMusicLibrary();
 
+		ArrayList<String> musicSettings = musicManager.getMusicFilterSettings();
+		String artist = musicSettings.get(0);
+		String title = musicSettings.get(1);
+		String genreStr = musicSettings.get(2);
+		String durationStr = musicSettings.get(3);
+
+		Boolean valid = true;
+
 		// Adiciona todas as músicas do repositório na tabela da GUI
 		for (Music music : musicLibrary) {
-			musicTable.add(music);
+
+			if ( !artist.isEmpty() ) { // Aplica filtro artist
+				valid = music.getArtist().equals(artist);
+			}
+
+			if ( valid && !title.isEmpty() ) { // Aplica filtro title
+				valid = music.getTitle().equals(title);
+			}
+
+			if ( valid && !genreStr.isEmpty() ) { // Aplica filtro genre
+				valid = music.getGenre().getValueStr().equals(genreStr.toUpperCase());
+			}
+
+			if ( valid && !durationStr.isEmpty() ) { // Aplica filtro duration
+				Double duration = Double.valueOf(music.getDuration());
+				int minutes = (int) ((duration / (1000*60)) % 60);
+
+				if ( durationStr.equals("Todas as durações") ) {
+					valid = true;
+				} else if ( durationStr.equals("Curto (0-4 min)") && minutes <= 4 ) {
+					valid = true;
+				} else if ( durationStr.equals("Medio (4-20 min)") && minutes >= 4 && minutes <= 20) {
+					valid = true;
+				} else if ( durationStr.equals("Longo (20 min ou mais)") && minutes >= 20 ) { // Longo 20min+
+					valid = true;
+				} else {
+					valid = false;
+				}
+			}
+
+			if (valid) musicTable.add(music);
 		}
-		
-		Genre genre = Enum.valueOf(Genre.class, "CLASSIC");
-		musicTable.add(new Music(1, "Fur Elise", "Betoven", genre, "0.0"));
 		
 		return musicTable;
 	}
@@ -356,16 +378,34 @@ public class TelaPrincipalController implements Initializable {
 		ObservableList<Playlist> playlistTable = FXCollections.observableArrayList();
 		
 		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
-		//	System.out.println("@mostrar playlistLibrary"+ playlistLibrary.toString());
-		// ArrayList<Playlist> favPlaylists = musicManager.getLoggedUserFavPlaylists();
+		
+		ArrayList<String> playlistSettings = musicManager.getPlaylistFilterSettings();
+		String creatorName = playlistSettings.get(0);
+		String GenreStr = playlistSettings.get(1);
+
+		Boolean valid = true;
 
 		// Adiciona todas as playlists do repositório na tabela da GUI
 		for (Playlist playlist : playlistLibrary) {
-			playlistTable.add(playlist);
-			
-		}
-		System.out.println("@mostrar playlistTable"+playlistLibrary.toString());
 
+			if ( !creatorName.isEmpty() ) { // Aplica filtro artist
+				valid = musicManager.getUserNameById(playlist.getCreatorId()).equals(creatorName);
+			}
+
+			if ( valid && !GenreStr.isEmpty() ) { // Aplica filtro title
+				for ( Music m : playlist.getMusics() ) {
+					if ( m.getGenre().getValueStr().equals(GenreStr.toUpperCase()) ) {
+						valid = true;
+						break;
+					} else {
+						valid = false;
+					}
+				}
+			}
+
+			if (valid) playlistTable.add(playlist);
+		}
+		// System.out.println("@mostrar playlistTable"+playlistLibrary.toString());
 		return playlistTable;
 	}
 

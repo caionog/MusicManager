@@ -3,6 +3,11 @@ package negocio;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import negocio.beans.Filter;
+
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
+
 import negocio.controllers.MusicController; // Controladores
 import negocio.controllers.PlaylistController;
 import negocio.controllers.UserController;
@@ -15,6 +20,7 @@ import negocio.beans.UserPermission;
 public class FacadeMusicManager {
 
 	User loggedUser;
+	Filter settings = new Filter();
 
 	MusicController musicController = new MusicController();
 	PlaylistController playlistContrtoller = new PlaylistController();
@@ -31,7 +37,8 @@ public class FacadeMusicManager {
 		return instance;
 	}
 
-	private FacadeMusicManager() {}
+	private FacadeMusicManager() {
+	}
 
 	// ---------------------------------------------------------//
 
@@ -111,8 +118,54 @@ public class FacadeMusicManager {
 		userController.addFavoritePlaylist(loggedUser, selectedPlaylist);
 	}
 
+
 	public void editLoggedUser(String email, String password, String name) throws IOException {
 		userController.modifyUser(loggedUser, name, password, email);
+	}
+
+	
+	public void setFilterSettings(String title, String artist, String genreStr, String durationStr) {
+		settings.setTitle(title);
+		settings.setArtist(artist);
+		settings.setMusicGenreStr(genreStr);
+		settings.setDurationStr(durationStr);
+	}
+	public void setFilterSettings(String creatorName, String genreStr) {
+		settings.setCreatorName(creatorName);
+		settings.setPlaylistGenreStr(genreStr);
+	}
+
+
+	public ArrayList<String> getMusicFilterSettings() {
+		ArrayList<String> s = new ArrayList<>(4);
+		s.add(settings.getTitle());
+		s.add(settings.getArtist());
+		s.add(settings.getMusicGenreStr());
+		s.add(settings.getDurationStr());
+		return s;
+	}
+
+
+	public ArrayList<String> getPlaylistFilterSettings() {
+		ArrayList<String> s = new ArrayList<>(2);
+		s.add(settings.getCreatorName());
+		s.add(settings.getPlaylistGenreStr());
+		return s;
+	}
+
+
+	public void createMusic(String path) {
+		try {
+			musicController.extractMetaData(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (TikaException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
