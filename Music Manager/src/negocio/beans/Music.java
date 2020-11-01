@@ -14,6 +14,7 @@ public class Music {
 		this.artist = artist;
 		this.genre = genre;
 		this.duration = duration;
+		
 	}
 
 	//---------------------getters-----------------//

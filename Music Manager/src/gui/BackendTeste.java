@@ -54,6 +54,7 @@ public class BackendTeste {
 		String pathSong3 = mp3StoragePath + "GD\\53576" + ".mp3";
 		String pathSong4 = mp3StoragePath + "Transistor\\Darren Korb - She Shines" + ".mp3";
 		String pathSong5 = mp3StoragePath + "ADOFAI\\The Midnight Train" + ".mp3";
+	//	String pathSong6 =  mp3StoragePath + "ADOFAI\\Pulse" + ".mp3";
 
 		// Simulando a criação da Music no repositório de musicas com base no input path
 		musicController.extractMetaData(pathSong1);
@@ -61,6 +62,7 @@ public class BackendTeste {
 		musicController.extractMetaData(pathSong3);
 		musicController.extractMetaData(pathSong4);
 		musicController.extractMetaData(pathSong5);
+	//	musicController.extractMetaData(pathSong6);
 
 		// Simulando a criação de playlists
 		ArrayList<Music> selectedMusics = new ArrayList<Music>(2);

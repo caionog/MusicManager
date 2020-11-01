@@ -5,7 +5,7 @@ public enum Genre {
   AXE(1), BLUES(2), COUNTRY(3), ELETRONIC(4), LINING(5),
   FUNK(6), GOSPEL(7), HIPHOP(8), JAZZ(9), MPB(10),
   CLASSIC(11), PAGODE(12), POP(13), REAGUE(14), ROCK(15),
-  SAMBA(16), BACK_COUNTRY(17);
+  SAMBA(16), BACK_COUNTRY(17),PODCAST(18),;
 
   private int value;
 
@@ -18,7 +18,8 @@ public enum Genre {
   }
 
   public String getValueStr() {
-    switch (value) {
+	      switch (value) {
+    
       case -1: return "NULL";
       case 0: return "NOT_LISTED";
       case 1: return "AXE";
@@ -38,8 +39,12 @@ public enum Genre {
       case 15: return "ROCK";
       case 16: return "SAMBA";
       case 17: return "BACK_COUNTRY";
+      case 18: return "PODCAST";
       default: return "NULL";
     }
+		
+	
+
 
   }
 }

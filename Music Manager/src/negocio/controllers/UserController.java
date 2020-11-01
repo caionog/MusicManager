@@ -81,7 +81,7 @@ public class UserController implements IUserController {
     
     
     @Override
-    public boolean handleUserLogin(String nameOrEmail, String password) {
+    public User handleUserLogin(String nameOrEmail, String password) {
 
         Boolean nameOrEmailExist = false, passwordExist = false;
         int i = 0, j = 0;
@@ -120,45 +120,80 @@ public class UserController implements IUserController {
 
 
         if (nameOrEmailExist && passwordExist && (i == j) ) {
-            // TODO guarda loggedUser
-            return true;
+            return userRepoInstance.getUserByIndex(i-1);
         }
         else 
         {
         	System.out.println("Nao existe");
-        	return false;
+        	return null;
         }
     }
     
 
     @Override
-    public void addFavoriteMusic(User u, Music m) throws IOException {
-    	
-        u.addFavMusic(m);
-        userRepoInstance.updateUserFavoriteMusics(u.getId(), m.getId() );
+    public void addFavoriteMusic(User u, Music m) {
+        
+        try {
+            userRepoInstance.updateUserFavoriteMusics(u.getId(), m.getId());
+            u.addFavMusic(m);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 
     @Override
-    public void addFavoritePlaylist(User u, Playlist p) throws IOException {
-    	
-        u.addFavPlaylist(p);
-        userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId() );
+    public void addFavoritePlaylist(User u, Playlist p) {
+        
+        try {
+            userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId());
+            u.addFavPlaylist(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
-    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) {
-        if (newEmail != "") loggedUser.setEmail(newEmail);
+    public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) throws IOException {
         
-		if (newName != "") loggedUser.setName(newName);
+        Boolean needRepoUpdated = false;
 
-		if (newPassword != "") loggedUser.setPassword(newPassword);
-	}
+        if (newEmail != "") {
+            loggedUser.setEmail(newEmail);
+            needRepoUpdated = true;
+        }
+
+		if (newName != "") {
+            loggedUser.setName(newName);
+            needRepoUpdated = true;
+        }
+
+        if (newPassword != "") {
+            loggedUser.setPassword(newPassword);
+            needRepoUpdated = true;
+        }
+
+        if ( needRepoUpdated ) {
+            // TODO
+            // função que altera txt
+            // userRepoInstance.updateUserData(newName, newPassword, newEmail);
+        }
+    }
     
     
     @Override
     public User getUserByIndex(int index) {
 		return userRepoInstance.getUserByIndex(index);
+	}
+
+
+	public String getUserNameById(int id) {
+        return userRepoInstance.getUserById(id).getName();
+	}
+
+
+	public ArrayList<User> getUserLibrary() {
+		return userRepoInstance.getUserLibrary();
 	}
 }

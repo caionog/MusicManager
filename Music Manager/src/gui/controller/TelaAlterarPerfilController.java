@@ -9,9 +9,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import negocio.FacadeMusicManager;
+import negocio.FacadeMusicManager; // Fachada
 
 public class TelaAlterarPerfilController {
 
@@ -22,11 +24,24 @@ public class TelaAlterarPerfilController {
 
     @FXML
     private Button botaoCancelarTelaAlterarPerfil;
+    
+    @FXML
+    private TextField emailFieldTelaAlterarPerfil;
+
+    @FXML
+    private TextField nomeFieldTelaAlterarPerfil;
+
+    @FXML
+    private PasswordField senhaFieldTelaAlterarPerfil;
 
     @FXML
     void alterarDados(ActionEvent event)throws IOException {
-    	System.out.println("Dados alterados com sucesso");
-
+    	
+    	String email = emailFieldTelaAlterarPerfil.getText();
+    	String password = senhaFieldTelaAlterarPerfil.getText();
+    	String name = nomeFieldTelaAlterarPerfil.getText();
+        
+        musicManager.editLoggedUser(email, password, name);
     }
 
     @FXML
@@ -36,7 +51,6 @@ public class TelaAlterarPerfilController {
     	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
      	window.setScene(tabbleViewScene);
     	window.show();
-
     }
 
 }

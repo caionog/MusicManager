@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -12,39 +8,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaCadastroController">
+<AnchorPane prefHeight="1000.0" prefWidth="1000.0" stylesheets="@../resources/MainTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaCadastroController">
    <children>
-      <Button fx:id="botaoCadastrarTelaCadastro" layoutX="337.0" layoutY="288.0" mnemonicParsing="false" onAction="#cadastrarConta" text="Cadastrar" />
-      <PasswordField fx:id="senhaFieldTelaCadastro" layoutX="250.0" layoutY="181.0" promptText="Senha" />
-      <TextField fx:id="emailFieldTelaCadastro" layoutX="251.0" layoutY="146.0" promptText="Email" />
-      <Button fx:id="botaoCancelarTelaCadastro" layoutX="57.0" layoutY="288.0" mnemonicParsing="false" onAction="#cancelarCadastroConta" text="cancelar" />
-      <Label layoutX="51.0" layoutY="107.0" text="Nome">
+      <Button fx:id="botaoCadastrarTelaCadastro" layoutX="291.0" layoutY="309.0" mnemonicParsing="false" onAction="#cadastrarConta" text="Cadastrar" />
+      <PasswordField fx:id="senhaFieldTelaCadastro" layoutX="250.0" layoutY="197.0" promptText="Senha" />
+      <TextField fx:id="emailFieldTelaCadastro" layoutX="251.0" layoutY="156.0" promptText="Email" />
+      <Button fx:id="botaoCancelarTelaCadastro" layoutX="33.0" layoutY="30.0" mnemonicParsing="false" onAction="#cancelarCadastroConta" text="cancelar" />
+      <Label layoutX="51.0" layoutY="117.0" text="Nome">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="52.0" layoutY="148.0" text="Email">
+      <Label layoutX="52.0" layoutY="158.0" text="Email">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="183.0" text="Senha">
+      <Label layoutX="50.0" layoutY="199.0" text="Senha">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="nomeFieldTelaCadastro" layoutX="251.0" layoutY="104.0" promptText="Nome" />
-      <Label layoutX="51.0" layoutY="34.0" text="Tela de Cadastro">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <TextField fx:id="nomeFieldTelaCadastro" layoutX="251.0" layoutY="114.0" promptText="Nome" />
       <Pane layoutX="202.0" layoutY="6.0" prefHeight="83.0" prefWidth="260.0">
          <children>
-            <Label fx:id="errorMessageLabelTelaCadastro" alignment="CENTER" layoutX="86.0" layoutY="33.0" text="Mensagem de erro" />
+            <Label layoutX="64.0" layoutY="28.0" text="Tela de Cadastro">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <CheckBox fx:id="checkAdminTelaCadastro" layoutX="281.0" layoutY="234.0" mnemonicParsing="false" onAction="#setAdmin" text="Admin" />
+      <CheckBox fx:id="checkAdminTelaCadastro" layoutX="281.0" layoutY="247.0" mnemonicParsing="false" onAction="#setAdmin" text="Admin" />
+      <Text layoutX="660.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Regras de cadastro:" />
+      <Label fx:id="errorMessageLabelTelaCadastro" alignment="CENTER" layoutX="631.0" layoutY="258.0" text="Mensagem de erro: nenhum" />
+      <Text layoutX="594.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[1] - Não pode existir nomes ou emails repetidos" wrappingWidth="330.234375" />
+      <Text layoutX="594.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[2] - Nomes não podem conter o caracter @" wrappingWidth="330.234375" />
+      <Text layoutX="594.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[3] - Emails devem conter o caracter @" wrappingWidth="330.234375" />
    </children>
 </AnchorPane>
