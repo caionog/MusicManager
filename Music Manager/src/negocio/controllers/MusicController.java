@@ -20,16 +20,15 @@ import negocio.beans.User;
 
 import negocio.beans.Genre; // Enum
 
-import negocio.interfaces.IMusicController; // Interface
+import negocio.interfaces.IMusicRepo; // Interface
 
-public class MusicController implements IMusicController {
+public class MusicController {
 	
 	private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 	
 	private UserRepo userRepoInstance = UserRepo.getInstance();
 
 
-	@Override
     public void extractMetaData(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();
 	    Metadata metadata = new Metadata();  
@@ -40,7 +39,7 @@ public class MusicController implements IMusicController {
 		
 		Mp3Parser.parse(inputstream, handler, metadata, pcontext); // Extrai metadata nesse metodo
 		
-		String title =  metadata.get("title");
+		String title = metadata.get("title");
 		String artist = metadata.get("creator");
 		String genreStr = metadata.get("xmpDM:genre");
 		String comprimentoStr = metadata.get("xmpDM:duration");
@@ -98,19 +97,16 @@ public class MusicController implements IMusicController {
 	}
     
 	
-	@Override
     public void resetRepo() {
     	musicRepoInstance.resetRepo();
     }
 
 
-	@Override
 	public void populateMusicLibrary() throws IOException {
 		musicRepoInstance.populateMusicLibrary();
 	}
 
 
-	@Override
 	public void deleteMusic(User loggedUser, Music selectedMusic) throws IOException {
 		
 		// So permite deletar musica se o loggedUser for administrador
@@ -126,7 +122,6 @@ public class MusicController implements IMusicController {
 	}
 		
 
-	@Override
 	public void printMetadata(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
@@ -139,7 +134,6 @@ public class MusicController implements IMusicController {
 	}
 	
 	
-	@Override
 	public void printSummary(String path) throws Exception, IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();  
 	    Metadata metadata = new Metadata();  
@@ -151,19 +145,16 @@ public class MusicController implements IMusicController {
 	}
 
 
-	@Override
 	public ArrayList<Music> getMusicLibrary() {
 		return musicRepoInstance.getMusicLibrary();
 	}
 
 
-	@Override
 	public Music getMusicById(int id) {
 		return musicRepoInstance.getMusicById(id);
 	}
 	
 	
-	@Override
 	public ArrayList<Music> filterMusic(Genre genre, String title) {
 
 		ArrayList<Music> musics = new ArrayList<Music>(0);

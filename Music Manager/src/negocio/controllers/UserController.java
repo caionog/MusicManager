@@ -13,9 +13,9 @@ import negocio.beans.User;
 
 import negocio.beans.UserPermission; // Enum
 
-import negocio.interfaces.IUserController; // Interface
+import negocio.interfaces.IUserRepo; // Interface
 
-public class UserController implements IUserController {
+public class UserController {
 
     private UserRepo userRepoInstance = UserRepo.getInstance();
     
@@ -23,19 +23,16 @@ public class UserController implements IUserController {
     private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 
 
-    @Override
     public void resetRepo() {
     	userRepoInstance.resetRepo();
     }
 
 
-    @Override
     public void populateUsersRepo() throws IOException {
         userRepoInstance.populateUserRepo(musicRepoInstance, playlistRepoInstance);
     }
 
 
-    @Override
     public Boolean handleUserRegister(UserPermission permission, String email, String name, String password) throws IOException {
     	
         // Checa se o email e nome estão no formato correto
@@ -80,7 +77,6 @@ public class UserController implements IUserController {
     }
     
     
-    @Override
     public User handleUserLogin(String nameOrEmail, String password) {
 
         Boolean nameOrEmailExist = false, passwordExist = false;
@@ -132,7 +128,6 @@ public class UserController implements IUserController {
     }
     
 
-    @Override
     public void addFavoriteMusic(User u, Music m) {
         
         try {
@@ -144,7 +139,6 @@ public class UserController implements IUserController {
     }
     
 
-    @Override
     public void addFavoritePlaylist(User u, Playlist p) {
         
         try {
@@ -156,7 +150,6 @@ public class UserController implements IUserController {
     }
 
 
-    @Override
     public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) throws IOException {
         
         Boolean needRepoUpdated = false;
@@ -184,7 +177,6 @@ public class UserController implements IUserController {
     }
     
     
-    @Override
     public User getUserByIndex(int index) {
 		return userRepoInstance.getUserByIndex(index);
 	}
