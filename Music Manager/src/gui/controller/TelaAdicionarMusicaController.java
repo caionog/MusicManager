@@ -7,13 +7,8 @@ import org.xml.sax.SAXException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import negocio.FacadeMusicManager; // Fachada
 
@@ -21,26 +16,30 @@ import negocio.FacadeMusicManager; // Fachada
 public class TelaAdicionarMusicaController {
 
 	FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
-
-	@FXML
-	private Button botaoAdicionarTelaAdicionarMusica;
 	
 	@FXML
 	private TextField pathFieldTelaAdiconarMusica;
+
+	@FXML
+	private Button botaoAdicionarTelaAdicionarMusica;
 	 
 	 
 	@FXML
-	void adicionarAdicionarMusica(ActionEvent event) throws IOException, SAXException, TikaException, Exception {
+	void adicionarAdicionarMusica(ActionEvent event) throws IOException, SAXException, TikaException {
 		
-		//LEMBRAR DE FAZER EXCEÇÃO
-		//if(musicManager.)
 		String path = pathFieldTelaAdiconarMusica.getText();
-		musicManager.createMusic(path);
-		//	 musicController.extractMetaData(path);
-		//	 String pathSong = mp3StoragePath +path+ ".mp3";
-		
-		//	 musicController.extractMetaData(pathSong);
-		//	 System.out.println(pathSong);
-		System.out.println("Música adicionada com sucesso");
+
+		if ( path.endsWith(".mp3") )
+		{
+			path.replace('\\', '/');
+			musicManager.createMusic(path);
+			//TODO
+			// fecha o popup automáticamente
+			// Se possível atualiza a tabela quando fechar o popup
+		} else {
+			// Mostra msg de erro
+			// "Path inválido"
+		}
+
 	}
 }

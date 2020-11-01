@@ -165,7 +165,6 @@ public class TelaPrincipalController implements Initializable {
 	@FXML
     void irMinhasPlaylists(ActionEvent event) throws IOException {
 
-
 		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
 		Scene tabbleViewScene = new Scene(tabbleViewParent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -189,7 +188,6 @@ public class TelaPrincipalController implements Initializable {
 	@FXML
     void favMusic(ActionEvent event) {
 		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
-		System.out.println(selectedMusic);
 		
 		if (selectedMusic != null) {
 			musicManager.favMusic(selectedMusic);
@@ -205,8 +203,17 @@ public class TelaPrincipalController implements Initializable {
 
 	@FXML 
 	void unfavMusic(ActionEvent event) {
-		// TODO
-		// código semelhante ao favMusic
+		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
+		
+		if (selectedMusic != null) {
+			musicManager.unfavMusic(selectedMusic);
+		} else {
+			String msgErro = "Selecione uma musica para favoritar!";
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(msgErro);
+			alert.initOwner(metadadosStage);;
+			alert.showAndWait();
+		}
 	}
 
 
@@ -416,7 +423,7 @@ public class TelaPrincipalController implements Initializable {
 			userTable.add(user);
 			
 		}
-		System.out.println("@mostrar userTable"+userLibrary.toString());
+		//System.out.println("@mostrar userTable"+userLibrary.toString());
 
 		return userTable;
 	}

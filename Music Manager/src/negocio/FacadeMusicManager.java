@@ -113,9 +113,16 @@ public class FacadeMusicManager {
 		userController.addFavoriteMusic(loggedUser, selectedMusic);
 	}
 
+	public void unfavMusic(Music selectedMusic) {
+		userController.removeFavoriteMusic(loggedUser, selectedMusic);
+	}
+
 
 	public void favPlaylist(Playlist selectedPlaylist) throws IOException {
 		userController.addFavoritePlaylist(loggedUser, selectedPlaylist);
+	}
+
+	public void unfavPlaylist(Music selectedPlaylist) {
 	}
 
 
@@ -154,18 +161,7 @@ public class FacadeMusicManager {
 	}
 
 
-	public void createMusic(String path) {
-		try {
-			musicController.extractMetaData(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (TikaException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void createMusic(String path) throws IOException, SAXException, TikaException {
+		musicController.extractMetaData(path);
 	}
-
 }

@@ -29,7 +29,7 @@ public class MusicController {
 	private UserRepo userRepoInstance = UserRepo.getInstance();
 
 
-    public void extractMetaData(String path) throws Exception, IOException, SAXException, TikaException {
+    public void extractMetaData(String path) throws IOException, SAXException, TikaException {
 		BodyContentHandler handler = new BodyContentHandler();
 	    Metadata metadata = new Metadata();  
 	    FileInputStream inputstream = new FileInputStream(new File(path));  
