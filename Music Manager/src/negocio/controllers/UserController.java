@@ -47,9 +47,7 @@ public class UserController {
         }
 
     	// Checa se o email já foi utilizado por outro user
-        ArrayList<String> emails = userRepoInstance.getEmails();
-        
-        for (String eachEmail : emails) {
+        for (String eachEmail : userRepoInstance.getEmails()) {
 			if ( email.equalsIgnoreCase(eachEmail) ) {
                 System.out.println("Email inválido! problema: email já está cadastrado");
                 return false;
@@ -57,9 +55,7 @@ public class UserController {
 		}
 
         // Checa se o name já foi utilizado por outro user
-        ArrayList<String> names = userRepoInstance.getNames();
-        
-        for (String eachName : names) {
+        for (String eachName : userRepoInstance.getNames()) {
 			if ( name.equalsIgnoreCase(eachName) ) {
 				System.out.println("Nome inválido! problema: nome já está cadastrado");
 				return false;
@@ -81,8 +77,6 @@ public class UserController {
 
         Boolean nameOrEmailExist = false, passwordExist = false;
         int i = 0, j = 0;
-
-
 
         // Explora e verifica os emails
         for (String email : userRepoInstance.getEmails()) {
@@ -170,28 +164,47 @@ public class UserController {
 
     public void modifyUser(User loggedUser, String newName, String newPassword, String newEmail) throws IOException {
         
-        Boolean needRepoUpdated = false;
+        Boolean validEmail = true;
+        Boolean validName = true;
+        String currentEmail, currentName;
 
-        if (newEmail != "") {
+        if ( newEmail.indexOf('@') == -1 ) {
+            validEmail = false;
+        }
+
+		if ( newName.indexOf('@') != -1 ) {
+            validName = false;
+        }
+
+        // Verifica se o newEmail e newName não é repetido
+        for (User user : userRepoInstance.getUserLibrary()) {
+            currentEmail = user.getEmail();
+            currentName = user.getName();
+
+            if ( newEmail.equals(currentEmail) ) {
+                validEmail = false;
+            }
+
+            if ( newName.equals(currentName) ) {
+                validName = false;
+            }
+        }
+
+        if ( validEmail ) {
             loggedUser.setEmail(newEmail);
-            needRepoUpdated = true;
+        } else {
+            newEmail = loggedUser.getEmail();
         }
 
-		if (newName != "") {
+        if ( validName ) {
             loggedUser.setName(newName);
-            needRepoUpdated = true;
+        } else {
+            newName = loggedUser.getName();
         }
 
-        if (newPassword != "") {
-            loggedUser.setPassword(newPassword);
-            needRepoUpdated = true;
-        }
+        loggedUser.setPassword(newPassword);
 
-        if ( needRepoUpdated ) {
-            // TODO
-            // função que altera txt
-            // userRepoInstance.updateUserData(newName, newPassword, newEmail);
-        }
+        userRepoInstance.updateUserData(loggedUser.getId(), newName, newPassword, newEmail);
     }
     
     

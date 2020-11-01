@@ -101,9 +101,9 @@ public class FacadeMusicManager {
 
 	public boolean handleUserLogin(String nameOrEmail, String password) {
 
-		User user = userController.handleUserLogin(nameOrEmail, password);
+		loggedUser = userController.handleUserLogin(nameOrEmail, password);
 
-		if (user != null) {
+		if (loggedUser != null) {
 			return true;
 		} else {
 			return false;
@@ -136,7 +136,6 @@ public class FacadeMusicManager {
 
 	public void editLoggedUser(String email, String password, String name) throws IOException {
 		userController.modifyUser(loggedUser, name, password, email);
-		
 	}
 
 	

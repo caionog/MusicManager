@@ -22,10 +22,12 @@ public interface IUserRepo {
 
     public void updateUserFavoritePlaylists(int userId, int newPlaylistId) throws IOException;
 
+    public void updateUserData(int loggedUserId, String newName, String newPassword, String newEmail) throws IOException;
+
     public void updateDeletedMusics(int selectedMusicId) throws IOException;
 
     public void populateUserRepo(MusicRepo musicRepo, PlaylistRepo playlistRepo) throws IOException;
-
+    
     public ArrayList<User> getUserRepo();
 
     public User getUserByIndex(int index);

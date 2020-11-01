@@ -19,60 +19,53 @@ import negocio.FacadeMusicManager; // Fachada
 
 public class TelaAlterarPerfilController {
 
-    FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
-    
-    private Stage perfilStage;
-    
+	FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
+	
+	private Stage perfilStage;
+	
 
-    @FXML
-    private Button botaoAlterarDadosTelaAlterarPerfil;
+	@FXML
+	private Button backButton;
+	
+	
+	@FXML
+	private TextField nameField;
+	@FXML
+	private TextField emailField;
+	@FXML
+	private PasswordField passwordField;
 
-    @FXML
-    private Button botaoCancelarTelaAlterarPerfil;
-    
-    @FXML
-    private TextField emailFieldTelaAlterarPerfil;
+	@FXML
+	private Button editUserButton;
 
-    @FXML
-    private TextField nomeFieldTelaAlterarPerfil;
 
-    @FXML
-    private PasswordField senhaFieldTelaAlterarPerfil;
+	@FXML
+	void editUser(ActionEvent event) throws IOException {
+		
+		try {
+		
+			String name = nameField.getText();
+			String email = emailField.getText();
+			String password = passwordField.getText();
+				
+			musicManager.editLoggedUser(email, password, name);
 
-    @FXML
-    void alterarDados(ActionEvent event)throws IOException {
-    	
-    	/*
-    	try {
-    	*/
-    		String email = emailFieldTelaAlterarPerfil.getText();
-        	String password = senhaFieldTelaAlterarPerfil.getText();
-        	String name = nomeFieldTelaAlterarPerfil.getText();
-        	System.out.println(nomeFieldTelaAlterarPerfil.getText());
-        	
-        	
-         //   System.out.println(musicManager.getLoggedUserName());
-      //      System.out.println(musicManager.getLoggedUserEmail());
-       //     System.out.println(musicManager.getLoggedUserPassword());
-       //     musicManager.editLoggedUser(email, password, name);
-    	/*}catch (Exception NullPointerException) {
-    		String msgErro = "ERRO null pointer exception!";
+		} catch (Exception NullPointerException) {
+			String msgErro = "ERRO null pointer exception!";
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText(msgErro);
 			alert.initOwner(perfilStage);
 			alert.showAndWait();
-		}*/
-    	
-    	
-    }
+		}	
+	}
 
-    @FXML
-    void cancelarAlterarDados(ActionEvent event)throws IOException{
-    	Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
-    	Scene tabbleViewScene = new Scene(tabbleViewParent);
-    	Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-     	window.setScene(tabbleViewScene);
-    	window.show();
-    }
 
+	@FXML
+	void goBack(ActionEvent event)throws IOException{
+		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
+		Scene tabbleViewScene = new Scene(tabbleViewParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(tabbleViewScene);
+		window.show();
+	}
 }

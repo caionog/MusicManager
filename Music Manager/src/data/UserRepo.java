@@ -154,6 +154,38 @@ public class UserRepo implements IUserRepo {
         writer.write(s); // Sobrescreve o file atualizando os ids favoritos
         writer.close();
     }
+
+
+    @Override
+    public void updateUserData(int loggedUserId, String newName, String newPassword, String newEmail)
+            throws IOException {
+
+        ArrayList<String> playlistData = readUser(loggedUserId);
+        
+        String id = playlistData.get(0);
+        String userPermission = playlistData.get(1);
+        String email = newEmail.isEmpty() ? playlistData.get(2) : newEmail;
+        String name = newName.isEmpty() ? playlistData.get(3) : newName;
+        String password = newPassword.isEmpty() ? playlistData.get(4) : newPassword;
+
+        String musicsIds = playlistData.get(5);
+        String playlistIds = playlistData.get(6);
+
+        String s = "";
+        s += id + "\n";
+        s += userPermission + "\n";
+        s += email + "\n";
+        s += name + "\n";
+        s += password + "\n";
+        s += musicsIds + "\n";
+        s += playlistIds + "\n";
+
+        File user = new File(absolutePath + loggedUserId + ".txt");
+        FileWriter writer = new FileWriter(user.getAbsolutePath());
+
+        writer.write(s); // Sobrescreve o file atualizando as informações do usuário
+        writer.close();
+    }
     
 
     @Override
