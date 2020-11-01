@@ -23,13 +23,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import negocio.FacadeMusicManager; // Fachada
+
 import negocio.beans.Music; // Classe base
 import negocio.beans.Playlist;
 import negocio.beans.User;
+
 import negocio.FacadeMusicManager;
+
 import negocio.beans.Genre; // Enum
 
-public class TelaPrincipalController implements Initializable{
+public class TelaPrincipalController implements Initializable {
 
 	FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
 	
@@ -118,10 +122,10 @@ public class TelaPrincipalController implements Initializable{
 	@FXML
 	void sairTelaPrincipal(ActionEvent event) throws IOException {
 
-		Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaLogin.fxml"));
-		Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
+		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaLogin.fxml"));
+		Scene tabbleViewScene = new Scene(tabbleViewParent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(tabbleViewScene2);
+		window.setScene(tabbleViewScene);
 		window.show();
 	}
 
@@ -164,10 +168,11 @@ public class TelaPrincipalController implements Initializable{
 	@FXML
     void irMinhasPlaylists(ActionEvent event) throws IOException {
 
-		Parent tabbleViewParent3 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
-		Scene tabbleViewScene3 = new Scene(tabbleViewParent3);
+
+		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
+		Scene tabbleViewScene = new Scene(tabbleViewParent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(tabbleViewScene3);
+		window.setScene(tabbleViewScene);
 		window.show();
 	}
 

@@ -8,21 +8,15 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-            <TextField layoutX="396.0" layoutY="80.0" promptText="Título" />
-            <TextField layoutX="396.0" layoutY="137.0" promptText="Artista" />
-            <Slider layoutX="527.0" layoutY="367.0" orientation="VERTICAL" />
-            <Label layoutX="299.0" layoutY="437.0" text="Quantidade mínima de favoritos" textFill="#0077ff" />
-            <ChoiceBox layoutX="414.0" layoutY="207.0" prefWidth="150.0" />
-            <Button layoutX="22.0" layoutY="21.0" mnemonicParsing="false" text="Voltar" />
-            <Button layoutX="450.0" layoutY="923.0" mnemonicParsing="false" text="Aplicar filtro" />
-            <ChoiceBox layoutX="415.0" layoutY="302.0" prefWidth="150.0" />
-            <Label layoutX="347.0" layoutY="212.0" text="Gênero" textFill="#0077ff" />
-            <Label layoutX="347.0" layoutY="307.0" text="Tempo" textFill="#0077ff" />
-      </children>
-    </AnchorPane>
-  </children>
-</VBox>
+<AnchorPane prefHeight="655.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MusicFilterScreenController">
+<children>
+      <TextField fx:id="titleField" layoutX="268.0" layoutY="80.0" promptText="Título" />
+      <TextField fx:id="artistField" layoutX="268.0" layoutY="137.0" promptText="Artista" />
+      <Button fx:id="backButton" layoutX="22.0" layoutY="21.0" mnemonicParsing="false" onAction="#goBack" text="&lt;--" />
+      <Button fx:id="filterButton" layoutX="320.0" layoutY="559.0" mnemonicParsing="false" onAction="#applyFilter" text="Aplicar filtro" />
+      <ChoiceBox fx:id="durationChoice" layoutX="287.0" layoutY="302.0" prefWidth="150.0" />
+      <Label layoutX="219.0" layoutY="212.0" text="Gênero" textFill="#0077ff" />
+      <Label layoutX="219.0" layoutY="307.0" text="Tempo" textFill="#0077ff" />
+      <ComboBox fx:id="genreChoice" layoutX="286.0" layoutY="207.0" prefWidth="150.0" />
+</children>
+</AnchorPane>

@@ -58,11 +58,11 @@ public class TelaLoginController  {
 		
 		if ( isFieldFilled() && musicManager.handleUserLogin(email, senha) ) {
 			
-			Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
-			Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
-			Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window2.setScene(tabbleViewScene2);
-			window2.show();
+			Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
+			Scene tabbleViewScene = new Scene(tabbleViewParent);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			window.setScene(tabbleViewScene);
+			window.show();
 
 		} else {
 			errorMessageLabelTelaLogin.setText("Login ou senha incorretos");
