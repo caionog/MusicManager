@@ -12,8 +12,9 @@ import negocio.beans.Playlist;
 import negocio.beans.User;
 
 import negocio.beans.UserPermission; // Enum
+import negocio.interfaces.IUserRepo;
 
-public class UserRepo {
+public class UserRepo implements IUserRepo {
     
     private ArrayList<User> usersRepo = new ArrayList<User>();
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\Users repository\\";
@@ -35,6 +36,7 @@ public class UserRepo {
     //------------------ CRUD de users ---------------//
 
     // Create user no ArrayList e cria um .txt no repositorio
+    @Override
     public void createUser(UserPermission userPermission, String email, String name, String password) throws IOException {
         
         // Cria (registra) o user
@@ -69,6 +71,7 @@ public class UserRepo {
 
 
     // Read user.txt
+    @Override
     public ArrayList<String> readUser(int userId) throws FileNotFoundException {
 
         ArrayList<String> userData = new ArrayList<>(7);
@@ -86,6 +89,7 @@ public class UserRepo {
     }
 
     // Updaters no .txt
+    @Override
     public void updateUserFavoriteMusics(int userId, int newMusicId) throws IOException {
 
         ArrayList<String> playlistData = readUser(userId);
@@ -119,6 +123,7 @@ public class UserRepo {
     }
     
 
+    @Override
 	public void updateUserFavoritePlaylists(int userId, int newPlaylistId) throws IOException {
 
         ArrayList<String> playlistData = readUser(userId);
@@ -151,6 +156,7 @@ public class UserRepo {
     }
     
 
+    @Override
     public void updateDeletedMusics(int selectedMusicId) throws IOException {
         
         // Procura por um user que contenha uma musica "deletada"
@@ -212,6 +218,7 @@ public class UserRepo {
     //------------------ Funções auxiliares ---------------//
 
     // Read todas os Users.txt e coloca tds no arraylist userRepo
+    @Override
     public void populateUserRepo(MusicRepo musicRepo, PlaylistRepo playlistRepo) throws IOException {
         File userRepoFolder = new File(absolutePath);
 
@@ -252,16 +259,17 @@ public class UserRepo {
         }
     }
 
+    @Override
     public ArrayList<User> getUserRepo() {
         return usersRepo;
     }
 
-
+    @Override
     public User getUserByIndex(int index) {
         return usersRepo.get(index);
     }
 
-
+    @Override
     public User getUserById(int id) {
 		User p = searchUserById(id);
 
@@ -272,20 +280,6 @@ public class UserRepo {
     private int generateId() throws FileNotFoundException {
 
         int greaterId = 0, currentId;
-
-        /*
-        File userRepoFolder = new File(absolutePath);
-        
-        for (final File user : userRepoFolder.listFiles()) {
-            Scanner reader = new Scanner(user);
-            int currentId = Integer.valueOf(reader.nextLine());
-            reader.close();
-
-            if ( currentId >= greaterId ) {
-                greaterId = currentId;
-            }
-        }
-        */
         
         for (User user : usersRepo) {
         	currentId = user.getId();
@@ -299,6 +293,7 @@ public class UserRepo {
     }
 
     
+    @Override
     public void resetRepo() {
         File userRepoFolder = new File(absolutePath);
 
@@ -310,6 +305,7 @@ public class UserRepo {
     }
     
     //----------------buscadores-----------------\\
+    @Override
     public User searchUserByName(String nomeUsuario) {// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usersRepo.size();
         for (int posicao = 0 ; posicao < achou ; posicao++) {
@@ -321,7 +317,7 @@ public class UserRepo {
         return null;
     }
 
-
+    @Override
     public User searchUserById(int id) {// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usersRepo.size();
         for (int posicao = 0; posicao < achou; posicao++){
@@ -333,8 +329,8 @@ public class UserRepo {
         return null;
     }
 
-
-    public User searchUserByEmail(String emailUser){// navega pelo array comparando nome dos usuarios com a String digitada
+    @Override
+    public User searchUserByEmail(String emailUser) {// navega pelo array comparando nome dos usuarios com a String digitada
         int achou = usersRepo.size();
         for (int posicao = 0; posicao < achou; posicao++) {
             User comparUser = usersRepo.get(posicao);
@@ -345,20 +341,20 @@ public class UserRepo {
         return null;
     }
 
-
+    @Override
     public boolean addUser(User usuario) {
         this.IDs++;
         usuario.setId(this.IDs);
         return this.usersRepo.add(usuario);
     }
 
-
+    @Override
     public boolean removeUser(User usuario) {
         // this.IdRemovido = usuario.getUserId();
         return usersRepo.remove(usuario);
     }
 
-
+    @Override
     public void refreshList(int IdRemovido) {
         int achou = usersRepo.size();
         for(int posicao = IdRemovido-1; posicao < achou; posicao++ ) {
@@ -367,12 +363,12 @@ public class UserRepo {
         }
     }
 
-    
+    @Override
     public int getSize() {
         return this.usersRepo.size();
     }
 
-    
+    @Override
 	public ArrayList<String> getEmails() {
         ArrayList<String> emails = new ArrayList<>();
         
@@ -383,6 +379,7 @@ public class UserRepo {
         return emails;
 	}
 
+    @Override
 	public ArrayList<String> getNames() {
 		ArrayList<String> names = new ArrayList<>();
         
@@ -393,6 +390,7 @@ public class UserRepo {
         return names;
 	}
 
+    @Override
 	public ArrayList<String> getPasswords() {
         ArrayList<String> passwords = new ArrayList<>();
         
@@ -403,8 +401,8 @@ public class UserRepo {
         return passwords;
 	}
 
+    @Override
 	public ArrayList<User> getUserLibrary() {
-		// TODO Auto-generated method stub
 		return usersRepo;
 	}
 }

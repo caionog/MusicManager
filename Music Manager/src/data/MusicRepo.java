@@ -8,11 +8,13 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import negocio.interfaces.IMusicRepo; // Interface
+
 import negocio.beans.Music; // Classe base
 
 import negocio.beans.Genre; // Enum
 
-public class MusicRepo {
+public class MusicRepo implements IMusicRepo {
 
     private ArrayList<Music> musicLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\musics repository\\";
@@ -33,6 +35,7 @@ public class MusicRepo {
     //------------------ CRD de musics ---------------//
 
     // Create Music no ArrayList e cria um .txt no repositorio
+    @Override
     public void createMusic(String title, String artist, Genre genre, String duration) throws IOException, FileNotFoundException {
 
         // Cria a musica
@@ -74,6 +77,7 @@ public class MusicRepo {
 
 
     // Read Music.txt
+    @Override
     public ArrayList<String> readMusic(int musicId) throws FileNotFoundException {
 
         ArrayList<String> musicData = new ArrayList<>(5);
@@ -92,6 +96,7 @@ public class MusicRepo {
 
 
     // Deletar Music no ArrayList e deleta um .txt
+    @Override
     public void deleteMusic(Music m) {
         Boolean teste = false;
         if (teste) {
@@ -116,35 +121,40 @@ public class MusicRepo {
     //------------------ Funções auxiliares ---------------//
 
     // Read todas as Musics.txt e coloca tds no arraylist musicLibrary
+    @Override
     public void populateMusicLibrary() throws IOException {
-    File musicRepoFolder = new File(absolutePath);
+        File musicRepoFolder = new File(absolutePath);
 
-    for (final File music : musicRepoFolder.listFiles()) {
+        for (final File music : musicRepoFolder.listFiles()) {
 
-        int musicId = Integer.valueOf(music.getName().split("[.]")[0]);
-        ArrayList<String> musicData = readMusic( musicId );
+            int musicId = Integer.valueOf(music.getName().split("[.]")[0]);
+            ArrayList<String> musicData = readMusic( musicId );
 
-        int id = Integer.valueOf(musicData.get(0)); // Str -> int
-        String title = musicData.get(1); // str
-        String artist = musicData.get(2); // str
-        Genre genre = Enum.valueOf(Genre.class, musicData.get(3)); // Str -> Genre
-        String duration = musicData.get(4); // Str (-> double somente na hora de vizualizar)
+            int id = Integer.valueOf(musicData.get(0)); // Str -> int
+            String title = musicData.get(1); // str
+            String artist = musicData.get(2); // str
+            Genre genre = Enum.valueOf(Genre.class, musicData.get(3)); // Str -> Genre
+            String duration = musicData.get(4); // Str (-> double somente na hora de vizualizar)
 
-        Music m = new Music(id, title, artist, genre, duration);
-        musicLibrary.add(m);
+            Music m = new Music(id, title, artist, genre, duration);
+            musicLibrary.add(m);
+        }
     }
-}
 
+
+    @Override
     public ArrayList<Music> getMusicLibrary() {
         return musicLibrary;
     }
 
 
+    @Override
     public Music getMusicByIndex(int index) {
         return musicLibrary.get(index);
     }
 
 
+    @Override
     public Music getMusicById(int id) {
         Music m = searchMusic(id);
 
@@ -155,18 +165,6 @@ public class MusicRepo {
     private int generateId() throws FileNotFoundException {
 
         int greaterId = 0, currentId;
-        
-//        File musicRepoFolder = new File(absolutePath);
-
-//        for (final File music : musicRepoFolder.listFiles()) {
-//            Scanner reader = new Scanner(music);
-//            int compareId = Integer.valueOf(reader.nextLine());
-//            reader.close();
-//
-//            if (compareId >= greaterId) {
-//                greaterId = compareId;
-//            }
-//        }
         
         for (Music music : musicLibrary) {
 			currentId = music.getId();
@@ -180,6 +178,7 @@ public class MusicRepo {
     }
 
 
+    @Override
     public void resetRepo() {
         File musicRepoFolder = new File(absolutePath);
 
@@ -191,6 +190,7 @@ public class MusicRepo {
     }
 
 
+    @Override
     public Music searchMusic(int id) {
         Music m = null;
         

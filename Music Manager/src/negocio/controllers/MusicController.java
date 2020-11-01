@@ -24,7 +24,7 @@ import negocio.interfaces.IMusicRepo; // Interface
 
 public class MusicController {
 	
-	private MusicRepo musicRepoInstance = MusicRepo.getInstance();
+	private IMusicRepo musicRepoInstance = MusicRepo.getInstance();
 	
 	private UserRepo userRepoInstance = UserRepo.getInstance();
 
@@ -152,15 +152,5 @@ public class MusicController {
 
 	public Music getMusicById(int id) {
 		return musicRepoInstance.getMusicById(id);
-	}
-	
-	
-	public ArrayList<Music> filterMusic(Genre genre, String title) {
-
-		ArrayList<Music> musics = new ArrayList<Music>(0);
-
-		// TODO Acessa repositório de Musicas e buscar músicas compatíveis
-
-		return musics;
 	}
 }

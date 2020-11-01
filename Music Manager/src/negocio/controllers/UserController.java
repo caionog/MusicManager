@@ -17,7 +17,7 @@ import negocio.interfaces.IUserRepo; // Interface
 
 public class UserController {
 
-    private UserRepo userRepoInstance = UserRepo.getInstance();
+    private IUserRepo userRepoInstance = UserRepo.getInstance();
     
     private PlaylistRepo playlistRepoInstance = PlaylistRepo.getInstance();
     private MusicRepo musicRepoInstance = MusicRepo.getInstance();

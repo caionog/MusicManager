@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="655.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MusicFilterScreenController">
+<AnchorPane prefHeight="655.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MusicFilterScreenController">
 <children>
       <TextField fx:id="titleField" layoutX="268.0" layoutY="80.0" promptText="Título" />
       <TextField fx:id="artistField" layoutX="268.0" layoutY="137.0" promptText="Artista" />

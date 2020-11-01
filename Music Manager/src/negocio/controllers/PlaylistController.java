@@ -11,13 +11,11 @@ import negocio.beans.Playlist; // Classes base
 import negocio.beans.Music;
 import negocio.beans.User;
 
-import negocio.beans.Genre; // Enum
-
 import negocio.interfaces.IPlaylistRepo; // Interface
 
 public class PlaylistController {
 	
-	private PlaylistRepo playlistRepoInstance = PlaylistRepo.getInstance();
+	private IPlaylistRepo playlistRepoInstance = PlaylistRepo.getInstance();
 	
 	private MusicRepo musicRepoInstance = MusicRepo.getInstance();
 
@@ -62,15 +60,5 @@ public class PlaylistController {
 
 	public Playlist getPlaylistByIndex(int index) {
 		return playlistRepoInstance.getPlaylistByIndex(index);
-	}
-	
-
-	public ArrayList<Playlist> filterPlaylist(Genre genre, String title) {
-
-		ArrayList<Playlist> playlists = new ArrayList<Playlist>(0);
-
-		// TODO Acessa repositório de Musicas e buscar as playlists compatíveis
-
-		return playlists;
 	}
 }

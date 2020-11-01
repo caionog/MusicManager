@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="655.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.PlaylistFilterScreenController">
+<AnchorPane prefHeight="655.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.PlaylistFilterScreenController">
 <children>
       <TextField fx:id="creatorNameField" layoutX="278.0" layoutY="137.0" promptText="Nome do criador" />
       <Button fx:id="backButton" layoutX="22.0" layoutY="21.0" mnemonicParsing="false" onAction="#goBack" text="&lt;--" />

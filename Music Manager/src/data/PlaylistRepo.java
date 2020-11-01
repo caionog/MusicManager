@@ -11,8 +11,9 @@ import negocio.beans.Playlist; // Classes base
 import negocio.beans.Music;
 
 import negocio.beans._Visibility; // Enum
+import negocio.interfaces.IPlaylistRepo;
 
-public class PlaylistRepo {
+public class PlaylistRepo implements IPlaylistRepo {
 
     private ArrayList<Playlist> playlistsLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\playlists repository\\";
@@ -35,6 +36,7 @@ public class PlaylistRepo {
     //------------------ CRUD de playlists ---------------//
 
     // Create Music no ArrayList e cria um .txt no repositorio
+    @Override
     public void createPlaylist(ArrayList<Music> musics, int creatorId) throws IOException {
 
         // Cria a playlist
@@ -67,6 +69,7 @@ public class PlaylistRepo {
 
 
     // Read playlist.txt
+    @Override
     public ArrayList<String> readPlaylist(int playlistId) throws FileNotFoundException {
 
         ArrayList<String> playlistData = new ArrayList<>(4);
@@ -85,7 +88,7 @@ public class PlaylistRepo {
 
 
     // Updaters no .txt
-     
+    @Override
     public void updateDeletedMusics(int selectedMusicId) throws IOException {
 
         // Procura por uma playlist que contenha ua musica "deletada"
@@ -134,6 +137,7 @@ public class PlaylistRepo {
         } // Fim do for each playlist
 	}
 
+    @Override
     public void updateVisibility(String newVisibility, int playlistId) throws IOException {
 
         ArrayList<String> playlistData = readPlaylist(playlistId);
@@ -158,6 +162,7 @@ public class PlaylistRepo {
     
 
     // Delete Playlist no ArrayList e deleta um .txt
+    @Override
     public void deletePlaylist(Playlist p) {
         Boolean teste = false;
         if (teste) {
@@ -182,6 +187,7 @@ public class PlaylistRepo {
     //------------------ Funções auxiliares ---------------//
 
     // Read todas as Playlist.txt e coloca tds no arraylist playlistLibrary
+    @Override
     public void populatePlaylistLibrary(MusicRepo musicRepo) throws FileNotFoundException {
         File playlistRepoFolder = new File(absolutePath);
 
@@ -209,15 +215,17 @@ public class PlaylistRepo {
         }
     }
 
+    @Override
     public ArrayList<Playlist> getPlaylistsLibrary() {
         return playlistsLibrary;
     }
 
+    @Override
     public Playlist getPlaylistByIndex(int index) {
         return playlistsLibrary.get(index);
     }
 
-
+    @Override
     public Playlist getPlaylistById(int id) {
 		Playlist p = searchPlaylist(id);
 
@@ -228,17 +236,6 @@ public class PlaylistRepo {
     private int generateId() throws FileNotFoundException {
 
         int greaterId = 0, currentId;
-
-//        File musicRepoFolder = new File(absolutePath);
-//        for (final File playlist : musicRepoFolder.listFiles()) {
-//            Scanner reader = new Scanner(playlist);
-//            int compareId = Integer.valueOf(reader.nextLine());
-//            reader.close();
-//
-//            if (compareId >= greaterId) {
-//                greaterId = compareId;
-//            }
-//        }
         
 		for (Playlist playlist : playlistsLibrary) {
 			currentId = playlist.getId();
@@ -252,6 +249,7 @@ public class PlaylistRepo {
     }
     
 
+    @Override
     public void resetRepo() {
         File playlistRepoFolder = new File(absolutePath);
 
@@ -263,7 +261,8 @@ public class PlaylistRepo {
     }
 
 
-    Playlist searchPlaylist(int id) {
+    @Override
+    public Playlist searchPlaylist(int id) {
         Playlist p = null;
         
         for (Playlist playlist : playlistsLibrary) {
