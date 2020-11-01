@@ -85,6 +85,13 @@ public class FacadeMusicManager {
 	public String getLoggedUserName() {
 		return loggedUser.getName();
 	}
+	public String getLoggedUserEmail() {
+		return loggedUser.getEmail();
+	}
+	public String getLoggedUserPassword() {
+		return loggedUser.getPassword();
+	}
+	
 
 
 	public String getUserNameById(int id) {
@@ -128,6 +135,7 @@ public class FacadeMusicManager {
 
 	public void editLoggedUser(String email, String password, String name) throws IOException {
 		userController.modifyUser(loggedUser, name, password, email);
+		
 	}
 
 	

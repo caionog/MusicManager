@@ -18,6 +18,6 @@
       </Label>
       <TextField fx:id="emailFieldTelaAlterarPerfil" layoutX="246.0" layoutY="80.0" promptText="email" />
       <PasswordField fx:id="senhaFieldTelaAlterarPerfil" layoutX="246.0" layoutY="148.0" promptText="senha" />
-      <TextField fx:id="nomeFieldTelaAlterarPerfil1" layoutX="246.0" layoutY="115.0" promptText="nome" />
+      <TextField fx:id="nomeFieldTelaAlterarPerfil" layoutX="246.0" layoutY="115.0" promptText="nome" />
    </children>
 </AnchorPane>

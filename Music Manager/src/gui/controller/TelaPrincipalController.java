@@ -281,6 +281,7 @@ public class TelaPrincipalController implements Initializable {
 
 	@FXML
 	void deletePlaylist(ActionEvent event) {
+		
 		// TODO
 		// No doc de requisitas não tem dizendo que da pra deletar playlist...
 		// então tecnicamente...da pra deixar sem isso feito :>

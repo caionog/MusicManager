@@ -66,7 +66,7 @@
       </TableView>
       <ImageView fitHeight="98.0" fitWidth="179.0" layoutX="149.0" layoutY="18.0">
          <image>
-            <Image url="@../../../../../../OneDrive/Área%20de%20Trabalho/music-manager-logo.png" />
+            <Image url="@../resources/music-manager-logo.png" />
          </image>
       </ImageView>
    </children>
