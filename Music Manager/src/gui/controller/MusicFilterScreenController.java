@@ -20,7 +20,7 @@ import javafx.collections.FXCollections;
 
 import negocio.FacadeMusicManager; // Fachada
 
-public class MusicFilterScreenController  implements Initializable {
+public class MusicFilterScreenController implements Initializable {
 
     FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
 
@@ -94,7 +94,7 @@ public class MusicFilterScreenController  implements Initializable {
         durationChoice.setItems(FXCollections.observableArrayList(
             "Todas as durações", 
             "Curto (0-4 min)", 
-            "Medio (4-20 min)", 
+            "Médio (4-20 min)", 
             "Longo (20 min ou mais)"
         ));
 

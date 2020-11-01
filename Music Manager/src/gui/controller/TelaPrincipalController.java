@@ -327,8 +327,8 @@ public class TelaPrincipalController implements Initializable {
 		ArrayList<Music> musicLibrary = musicManager.getMusicLibrary();
 
 		ArrayList<String> musicSettings = musicManager.getMusicFilterSettings();
-		String artist = musicSettings.get(0);
-		String title = musicSettings.get(1);
+		String title = musicSettings.get(0);
+		String artist = musicSettings.get(1);
 		String genreStr = musicSettings.get(2);
 		String durationStr = musicSettings.get(3);
 
@@ -338,26 +338,24 @@ public class TelaPrincipalController implements Initializable {
 		for (Music music : musicLibrary) {
 
 			if ( !artist.isEmpty() ) { // Aplica filtro artist
-				valid = music.getArtist().equals(artist);
+				valid = music.getArtist().equalsIgnoreCase(artist);
 			}
 
 			if ( valid && !title.isEmpty() ) { // Aplica filtro title
-				valid = music.getTitle().equals(title);
+				valid = music.getTitle().equalsIgnoreCase(title);
 			}
 
-			if ( valid && !genreStr.isEmpty() ) { // Aplica filtro genre
+			if ( valid && !genreStr.equals("Todos") ) { // Aplica filtro genre
 				valid = music.getGenre().getValueStr().equals(genreStr.toUpperCase());
 			}
 
-			if ( valid && !durationStr.isEmpty() ) { // Aplica filtro duration
+			if ( valid && !durationStr.equals("Todas as durações") ) { // Aplica filtro duration
 				Double duration = Double.valueOf(music.getDuration());
 				int minutes = (int) ((duration / (1000*60)) % 60);
 
-				if ( durationStr.equals("Todas as durações") ) {
+				if ( durationStr.equals("Curto (0-4 min)") && minutes <= 4 ) {
 					valid = true;
-				} else if ( durationStr.equals("Curto (0-4 min)") && minutes <= 4 ) {
-					valid = true;
-				} else if ( durationStr.equals("Medio (4-20 min)") && minutes >= 4 && minutes <= 20) {
+				} else if ( durationStr.equals("Médio (4-20 min)") && minutes >= 4 && minutes <= 20) {
 					valid = true;
 				} else if ( durationStr.equals("Longo (20 min ou mais)") && minutes >= 20 ) { // Longo 20min+
 					valid = true;
@@ -366,7 +364,8 @@ public class TelaPrincipalController implements Initializable {
 				}
 			}
 
-			if (valid) musicTable.add(music);
+			if (valid) { musicTable.add(music); }
+			else { valid = true; }
 		}
 		
 		return musicTable;
@@ -381,7 +380,7 @@ public class TelaPrincipalController implements Initializable {
 		
 		ArrayList<String> playlistSettings = musicManager.getPlaylistFilterSettings();
 		String creatorName = playlistSettings.get(0);
-		String GenreStr = playlistSettings.get(1);
+		String genreStr = playlistSettings.get(1);
 
 		Boolean valid = true;
 
@@ -389,12 +388,12 @@ public class TelaPrincipalController implements Initializable {
 		for (Playlist playlist : playlistLibrary) {
 
 			if ( !creatorName.isEmpty() ) { // Aplica filtro artist
-				valid = musicManager.getUserNameById(playlist.getCreatorId()).equals(creatorName);
+				valid = musicManager.getUserNameById(playlist.getCreatorId()).equalsIgnoreCase(creatorName);
 			}
 
-			if ( valid && !GenreStr.isEmpty() ) { // Aplica filtro title
+			if ( valid && !genreStr.equals("Todos") ) { // Aplica filtro title
 				for ( Music m : playlist.getMusics() ) {
-					if ( m.getGenre().getValueStr().equals(GenreStr.toUpperCase()) ) {
+					if ( m.getGenre().getValueStr().equals(genreStr.toUpperCase()) ) {
 						valid = true;
 						break;
 					} else {
@@ -403,9 +402,9 @@ public class TelaPrincipalController implements Initializable {
 				}
 			}
 
-			if (valid) playlistTable.add(playlist);
+			if (valid) { playlistTable.add(playlist); }
+			else { valid = true; }
 		}
-		// System.out.println("@mostrar playlistTable"+playlistLibrary.toString());
 		return playlistTable;
 	}
 

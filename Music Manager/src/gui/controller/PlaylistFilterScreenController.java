@@ -19,7 +19,7 @@ import javafx.collections.FXCollections;
 
 import negocio.FacadeMusicManager; // Fachada
 
-public class PlaylistFilterScreenController  implements Initializable {
+public class PlaylistFilterScreenController implements Initializable {
     
     FacadeMusicManager musicManager = FacadeMusicManager.getInstance();
 

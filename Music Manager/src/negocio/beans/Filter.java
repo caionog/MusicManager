@@ -4,26 +4,11 @@ public class Filter {
 
     private String title = "";
     private String artist = "";
-    private String musicGenreStr = "";
-    private String durationStr = "";
+    private String musicGenreStr = "Todos";
+    private String durationStr = "Todas as durações";
 
     private String creatorName = "";
-    private String playlistGenreStr = "";
-
-
-    public Filter(String title, String artist, String musicGenreStr, String durationStr) {
-        this.title = title;
-        this.artist = artist;
-        this.musicGenreStr = musicGenreStr;
-        this.durationStr = durationStr;
-    }
-
-    public Filter(String creatorName, String playlistGenreStr) {
-        this.creatorName = creatorName;
-        this.playlistGenreStr = playlistGenreStr;
-    }
-
-    public Filter() {}
+    private String playlistGenreStr = "Todos";
 
     public String getTitle() {
         return title;
