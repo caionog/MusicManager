@@ -53,9 +53,16 @@ public class MusicController implements IMusicController {
 		int minutes = (int) ((comprimento / (1000*60)) % 60);
 		int hours   = (int) ((comprimento / (1000*60*60)) % 24);
 
-		Genre genre;
+		Genre genre = Genre.NOT_LISTED;
 		if ( genreStr != null ) {
-			genre = Enum.valueOf(Genre.class, genreStr.toUpperCase());
+			genreStr = genreStr.toUpperCase().replace(' ','_');
+
+			for (Genre g : Genre.values()) {
+				if ( genreStr.equals(g.getValueStr()) ) {
+					genre = Enum.valueOf(Genre.class, genreStr);
+				}
+			}
+				
 		} else {
 			genre = Genre.NULL;
 		}
