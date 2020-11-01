@@ -86,6 +86,8 @@ public class UserController implements IUserController {
         Boolean nameOrEmailExist = false, passwordExist = false;
         int i = 0, j = 0;
 
+
+
         // Explora e verifica os emails
         for (String email : userRepoInstance.getEmails()) {
             i++;
@@ -111,7 +113,7 @@ public class UserController implements IUserController {
         if (nameOrEmailExist) {
             for (String eachPassword : userRepoInstance.getPasswords()) {
                 j++;
-                if ( password.equals(eachPassword) ) {
+                if ( password.equals(eachPassword) && (i == j) ) {
                     passwordExist = true;
                     break;
                 }
@@ -119,7 +121,7 @@ public class UserController implements IUserController {
         }
 
 
-        if (nameOrEmailExist && passwordExist && (i == j) ) {
+        if ( nameOrEmailExist && passwordExist ) {
             return userRepoInstance.getUserByIndex(i-1);
         }
         else 

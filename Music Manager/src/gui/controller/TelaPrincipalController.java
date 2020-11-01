@@ -29,8 +29,6 @@ import negocio.beans.Music; // Classe base
 import negocio.beans.Playlist;
 import negocio.beans.User;
 
-import negocio.FacadeMusicManager;
-
 import negocio.beans.Genre; // Enum
 
 public class TelaPrincipalController implements Initializable {
