@@ -7,17 +7,11 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-            <TextField layoutX="396.0" layoutY="137.0" promptText="Nome do criador" />
-            <Slider layoutX="531.0" layoutY="367.0" orientation="VERTICAL" />
-            <Label layoutX="299.0" layoutY="437.0" text="Quantidade mínima de favoritos" textFill="#0077ff" />
-            <ChoiceBox layoutX="396.0" layoutY="224.0" prefWidth="150.0" />
-            <Button layoutX="22.0" layoutY="21.0" mnemonicParsing="false" text="Voltar" />
-            <Button layoutX="439.0" layoutY="697.0" mnemonicParsing="false" text="Aplicar filtro" />
-      </children>
-    </AnchorPane>
-  </children>
-</VBox>
+<AnchorPane prefHeight="655.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.PlaylistFilterScreenController">
+<children>
+      <TextField fx:id="creatorNameField" layoutX="278.0" layoutY="137.0" promptText="Nome do criador" />
+      <ChoiceBox fx:id="genreChoice" layoutX="291.0" layoutY="224.0" prefWidth="150.0" />
+      <Button fx:id="backButton" layoutX="22.0" layoutY="21.0" mnemonicParsing="false" onAction="#goBack" text="&lt;--" />
+      <Button fx:id="filterButton" layoutX="313.0" layoutY="559.0" mnemonicParsing="false" onAction="#applyFilter" text="Aplicar filtro" />
+</children>
+</AnchorPane>
