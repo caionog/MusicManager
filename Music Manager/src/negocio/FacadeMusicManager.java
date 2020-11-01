@@ -129,7 +129,8 @@ public class FacadeMusicManager {
 		userController.addFavoritePlaylist(loggedUser, selectedPlaylist);
 	}
 
-	public void unfavPlaylist(Music selectedPlaylist) {
+	public void unfavPlaylist(Playlist selectedPlaylist) {
+		userController.removeFavoritePlaylist(loggedUser, selectedPlaylist);
 	}
 
 

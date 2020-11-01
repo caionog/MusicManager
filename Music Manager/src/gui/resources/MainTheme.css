@@ -39,3 +39,34 @@ divider-color : #BDBDBD;
 .table-view .column-header, .tableview .filler{
 	-fx-background-color: divider-color;
 }
+.choice-box {
+  -fx-background-color: divider-color;
+  -fx-mark-color: orange;
+  -fx-font: 16px "Arial";
+  -fx-text-fill: dark;
+
+}
+.choice-box > .label { -fx-text-fill: white; }
+.choice-box {
+  -fx-background-color: divider-color;
+  -fx-mark-color: orange; 
+}
+.choice-box .context-menu { -fx-background-color: divider-color; }
+
+
+.combo-box{
+    -fx-background-color: divider-color;
+    -fx-mark-color: orange;
+  	-fx-font: 16px "Arial";
+	
+}
+.combo-box-popup .list-view
+ {
+ 	-fx-background-color: divider-color;
+	-fx-text-fill: dark;
+	
+}
+.combo-box .list-cell 
+{
+   -fx-background-color: divider-color;
+}

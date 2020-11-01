@@ -148,7 +148,7 @@ public class UserController {
     }
 
 
-    public void removeFavoriteMusic(User u, Music p) {
+    public void removeFavoriteMusic(User u, Music selectedMusic) {
         // try {
         //     //userRepoInstance.updateUserFavoriteMusics(u.getId(), p.getId(), false);
         //     u.removeFavMusic(p);

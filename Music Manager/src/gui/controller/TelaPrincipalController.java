@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import data.exceptions.MusicNotSelectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -138,12 +139,16 @@ public class TelaPrincipalController implements Initializable {
 		Music musicSelected = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
 		if ( musicSelected != null ) {
 			System.out.println("Gerar metadados funciona");
+			System.out.println(musicSelected);
+	
+		}
+		//	throw new MusicNotSelectedException();
 			//musicManager.
 			// MusicController musicControler = new MusicController();
-			System.out.println(musicSelected);
+			
 			//CÓDIGO DE GERAR METADADOS AQUI
 
-		}
+	//	}
 		else 
 		{
 			String msgErro = "Selecione uma musica para gerar metadados!";
@@ -255,9 +260,21 @@ public class TelaPrincipalController implements Initializable {
 	// =-= // Funções que interagem com a tabela playlist // =-= //
 
 	@FXML
-	void favPlaylist(ActionEvent event) {
+	void favPlaylist(ActionEvent event) throws IOException {
 		// TODO
 		// código semelhante ao favMusic
+		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
+		if (playlistSelected != null) {
+			musicManager.favPlaylist(playlistSelected);
+		}
+		else { 
+		String msgErro = "Selecione uma playlist para favoritar!";
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setContentText(msgErro);
+		alert.initOwner(metadadosStage);;
+		alert.showAndWait();
+		}
+		
 	}
 
 
@@ -265,6 +282,20 @@ public class TelaPrincipalController implements Initializable {
 	void unfavPlaylist(ActionEvent event) {
 		// TODO
 		// código semelhante ao favMusic
+		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
+		if (playlistSelected != null) {
+			musicManager.unfavPlaylist(playlistSelected);
+		}
+		else { 
+		String msgErro = "Selecione uma playlist para favoritar!";
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setContentText(msgErro);
+		alert.initOwner(metadadosStage);;
+		alert.showAndWait();
+		}
+		
+		
+		
 	}
 
 
