@@ -194,7 +194,7 @@ public class TelaPrincipalController implements Initializable {
     void favMusic(ActionEvent event) {
 		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
 		
-		if (selectedMusic != null) {
+		if (selectedMusic != null ) {
 			musicManager.favMusic(selectedMusic);
 		} else {
 			String msgErro = "Selecione uma musica para favoritar!";
@@ -210,10 +210,10 @@ public class TelaPrincipalController implements Initializable {
 	void unfavMusic(ActionEvent event) {
 		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
 		
-		if (selectedMusic != null) {
+		if ( selectedMusic != null && musicManager.getMusicFavCheck() ) {
 			musicManager.unfavMusic(selectedMusic);
 		} else {
-			String msgErro = "Selecione uma musica para favoritar!";
+			String msgErro = selectedMusic == null ? "Selecione uma musica para favoritar!" : "Necessário filtro de favoritos ativado!";
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText(msgErro);
 			alert.initOwner(metadadosStage);;
@@ -280,22 +280,18 @@ public class TelaPrincipalController implements Initializable {
 
 	@FXML
 	void unfavPlaylist(ActionEvent event) {
-		// TODO
-		// código semelhante ao favMusic
+
 		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
-		if (playlistSelected != null) {
+		if ( playlistSelected != null && musicManager.getPlaylistFavCheck() ) {
 			musicManager.unfavPlaylist(playlistSelected);
 		}
 		else { 
-		String msgErro = "Selecione uma playlist para favoritar!";
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setContentText(msgErro);
-		alert.initOwner(metadadosStage);;
-		alert.showAndWait();
+			String msgErro = playlistSelected == null ? "Selecione uma playlist para favoritar!" : "Necessário filtro de favoritos ativado!";
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(msgErro);
+			alert.initOwner(metadadosStage);;
+			alert.showAndWait();
 		}
-		
-		
-		
 	}
 
 
@@ -361,16 +357,23 @@ public class TelaPrincipalController implements Initializable {
 	private ObservableList<Music> populateMusicTable()
 	{
 		ObservableList<Music> musicTable = FXCollections.observableArrayList();
-		
-		ArrayList<Music> musicLibrary = musicManager.getMusicLibrary();
 
 		ArrayList<String> musicSettings = musicManager.getMusicFilterSettings();
 		String title = musicSettings.get(0);
 		String artist = musicSettings.get(1);
 		String genreStr = musicSettings.get(2);
 		String durationStr = musicSettings.get(3);
+		Boolean check = Boolean.valueOf(musicSettings.get(4));
 
 		Boolean valid = true;
+
+		ArrayList<Music> musicLibrary;
+		if ( check ) {
+			musicLibrary = musicManager.getLoggedUserFavMusics();
+		} else {
+			musicLibrary = musicManager.getMusicLibrary();
+		}
+
 
 		// Adiciona todas as músicas do repositório na tabela da GUI
 		for (Music music : musicLibrary) {
@@ -414,13 +417,19 @@ public class TelaPrincipalController implements Initializable {
 
 		ObservableList<Playlist> playlistTable = FXCollections.observableArrayList();
 		
-		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
-		
 		ArrayList<String> playlistSettings = musicManager.getPlaylistFilterSettings();
 		String creatorName = playlistSettings.get(0);
 		String genreStr = playlistSettings.get(1);
+		Boolean check = Boolean.valueOf(playlistSettings.get(2));
 
 		Boolean valid = true;
+
+		ArrayList<Playlist> playlistLibrary;
+		if ( check ) {
+			playlistLibrary = musicManager.getLoggedUserFavPlaylists();
+		} else {
+			playlistLibrary = musicManager.getPlaylistLibrary();
+		}
 
 		// Adiciona todas as playlists do repositório na tabela da GUI
 		for (Playlist playlist : playlistLibrary) {

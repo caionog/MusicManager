@@ -6,9 +6,11 @@ public class Filter {
     private String artist = "";
     private String musicGenreStr = "Todos";
     private String durationStr = "Todas as durações";
+    private Boolean showMusicFav = false;
 
     private String creatorName = "";
     private String playlistGenreStr = "Todos";
+    private Boolean showPlaylistFav = false;
 
     public String getTitle() {
         return title;
@@ -56,6 +58,22 @@ public class Filter {
 
     public void setPlaylistGenreStr(String playlistGenreStr) {
         this.playlistGenreStr = playlistGenreStr;
+    }
+
+    public Boolean getShowMusicFav() {
+        return showMusicFav;
+    }
+
+    public void setShowMusicFav(Boolean showMusicFav) {
+        this.showMusicFav = showMusicFav;
+    }
+
+    public Boolean getShowPlaylistFav() {
+        return showPlaylistFav;
+    }
+
+    public void setShowPlaylistFav(Boolean showPlaylistFav) {
+        this.showPlaylistFav = showPlaylistFav;
     }
     
 }

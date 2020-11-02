@@ -18,9 +18,9 @@ public interface IUserRepo {
 
     public ArrayList<String> readUser(int userId) throws FileNotFoundException;
 
-    public void updateUserFavoriteMusics(int userId, int newMusicId) throws IOException;
+    public void updateUserFavoriteMusics(int userId, int newMusicId, Boolean add) throws IOException;
 
-    public void updateUserFavoritePlaylists(int userId, int newPlaylistId) throws IOException;
+    public void updateUserFavoritePlaylists(int userId, int newPlaylistId, Boolean add) throws IOException;
 
     public void updateUserData(int loggedUserId, String newName, String newPassword, String newEmail) throws IOException;
 
