@@ -207,6 +207,8 @@ public class UserController {
         userRepoInstance.updateUserData(loggedUser.getId(), newName, newPassword, newEmail);
     }
     
+   
+    
     
     public User getUserByIndex(int index) {
 		return userRepoInstance.getUserByIndex(index);

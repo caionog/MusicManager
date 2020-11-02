@@ -89,6 +89,7 @@ public class FacadeMusicManager {
 		return loggedUser.getEmail();
 	}
 	public String getLoggedUserPassword() {
+		
 		return loggedUser.getPassword();
 	}
 	
@@ -97,6 +98,7 @@ public class FacadeMusicManager {
 	public String getUserNameById(int id) {
 		return userController.getUserNameById(id);
 	}
+	
 
 
 	public boolean handleUserLogin(String nameOrEmail, String password) {
