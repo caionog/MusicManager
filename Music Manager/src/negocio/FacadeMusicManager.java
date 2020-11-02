@@ -139,32 +139,36 @@ public class FacadeMusicManager {
 	}
 
 	
-	public void setFilterSettings(String title, String artist, String genreStr, String durationStr) {
+	public void setFilterSettings(String title, String artist, String genreStr, String durationStr, Boolean check) {
 		settings.setTitle(title);
 		settings.setArtist(artist);
 		settings.setMusicGenreStr(genreStr);
 		settings.setDurationStr(durationStr);
+		settings.setShowMusicFav(check);
 	}
-	public void setFilterSettings(String creatorName, String genreStr) {
+	public void setFilterSettings(String creatorName, String genreStr, Boolean check) {
 		settings.setCreatorName(creatorName);
 		settings.setPlaylistGenreStr(genreStr);
+		settings.setShowPlaylistFav(check);
 	}
 
 
 	public ArrayList<String> getMusicFilterSettings() {
-		ArrayList<String> s = new ArrayList<>(4);
+		ArrayList<String> s = new ArrayList<>(5);
 		s.add(settings.getTitle());
 		s.add(settings.getArtist());
 		s.add(settings.getMusicGenreStr());
 		s.add(settings.getDurationStr());
+		s.add(settings.getShowMusicFav().toString());
 		return s;
 	}
 
 
 	public ArrayList<String> getPlaylistFilterSettings() {
-		ArrayList<String> s = new ArrayList<>(2);
+		ArrayList<String> s = new ArrayList<>(3);
 		s.add(settings.getCreatorName());
 		s.add(settings.getPlaylistGenreStr());
+		s.add(settings.getShowPlaylistFav().toString());
 		return s;
 	}
 

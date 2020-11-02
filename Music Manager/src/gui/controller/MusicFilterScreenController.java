@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
@@ -41,6 +42,8 @@ public class MusicFilterScreenController implements Initializable {
     private ComboBox<String> genreChoice;
     @FXML
     private ChoiceBox<String> durationChoice;
+    @FXML
+    private CheckBox favCheckBox;
 
     // Botão aplicar filtro
     @FXML
@@ -67,7 +70,9 @@ public class MusicFilterScreenController implements Initializable {
         String genreStr = genreChoice.getValue();
         String durationStr = durationChoice.getValue();
 
-        musicManager.setFilterSettings(title, artist, genreStr, durationStr);
+        Boolean favCheck = favCheckBox.isSelected();
+
+        musicManager.setFilterSettings(title, artist, genreStr, durationStr, favCheck);
 
         Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPrincipal.fxml"));
         Scene tabbleViewScene = new Scene(tabbleViewParent);
