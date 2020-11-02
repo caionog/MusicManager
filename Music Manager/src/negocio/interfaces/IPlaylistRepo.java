@@ -12,7 +12,7 @@ import data.MusicRepo;
 
 public interface IPlaylistRepo {
   
-    public void createPlaylist(ArrayList<Music> musics, int creatorId) throws IOException;
+    public void createPlaylist(ArrayList<Music> musics, String creator) throws IOException;
 
     public ArrayList<String> readPlaylist(int playlistId) throws FileNotFoundException;
 

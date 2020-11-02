@@ -21,7 +21,7 @@ public class PlaylistController {
 
 
     public void groupSelectedMusic(ArrayList<Music> selected, User creator) throws IOException {
-    	playlistRepoInstance.createPlaylist(selected, creator.getId());
+    	playlistRepoInstance.createPlaylist(selected, creator.getName());
     }
     
 	

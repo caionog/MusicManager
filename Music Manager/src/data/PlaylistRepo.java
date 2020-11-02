@@ -39,12 +39,11 @@ public class PlaylistRepo implements IPlaylistRepo {
 
     // Create Music no ArrayList e cria um .txt no repositorio
     @Override
-    public void createPlaylist(ArrayList<Music> musics, int creatorId) throws IOException {
+    public void createPlaylist(ArrayList<Music> musics, String creator) throws IOException {
 
         // Cria a playlist
         int id = generateId(); // Gera um id unico, ou seja, nao se repete
-        Playlist p = new Playlist(id, musics, creatorId, _Visibility.INVISIBLE);
-        
+        Playlist p = new Playlist(id, musics, creator, _Visibility.INVISIBLE);
 
         // Adiciona na biblioteca
         playlistsLibrary.add(p);
@@ -55,7 +54,7 @@ public class PlaylistRepo implements IPlaylistRepo {
 
             String s = "";
             s += p.getId() + "\n";
-            s += p.getCreatorId() + "\n";
+            s += p.getCreator() + "\n";
             s += p.getVisibility().getStrValue() + "\n";
             for (Music music : musics) s += music.getId() + ",";
             s += "\n";
@@ -110,7 +109,7 @@ public class PlaylistRepo implements IPlaylistRepo {
                     ArrayList<String> playlistData = readPlaylist(playlist.getId());
 
                     String playlistId = playlistData.get(0); // Str
-                    String creatorId = playlistData.get(1); // str
+                    String creator = playlistData.get(1); // str
                     String visibility = playlistData.get(2); // Str
                     String musicIds[] = playlistData.get(3).split(","); // Str -> Str[] / ",2,3" -> [2, 3]
 
@@ -124,7 +123,7 @@ public class PlaylistRepo implements IPlaylistRepo {
 
                     String s = "";
                     s += playlistId + "\n";
-                    s += creatorId + "\n";
+                    s += creator + "\n";
                     s += visibility + "\n";
                     s += newMusicIds + "\n";
 
@@ -146,13 +145,13 @@ public class PlaylistRepo implements IPlaylistRepo {
         ArrayList<String> playlistData = readPlaylist(playlistId);
 
         String id = playlistData.get(0); // Str
-        String creatorId = playlistData.get(1); // str
+        String creator = playlistData.get(1); // str
         // Não precisa pegar playlistData.get(2) que é a visibilidade antiga
         String musicsIds = playlistData.get(3); // Str -> Str[]
 
         String s = "";
         s += id + "\n";
-        s += creatorId + "\n";
+        s += creator + "\n";
         s += newVisibility + "\n";
         s += musicsIds + "\n";
 
@@ -191,7 +190,7 @@ public class PlaylistRepo implements IPlaylistRepo {
             ArrayList<String> playlistData = readPlaylist(playlistId);
 
             int id = Integer.valueOf(playlistData.get(0)); // Str -> int
-            int creatorId = Integer.valueOf(playlistData.get(1)); // str -> int
+            String creator = playlistData.get(1); // str
             _Visibility v = Enum.valueOf(_Visibility.class, playlistData.get(2)); // Str -> _Visibilty
             String musicsIds[] = playlistData.get(3).split(","); // Str -> Str[] -> ArrayList<Music>
 
@@ -204,7 +203,7 @@ public class PlaylistRepo implements IPlaylistRepo {
                 }
             }
 
-            Playlist p = new Playlist(id, musics, creatorId, v);
+            Playlist p = new Playlist(id, musics, creator, v);
             playlistsLibrary.add(p);
         }
     }

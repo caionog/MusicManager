@@ -453,7 +453,7 @@ public class TelaPrincipalController implements Initializable {
 		for (Playlist playlist : playlistLibrary) {
 
 			if ( !creatorName.isEmpty() ) { // Aplica filtro artist
-				valid = musicManager.getUserNameById(playlist.getCreatorId()).equalsIgnoreCase(creatorName);
+				valid = playlist.getCreator().equalsIgnoreCase(creatorName);
 			}
 
 			if ( valid && !genreStr.equals("Todos") ) { // Aplica filtro title

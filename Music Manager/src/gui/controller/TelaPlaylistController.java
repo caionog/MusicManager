@@ -78,10 +78,10 @@ public class TelaPlaylistController implements Initializable{
 	//	String musicName = playlists.
 		
 		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
-		int loggedUserId = musicManager.getLoggedUserId();
+		String loggedUserName = musicManager.getLoggedUserName();
     	
 		for (Playlist playlist : playlistLibrary) {
-			if (playlist.getCreatorId() == loggedUserId) {
+			if (playlist.getCreator().equals(loggedUserName)) {
 				playlists.add(playlist);		
 			}
 		}

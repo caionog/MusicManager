@@ -6,13 +6,13 @@ public class Playlist {
 
 	private int id;
 	private ArrayList<Music> musics;
-	private int creatorId;
+	private String creator;
 	private _Visibility visibility = _Visibility.INVISIBLE; // VISIBLE ou INVISIBLE
 	
-	public Playlist(int id, ArrayList<Music> musics, int creatorId, _Visibility visibility) {
+	public Playlist(int id, ArrayList<Music> musics, String creator, _Visibility visibility) {
 		this.id = id;
 		this.musics = musics;
-		this.creatorId = creatorId;
+		this.creator = creator;
 		this.visibility = visibility;
 	}
 
@@ -24,8 +24,8 @@ public class Playlist {
 	public ArrayList<Music> getMusics() {
 		return musics;
 	}
-	public int getCreatorId() {
-		return creatorId;
+	public String getCreator() {
+		return creator;
 	}
 	public _Visibility getVisibility() {
 		return visibility;
@@ -39,8 +39,8 @@ public class Playlist {
 	public void setMusics(ArrayList<Music> musics) {
 		this.musics = musics;
 	}
-	public void setCreatorId(int creatorId) {
-		this.creatorId = creatorId;
+	public void setCreator(String creator) {
+		this.creator = creator;
 	}
 	public void setVisibility(_Visibility visibility) {
 		this.visibility = visibility;
@@ -80,7 +80,7 @@ public class Playlist {
 
 	public String toString() {
 		String s = "=-= Dados do usuario =-=" + "\n";
-		s += "creatorId: " + creatorId + "\n";
+		s += "creator: " + creator + "\n";
 		s += "=-= dados da playlist =-=" + "\n";
 		s += id + "\n";
 		s += visibility + "\n";
