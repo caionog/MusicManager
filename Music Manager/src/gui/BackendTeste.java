@@ -28,13 +28,13 @@ public class BackendTeste {
 		PlaylistController playlistController = new PlaylistController();
 		UserController userController = new UserController();
 
-		musicController.resetRepo();
+		//musicController.resetRepo();
 		musicController.populateMusicLibrary(); // Preenche o array com as musicas ja guardadas nos .txt
 
-		playlistController.resetRepo();
+		//playlistController.resetRepo();
 		playlistController.populatePlaylistLibrary();
 
-		userController.resetRepo();
+		//userController.resetRepo();
 		userController.populateUsersRepo();
 
 		////// Início dos teste  //////
