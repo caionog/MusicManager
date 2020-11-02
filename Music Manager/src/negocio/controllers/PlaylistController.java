@@ -10,7 +10,7 @@ import data.PlaylistRepo;
 import negocio.beans.Playlist; // Classes base
 import negocio.beans.Music;
 import negocio.beans.User;
-
+import negocio.beans._Visibility;
 import negocio.interfaces.IPlaylistRepo; // Interface
 
 public class PlaylistController {
@@ -69,6 +69,32 @@ public class PlaylistController {
 	public Playlist getPlaylistByIndex(int index) {
 		return playlistRepoInstance.getPlaylistByIndex(index);
 	}
+
+
+	public void createPlaylist(ArrayList<Music> p , String c) throws IOException {
+		 playlistRepoInstance.createPlaylist(p, c);
+		 
+		// playlistRepoInstance.cr
+		 
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setPlaylistPublic(Playlist selectedPlaylist) throws IOException {
+		// TODO Auto-generated method stub
+		playlistRepoInstance.updateVisibility("VISIBLE", selectedPlaylist.getId());
+		//_Visibility.VISIBLE
+		
+	}
+
+
+
+	
+	
+	
+	
+	
 
 
 

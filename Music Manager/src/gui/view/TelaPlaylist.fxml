@@ -3,31 +3,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="956.0" prefWidth="971.0" stylesheets="@../resources/MainTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaPlaylistController">
+<AnchorPane prefHeight="724.0" prefWidth="850.0" stylesheets="@../resources/MainTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaPlaylistController">
    <children>
-      <Button fx:id="botãoVoltarTelaPlaylist" layoutX="593.0" layoutY="151.0" mnemonicParsing="false" onAction="#botãoVoltarTelaPlaylist" text="Voltar" />
       <Label layoutX="248.0" layoutY="14.0" prefHeight="68.0" prefWidth="175.0" text="Minhas Playlists">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="botãoCriarPlaylist" layoutX="587.0" layoutY="82.0" mnemonicParsing="false" onAction="#criarPlaylistTelaPlaylist" prefHeight="25.0" prefWidth="94.0" text="Criar Playlist" />
-      <TableView fx:id="playlistTablePlaylist" layoutX="131.0" layoutY="63.0" prefHeight="200.0" prefWidth="410.0">
-        <columns>
-          <TableColumn prefWidth="112.0" text="Nome do criador" />
-          <TableColumn prefWidth="54.0" text="Id" />
-            <TableColumn fx:id="nameMusicColumnPlaylist" prefWidth="243.0" text="Nome da música" />
-        </columns>
-      </TableView>
-      <Pane layoutX="55.0" layoutY="263.0" prefHeight="493.0" prefWidth="671.0">
+      <Pane layoutX="24.0" layoutY="95.0" prefHeight="493.0" prefWidth="671.0">
          <children>
             <ListView fx:id="playlistListPlaylist" layoutX="28.0" layoutY="14.0" prefHeight="327.0" prefWidth="630.0" />
+            <Button fx:id="botãoAtualizarTelaPlaylist" layoutX="411.0" layoutY="360.0" mnemonicParsing="false" onAction="#atualizarTelaPlaylist" text="Atualizar" />
+            <Button fx:id="botãoVoltarTelaPlaylist" layoutX="590.0" layoutY="362.0" mnemonicParsing="false" onAction="#botãoVoltarTelaPlaylist" text="Voltar" />
+            <Button fx:id="botãoCriarPlaylist" layoutX="145.0" layoutY="362.0" mnemonicParsing="false" onAction="#criarPlaylistTelaPlaylist" prefHeight="25.0" prefWidth="139.0" text="Criar e editar Playlist" />
+            <Button fx:id="botãoDeletarTelaPlaylist" layoutX="309.0" layoutY="358.0" mnemonicParsing="false" onAction="#deletarTelaPlaylist" text="Deletar" />
+            <Button fx:id="botãoTornarPúblico" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#fazerTornarPúblico" text="Tornar Público" />
          </children>
       </Pane>
    </children>

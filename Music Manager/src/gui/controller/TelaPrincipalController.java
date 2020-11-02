@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,7 +29,7 @@ import negocio.FacadeMusicManager; // Fachada
 import negocio.beans.Music; // Classe base
 import negocio.beans.Playlist;
 import negocio.beans.User;
-
+import negocio.beans._Visibility;
 import negocio.beans.Genre; // Enum
 
 public class TelaPrincipalController implements Initializable {
@@ -81,31 +82,37 @@ public class TelaPrincipalController implements Initializable {
 	@FXML
 	private Button addMusicButton;
 	
+	//List View playlist
+	@FXML
+    private ListView<Playlist> listViewPrincipal;
 	// Table view playlist
-	@FXML
-    private TableView<Playlist> playlistTable;
-	@FXML
-    private TableColumn<Playlist, String> NomeDoCriadorColumn;
-    @FXML
-    private TableColumn<Playlist, String> playlistIdColumn;
-    @FXML
-	private TableColumn<Playlist, ArrayList<Music>> nomesMusicaColumn;
+//	@FXML
+ //   private TableView<Playlist> playlistTable;
+//	@FXML
+ //   private TableColumn<Playlist, String> NomeDoCriadorColumn;
+  //  @FXML
+   // private TableColumn<Playlist, String> playlistIdColumn;
+   // @FXML
+//	private TableColumn<Playlist, ArrayList<Music>> nomesMusicaColumn;
 
 	// Table view user
-	@FXML
-    private TableView<User> userTableViewTelaPrincipal;
-    @FXML
-	private TableColumn<User, String> NomeColumn;
+//	@FXML
+ //   private TableView<User> userTableViewTelaPrincipal;
+  //  @FXML
+//	private TableColumn<User, String> NomeColumn;
 	
 	// Botões que interagem com a tabela de playlist
+
+	
 	@FXML
-	private Button playlistFavoriteButton;
-	@FXML
-	private Button playlistUnfavoriteButton;
-	@FXML
-	private Button playlistFilterButton;
-	@FXML
-	private Button deletePlaylistButton;
+    private Button playlistFavoriteButton;
+
+    @FXML
+    private Button deletePlaylistButton;
+
+    @FXML
+    private Button playlistUnfavoriteButton;
+
 	@FXML
 	private Button createPlaylisButton;
 
@@ -168,11 +175,11 @@ public class TelaPrincipalController implements Initializable {
 	@FXML
     void irMinhasPlaylists(ActionEvent event) throws IOException {
 
-		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
-		Scene tabbleViewScene = new Scene(tabbleViewParent);
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(tabbleViewScene);
-		window.show();
+		Parent tabbleViewParent2 = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaPlaylist.fxml"));
+		Scene tabbleViewScene2 = new Scene(tabbleViewParent2);
+		Stage window2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window2.setScene(tabbleViewScene2);
+		window2.show();
 	}
 
 
@@ -191,9 +198,11 @@ public class TelaPrincipalController implements Initializable {
 	@FXML
     void favMusic(ActionEvent event) {
 		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
+		System.out.println(selectedMusic);
 		
 		if (selectedMusic != null ) {
 			musicManager.favMusic(selectedMusic);
+			
 		} else {
 			String msgErro = "Selecione uma musica para favoritar!";
 			Alert alert = new Alert(AlertType.ERROR);
@@ -230,7 +239,7 @@ public class TelaPrincipalController implements Initializable {
 		window.show();
 	}
 
-
+//AQUI
 	@FXML
 	void deleteMusic(ActionEvent event) throws IOException {
 		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
@@ -243,7 +252,7 @@ public class TelaPrincipalController implements Initializable {
 			alert.setContentText(msgErro);
 			alert.initOwner(metadadosStage);;
 			alert.showAndWait();
-		}
+	}
 	}
 
 
@@ -270,12 +279,17 @@ public class TelaPrincipalController implements Initializable {
 	}
 	
 	// =-= // Funções que interagem com a tabela playlist // =-= //
-
+//AQUI
 	@FXML
 	void favPlaylist(ActionEvent event) throws IOException {
-		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
+		Playlist playlistSelected = listViewPrincipal.getSelectionModel().getSelectedItem();
+	
+	//	System.out.println(playlistSelected);
 		if (playlistSelected != null) {
+			System.out.println(playlistSelected);
 			musicManager.favPlaylist(playlistSelected);
+			System.out.println(musicManager.getPlaylistFavCheck());
+			System.out.println("funciona");
 		}
 		else { 
 			String msgErro = "Selecione uma playlist para favoritar!";
@@ -286,13 +300,20 @@ public class TelaPrincipalController implements Initializable {
 		}
 	}
 
-
+//AQUI
 	@FXML
 	void unfavPlaylist(ActionEvent event) {
-
-		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
+//
+		Playlist playlistSelected = listViewPrincipal.getSelectionModel().getSelectedItem();
+//		playlistSelected = listViewPrincipal.getSelectionModel().getSelectedItem();
+		System.out.println(playlistSelected);
+		System.out.println(musicManager.getPlaylistFavCheck());
+	//	System.out.println(musicManager.getPlaylistFavCheck());
+		
 		if ( playlistSelected != null && musicManager.getPlaylistFavCheck() ) {
 			musicManager.unfavPlaylist(playlistSelected);
+			System.out.println("funciona");
+			
 		}
 		else { 
 			String msgErro = playlistSelected == null ? "Selecione uma playlist para favoritar!" : "Necessário filtro de favoritos ativado!";
@@ -314,11 +335,11 @@ public class TelaPrincipalController implements Initializable {
 		window.show();
 	}
 
-
+//AQUI
 	@FXML
 	void deletePlaylist(ActionEvent event) {
 		
-		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
+		Playlist playlistSelected = listViewPrincipal.getSelectionModel().getSelectedItem();
 		if ( playlistSelected != null ) {
 			musicManager.deletePlaylist(playlistSelected);
 		}
@@ -336,9 +357,14 @@ public class TelaPrincipalController implements Initializable {
 
 
 	@FXML
-	void createPlaylist(ActionEvent event) {
+	void createPlaylist(ActionEvent event) throws IOException {
 		// TODO
 		// Abrir uma tela que pede ids ou nomes de música de música
+		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaCriarPlaylist.fxml"));
+		Scene tabbleViewScene = new Scene(tabbleViewParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(tabbleViewScene);
+		window.show();
 	}
 
 	// =-= // Função principal da tela // =-= //
@@ -359,15 +385,16 @@ public class TelaPrincipalController implements Initializable {
 		idColumn.setCellValueFactory(new PropertyValueFactory<Music, String>("id"));
 
 		// configurar colunas do tableview das playlist
-		playlistIdColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("id"));
-		nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist, ArrayList<Music>>("musics"));
+	//	playlistIdColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("id"));
+	//	nomesMusicaColumn.setCellValueFactory(new PropertyValueFactory<Playlist, ArrayList<Music>>("musics"));
 
     	// configurar coluna da tableview usuário
-		NomeColumn.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
+	//	NomeColumn.setCellValueFactory(new PropertyValueFactory<User,String>("name"));
 
 		tableViewTelaPrincipal.setItems(populateMusicTable()); // carregar os atributos na tabela música
-		userTableViewTelaPrincipal.setItems(populateUserTable()); // carrega os atributos na table user
-		playlistTable.setItems(populatePlaylistTable()); //carregar os atributos na table playlist
+		listViewPrincipal.getItems().addAll(listViewPrincipal());
+		listViewPrincipal.setItems(listViewPrincipal());
+	
 	}
 
 	// =-= // Funções auxiliares // =-= //
@@ -474,17 +501,56 @@ public class TelaPrincipalController implements Initializable {
 	}
 
 
-	private ObservableList<User> populateUserTable() 
+	
+	public ObservableList<Playlist> listViewPrincipal()
 	{
-		ObservableList<User> userTable = FXCollections.observableArrayList();
-		ArrayList<User> userLibrary = musicManager.getUserLibrary();
-		for (User user : userLibrary) {
-			userTable.add(user);
-			
+		ObservableList<Playlist> playlists = FXCollections.observableArrayList();
+		
+	//	ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
+	//	String loggedUserName = musicManager.getLoggedUserName();
+		ArrayList<String> playlistSettings = musicManager.getPlaylistFilterSettings();
+		String creatorName = playlistSettings.get(0);
+		String genreStr = playlistSettings.get(1);
+		Boolean check = Boolean.valueOf(playlistSettings.get(2));
+		Boolean valid = true;
+		
+		ArrayList<Playlist> playlistLibrary;
+		if ( check ) {
+			playlistLibrary = musicManager.getLoggedUserFavPlaylists();
+		} else {
+			playlistLibrary = musicManager.getPlaylistLibrary();
 		}
-		//System.out.println("@mostrar userTable"+userLibrary.toString());
+//		 Adiciona todas as playlists do repositório na tabela da GUI
+				for (Playlist playlist : playlistLibrary) {
 
-		return userTable;
+					if ( !creatorName.isEmpty() ) { // Aplica filtro artist
+						valid = playlist.getCreator().equalsIgnoreCase(creatorName);
+					}
+
+					if ( valid && !genreStr.equals("Todos") ) { // Aplica filtro title
+						for ( Music m : playlist.getMusics() ) {
+							if ( m.getGenre().getValueStr().equals(genreStr.toUpperCase()) ) {
+								valid = true;
+								break;
+							} else {
+								valid = false;
+							}
+						}
+					}
+					//verifica se playlist é visível
+
+					if (valid && playlist.getVisibility().equals(_Visibility.VISIBLE))  { playlists.add(playlist); }
+					else { valid = true; }
+				}
+
+    	
+//		for (Playlist playlist : playlistLibrary) {
+//			if (playlist.getCreator().equals(loggedUserName) && playlist.getVisibility().equals(_Visibility.VISIBLE)) {
+//				playlists.add(playlist);		
+//				System.out.println(playlist.getVisibility());
+//			}
+//		}
+    	return playlists;
 	}
 
-}
+    }

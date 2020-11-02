@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="496.0" prefWidth="703.0" stylesheets="@../resources/MainTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TelaCriarPlaylistController">
+   <children>
+      <Pane layoutX="-15.0" layoutY="266.0" prefHeight="230.0" prefWidth="243.0">
+         <children>
+            <TableView fx:id="musicTableView" layoutX="22.0" layoutY="15.0" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="titleColumn" prefWidth="199.0" text="Músicas" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane layoutX="396.0" layoutY="216.0" prefHeight="266.0" prefWidth="293.0">
+         <children>
+            <ListView fx:id="playlistListView" layoutX="8.0" layoutY="5.0" prefHeight="256.0" prefWidth="277.0" />
+         </children>
+      </Pane>
+      <Button fx:id="addMusicToPlaylistButton" layoutX="229.0" layoutY="356.0" mnemonicParsing="false" onAction="#addMusic" text="Adicionar música a Playlist" />
+      <Button fx:id="createPlaylistButton" layoutX="236.0" layoutY="303.0" mnemonicParsing="false" onAction="#createPlaylist" text="Criar Playlist em Branco" />
+      <Label fx:id="labelMinhasPlaylists" layoutX="506.0" layoutY="132.0" text="Minhas Playlists" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/music-manager-logo.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelTítulo" layoutX="245.0" layoutY="35.0" text="Criar e Editar minhas Playlists" />
+      <Button fx:id="botãoDeletarTelaCriarPlaylist" layoutX="259.0" layoutY="405.0" mnemonicParsing="false" onAction="#deletarTelaCriarPlaylist" text="Deletar Playlist" />
+      <Label fx:id="errorMessageLabelTelaCriarPlaylist" layoutX="259.0" layoutY="170.0" />
+   </children>
+</AnchorPane>

@@ -40,6 +40,7 @@ public class TelaAdicionarMusicaController {
 		if ( path.endsWith(".mp3") )
 		{
 			path.replace('\\', '/');
+			
 			musicManager.createMusic(path);
 			//TODO fecha o popup automáticamente
 			// Se possível atualiza a tabela quando fechar o popup

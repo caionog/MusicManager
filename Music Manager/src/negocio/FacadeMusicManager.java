@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import negocio.beans.Filter;
+import negocio.beans.Genre;
 
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
@@ -202,4 +203,35 @@ public class FacadeMusicManager {
 	public void deletePlaylist(Playlist selectedPlaylist) {
 		playlistContrtoller.deletePlaylist(selectedPlaylist);
 	}
+
+	public void createPlaylist(int userId) throws IOException {
+		
+		ArrayList <Music> m = new ArrayList<Music>() ;
+		
+		String titlee = "";
+		String artistt = "";
+		Genre genree = Genre.NULL;
+		String durationn = "";
+		Music music = new Music(userId, titlee, artistt, genree, durationn);
+		m.add(music);
+		
+		playlistContrtoller.createPlaylist(m, getLoggedUserName());
+		//loggedUser.getName();
+		// TODO Auto-generated method stub
+		System.out.println("funcionou");
+		
+	}
+
+	public void addMusicToPlaylist(Music selectedMusic, Playlist selectedPlaylist) {
+		// TODO Auto-generated method stub
+		selectedPlaylist.addMusicPlaylist(selectedMusic);
+		
+	}
+
+	public void setPlaylistPublic(Playlist selectedPlaylist) throws IOException {
+		// TODO Auto-generated method stub
+		playlistContrtoller.setPlaylistPublic(selectedPlaylist);
+	}
+
+
 }
