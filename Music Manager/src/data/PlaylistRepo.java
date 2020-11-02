@@ -16,6 +16,8 @@ import negocio.interfaces.IPlaylistRepo;
 public class PlaylistRepo implements IPlaylistRepo {
 
     private ArrayList<Playlist> playlistsLibrary = new ArrayList<>(0);
+    //AQUI
+  //  private ArrayList<Playlist> playlistsMusicLibrary = new ArrayList<>(0);
     private String absolutePath = "Music Manager\\src\\data\\txt storage\\playlists repository\\";
 
     // TO-DO alterar id dentro do .txt ou visibilidade (U)
@@ -42,6 +44,7 @@ public class PlaylistRepo implements IPlaylistRepo {
         // Cria a playlist
         int id = generateId(); // Gera um id unico, ou seja, nao se repete
         Playlist p = new Playlist(id, musics, creatorId, _Visibility.INVISIBLE);
+        
 
         // Adiciona na biblioteca
         playlistsLibrary.add(p);
@@ -210,6 +213,8 @@ public class PlaylistRepo implements IPlaylistRepo {
     public ArrayList<Playlist> getPlaylistsLibrary() {
         return playlistsLibrary;
     }
+    
+    
 
     @Override
     public Playlist getPlaylistByIndex(int index) {
@@ -264,4 +269,10 @@ public class PlaylistRepo implements IPlaylistRepo {
 
         return p;
     }
+//AQUI
+	//@Override
+	//public ArrayList<Playlist> getPlaylistMusicLibrary() {
+		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

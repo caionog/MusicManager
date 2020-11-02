@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.apache.poi.ss.format.CellDateFormatter;
+
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +18,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Cell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
+import javafx.util.Callback;
 import negocio.FacadeMusicManager; // Fachada
 
 import negocio.beans.Playlist; // Classes base
@@ -32,11 +39,14 @@ public class TelaPlaylistController implements Initializable{
     private Button botãoVoltarTelaPlaylist;
 	@FXML
 	private Button botãoCriarPlaylist;
-	@FXML
-	private TableView<Playlist> tableViewTelaPlaylist;
 	
 	@FXML
-	private TableColumn<Playlist, String> titlePlaylist; // Modifica pra creatorName
+    private TableView<Playlist> playlistTablePlaylist;
+
+    @FXML
+	 private TableColumn<Playlist, String> nameMusicColumnPlaylist;
+    @FXML
+    private ListView playlistListPlaylist;
 
 
     @FXML
@@ -59,10 +69,13 @@ public class TelaPlaylistController implements Initializable{
 
     }
     
-    
-    public ObservableList<Playlist> populateFavPlaylistTable()
+ 
+    public ObservableList<Playlist> playlistTablePlaylist()
 	{
 		ObservableList<Playlist> playlists = FXCollections.observableArrayList();
+	//	String musicSelected = tableViewTelaPrincipal.getSelectionModel().getSelectedItem().getTitle();
+	//	ArrayList<String> playlistSettings = musicManager.getPlaylistFilterSettings();
+	//	String musicName = playlists.
 		
 		ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
 		int loggedUserId = musicManager.getLoggedUserId();
@@ -72,6 +85,9 @@ public class TelaPlaylistController implements Initializable{
 				playlists.add(playlist);		
 			}
 		}
+		
+
+		
     	return playlists;
 	}
     
@@ -80,6 +96,13 @@ public class TelaPlaylistController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 
 		// Configura as colunas da table view de playlists
+		nameMusicColumnPlaylist.setCellValueFactory(new PropertyValueFactory<Playlist, String>("musics"));
+		//playlistListPlaylist.getItems().addAll("musics");
+		
+
+		//playlistListPlaylist.setItems(playlistTablePlaylist());
+		playlistListPlaylist.getItems().addAll(playlistTablePlaylist());
+		playlistTablePlaylist.setItems(playlistTablePlaylist());
 		//creatorName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("Nome do criador"));
 		//idPlaylistColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("id"));
 		//musicsNamesColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("Nome das músicas")); // Exemplo: "Nome_A ; Nome_B ; Nome_C"

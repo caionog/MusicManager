@@ -59,9 +59,17 @@ public class PlaylistController {
 	public ArrayList<Playlist> getPlaylistsLibrary() {
 		return playlistRepoInstance.getPlaylistsLibrary();
 	}
+	//AQUI
+//	public ArrayList<Playlist> getPlaylistMusicLibrary() {
+		// TODO Auto-generated method stub
+//		return playlistRepoInstance.getPlaylistMusicLibrary();
+//	}
 
 
 	public Playlist getPlaylistByIndex(int index) {
 		return playlistRepoInstance.getPlaylistByIndex(index);
 	}
+
+
+
 }

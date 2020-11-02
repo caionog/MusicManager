@@ -25,6 +25,9 @@ public interface IPlaylistRepo {
     public void populatePlaylistLibrary(MusicRepo musicRepo) throws FileNotFoundException;
 
     public ArrayList<Playlist> getPlaylistsLibrary();
+    
+    //AQUI
+  //	public ArrayList<Playlist> getPlaylistMusicLibrary();
 
     public Playlist getPlaylistByIndex(int index);
 
@@ -33,4 +36,6 @@ public interface IPlaylistRepo {
     public void resetRepo();
 
     public Playlist searchPlaylist(int id);
+    
+ 
 }

@@ -50,6 +50,10 @@ public class FacadeMusicManager {
 	public ArrayList<Playlist> getPlaylistLibrary() {
 		return playlistContrtoller.getPlaylistsLibrary();
 	}
+	//AQUI
+//	public ArrayList<Playlist> getPlaylistMusicLibrary() {
+//		return playlistContrtoller.getPlaylistMusicLibrary();
+//	}
 
 
 	public ArrayList<User> getUserLibrary() {
