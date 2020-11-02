@@ -164,22 +164,13 @@ public class PlaylistRepo implements IPlaylistRepo {
     // Delete Playlist no ArrayList e deleta um .txt
     @Override
     public void deletePlaylist(Playlist p) {
-        Boolean teste = false;
-        if (teste) {
-            System.out.println(p.toString());
-            System.out.println(searchPlaylist(p.getId()).toString());
-        }
 
-        Boolean result =  playlistsLibrary.remove(p);
+        Boolean result = playlistsLibrary.remove(p);
 
         if (result == true) {
             // Atualiza o .txt
             File playlist = new File(absolutePath + p.getId() + ".txt");
             playlist.delete();
-
-            if (teste) {
-                System.out.println("Playlist(.txt) com id " + p.getId() + " deletada");
-            }
         }
     }
 

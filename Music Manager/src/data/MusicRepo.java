@@ -98,22 +98,13 @@ public class MusicRepo implements IMusicRepo {
     // Deletar Music no ArrayList e deleta um .txt
     @Override
     public void deleteMusic(Music m) {
-        Boolean teste = false;
-        if (teste) {
-            System.out.println(m.toString());
-            System.out.println(searchMusic(m.getId()).toString());
-        }
-        
+
         Boolean result = musicLibrary.remove(m);
 
         if (result == true) {
             // Atualiza o .txt
             File music = new File(absolutePath + m.getId() + ".txt");
             music.delete();
-
-            if (teste) {
-                System.out.println("Musica(.txt) com id " + m.getId() + " deletada");
-            }
         }
     }
 

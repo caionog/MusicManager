@@ -133,8 +133,6 @@ public class TelaPrincipalController implements Initializable {
 	void irGerarMetadados(ActionEvent event) {
 
 		// TODO
-		// No doc de requisitas não tem dizendo que precisa gerar os metadados...
-		// então tecnicamente...da pra terminar sem isso feito :>
 
 		Music musicSelected = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
 		if ( musicSelected != null ) {
@@ -234,47 +232,58 @@ public class TelaPrincipalController implements Initializable {
 
 
 	@FXML
-	void deleteMusic(ActionEvent event) {
-		// TODO
-		// Verifica se existe uma música selecionada
-		// Verifica se o logged user é admin
-		// Cria uma função no Facade
-		// Chama a função do controlador que deleta music 
-		// essa função do controlador já criada chama os updaters dos txt
+	void deleteMusic(ActionEvent event) throws IOException {
+		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
+		
+		if ( selectedMusic != null && musicManager.getLoggedPermission() ) {
+			musicManager.deleteMusic(selectedMusic);
+		} else {
+			String msgErro = selectedMusic == null ? "Selecione uma música para deletar!" : "Apenas usuários ADM tem permissão para deletar músicas!";
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(msgErro);
+			alert.initOwner(metadadosStage);;
+			alert.showAndWait();
+		}
 	}
 
 
 	@FXML
 	void addMusic(ActionEvent event) throws IOException {
 
-		Stage stage;
-		Parent root;
-		stage = new Stage();
-		root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAdicionarMusica.fxml"));
-		stage.setScene(new Scene(root));
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.initOwner(addMusicButton.getScene().getWindow());
-		stage.showAndWait();
+		if ( musicManager.getLoggedPermission() ) {
+			Stage stage;
+			Parent root;
+			stage = new Stage();
+			root = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/TelaAdicionarMusica.fxml"));
+			stage.setScene(new Scene(root));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(addMusicButton.getScene().getWindow());
+			stage.showAndWait();
+		} else {
+			String msgErro = "Apenas usuários ADM tem permissão para adicionar músicas!";
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(msgErro);
+			alert.initOwner(metadadosStage);;
+			alert.showAndWait();
+		}
+		
 	}
 	
 	// =-= // Funções que interagem com a tabela playlist // =-= //
 
 	@FXML
 	void favPlaylist(ActionEvent event) throws IOException {
-		// TODO
-		// código semelhante ao favMusic
 		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
 		if (playlistSelected != null) {
 			musicManager.favPlaylist(playlistSelected);
 		}
 		else { 
-		String msgErro = "Selecione uma playlist para favoritar!";
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setContentText(msgErro);
-		alert.initOwner(metadadosStage);;
-		alert.showAndWait();
+			String msgErro = "Selecione uma playlist para favoritar!";
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(msgErro);
+			alert.initOwner(metadadosStage);;
+			alert.showAndWait();
 		}
-		
 	}
 
 
@@ -309,18 +318,27 @@ public class TelaPrincipalController implements Initializable {
 	@FXML
 	void deletePlaylist(ActionEvent event) {
 		
+		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
+		if ( playlistSelected != null ) {
+			musicManager.deletePlaylist(playlistSelected);
+		}
+		else { 
+			String msgErro = "Selecione uma playlist para deletar!";
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(msgErro);
+			alert.initOwner(metadadosStage);;
+			alert.showAndWait();
+		}
 		// TODO
-		// No doc de requisitas não tem dizendo que da pra deletar playlist...
-		// então tecnicamente...da pra deixar sem isso feito :>
-		// Verificar se uma playlist está selecionada
-		// Verificar se essa playlist foi criada pelo usuário que quer deletar
-		// Falta algumas coisas dessa função, deixa por ultimo
+		// Colocar essa função dentro da tela que mostra playlists somente criadas pelo usuário
+		// OU Verificar se essa playlist foi criada pelo usuário que quer deletar
 	}
 
 
 	@FXML
 	void createPlaylist(ActionEvent event) {
 		// TODO
+		// Abrir uma tela que pede ids ou nomes de música de música
 	}
 
 	// =-= // Função principal da tela // =-= //

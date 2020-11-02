@@ -107,18 +107,12 @@ public class MusicController {
 	}
 
 
-	public void deleteMusic(User loggedUser, Music selectedMusic) throws IOException {
-		
-		// So permite deletar musica se o loggedUser for administrador
-		if ( selectedMusic != null && loggedUser.getUserPermission().getValue() ) {
-			musicRepoInstance.deleteMusic(selectedMusic);
+	public void deleteMusic(Music selectedMusic) throws IOException {
+		musicRepoInstance.deleteMusic(selectedMusic);
 
-			userRepoInstance.updateDeletedMusics(selectedMusic.getId());
+		userRepoInstance.updateDeletedMusics(selectedMusic.getId());
 
-			userRepoInstance.updateDeletedMusics(selectedMusic.getId());
-		} else {
-			System.out.println("O Usuário logado não tem permissão para esse ação OU selected music é null");
-		}
+		userRepoInstance.updateDeletedMusics(selectedMusic.getId());
 	}
 		
 

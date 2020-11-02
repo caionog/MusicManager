@@ -98,11 +98,11 @@ public class BackendTeste {
 		// Deleta 2 musicas selecionada
 		int id = 1;
 		Music selectedMusic = musicController.getMusicById(id); // id da musica criada com o pathSong1
-		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, selectedMusic);
+		if (selectedMusic != null ) musicController.deleteMusic(selectedMusic);
 
 		id = 2;
 		selectedMusic = musicController.getMusicById(id); // id da musica criada com o pathSong2
-		if (selectedMusic != null ) musicController.deleteMusic(loggedUser, selectedMusic);
+		if (selectedMusic != null ) musicController.deleteMusic(selectedMusic);
 
 		musicController.extractMetaData(pathSong1); // Cria uma musica depois de deletar
 	

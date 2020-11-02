@@ -48,8 +48,11 @@ public class PlaylistController {
     }
 
 	
-    public void deletePlaylist() {
-        
+    public void deletePlaylist(Playlist selectedPlaylist) {
+        playlistRepoInstance.deletePlaylist(selectedPlaylist);
+
+        // TODO
+        // Atualizar usuários que favoritaram essa playlist
     }
 
 

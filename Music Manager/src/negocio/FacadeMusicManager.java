@@ -186,4 +186,16 @@ public class FacadeMusicManager {
 	public boolean getPlaylistFavCheck() {
 		return settings.getShowPlaylistFav();
 	}
+
+	public boolean getLoggedPermission() {
+		return loggedUser.getUserPermission().getValue();
+	}
+
+	public void deleteMusic(Music selectedMusic) throws IOException {
+		musicController.deleteMusic(selectedMusic);
+	}
+
+	public void deletePlaylist(Playlist selectedPlaylist) {
+		playlistContrtoller.deletePlaylist(selectedPlaylist);
+	}
 }
