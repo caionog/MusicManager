@@ -123,42 +123,42 @@ public class UserController {
     
 
     public void addFavoriteMusic(User u, Music m) {
-        // try {
-        //     //userRepoInstance.updateUserFavoriteMusics(u.getId(), m.getId(), true);
-        //     u.addFavMusic(m);
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+        try {
+            userRepoInstance.updateUserFavoriteMusics(u.getId(), m.getId(), true);
+            u.addFavMusic(m);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 
     public void addFavoritePlaylist(User u, Playlist p) {
-        // try {
-        //     //userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId(), true);
-        //     u.addFavPlaylist(p);
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+        try {
+            userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId(), true);
+            u.addFavPlaylist(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    public void removeFavoriteMusic(User u, Music selectedMusic) {
-        // try {
-        //     //userRepoInstance.updateUserFavoriteMusics(u.getId(), p.getId(), false);
-        //     u.removeFavMusic(p);
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+    public void removeFavoriteMusic(User u, Music m) {
+        try {
+            userRepoInstance.updateUserFavoriteMusics(u.getId(), m.getId(), false);
+            u.removeFavMusic(m);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 
     public void removeFavoritePlaylist(User u, Playlist p) {
-        // try {
-        //     //userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId(), false);
-        //     u.removeFavPlaylist(p);
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+        try {
+            userRepoInstance.updateUserFavoritePlaylists(u.getId(), p.getId(), false);
+            u.removeFavPlaylist(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 

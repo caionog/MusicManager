@@ -90,7 +90,7 @@ public class UserRepo implements IUserRepo {
 
     // Updaters no .txt
     @Override
-    public void updateUserFavoriteMusics(int userId, int newMusicId) throws IOException {
+    public void updateUserFavoriteMusics(int userId, int newMusicId, Boolean add) throws IOException {
 
         ArrayList<String> playlistData = readUser(userId);
         
@@ -101,7 +101,16 @@ public class UserRepo implements IUserRepo {
         String password = playlistData.get(4);
 
         String musicIds[] = playlistData.get(5).split(",");
+        ArrayList<String> modifiedMusicIds = new ArrayList<>();
         String playlistIds = playlistData.get(6);
+
+        // Quando a newMusicId já está presente nos Ids do usuário, 
+        // então foi chamado uma função de remover esse Id
+        for (String musicId : musicIds) {
+            if ( !musicId.isEmpty() && newMusicId != Integer.valueOf(musicId) ) {
+                modifiedMusicIds.add(musicId);
+            }
+        }
 
         String s = "";
         s += id + "\n";
@@ -110,8 +119,9 @@ public class UserRepo implements IUserRepo {
         s += name + "\n";
         s += password + "\n";
 
-        for (String musicId : musicIds) if( !musicId.isEmpty() ) s += musicId + ",";
-        s += newMusicId + "\n";
+        for (String musicId : modifiedMusicIds) if( !musicId.isEmpty() ) s += musicId + ",";
+        if (add) s += newMusicId;
+        s += "\n";
         
         s += playlistIds + "\n";
 
@@ -124,7 +134,7 @@ public class UserRepo implements IUserRepo {
     
 
     @Override
-	public void updateUserFavoritePlaylists(int userId, int newPlaylistId) throws IOException {
+	public void updateUserFavoritePlaylists(int userId, int newPlaylistId, Boolean add) throws IOException {
 
         ArrayList<String> playlistData = readUser(userId);
         
@@ -136,6 +146,15 @@ public class UserRepo implements IUserRepo {
 
         String musicsIds = playlistData.get(5);
         String playlistIds[] = playlistData.get(6).split(",");
+        ArrayList<String> modifiedPlaylistsIds = new ArrayList<>();
+
+        // Quando a newMusicId já está presente nos Ids do usuário, 
+        // então foi chamado uma função de remover esse Id
+        for (String playlistId : playlistIds) {
+            if ( !playlistId.isEmpty() && newPlaylistId != Integer.valueOf(playlistId) ) {
+                modifiedPlaylistsIds.add(playlistId);
+            }
+        }
 
         String s = "";
         s += id + "\n";
@@ -145,8 +164,9 @@ public class UserRepo implements IUserRepo {
         s += password + "\n";
 
         s += musicsIds + "\n";
-        for (String playlistId : playlistIds) if( !playlistId.isEmpty() ) s += playlistId + ",";
-        s += newPlaylistId + "\n";
+        for (String playlistId : modifiedPlaylistsIds) if( !playlistId.isEmpty() ) s += playlistId + ",";
+        if (add) s += newPlaylistId;
+        s += "\n";
 
         File user = new File(absolutePath + userId + ".txt");
         FileWriter writer = new FileWriter(user.getAbsolutePath());

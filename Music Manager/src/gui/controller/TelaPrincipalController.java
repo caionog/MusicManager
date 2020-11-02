@@ -194,7 +194,7 @@ public class TelaPrincipalController implements Initializable {
     void favMusic(ActionEvent event) {
 		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
 		
-		if (selectedMusic != null) {
+		if (selectedMusic != null ) {
 			musicManager.favMusic(selectedMusic);
 		} else {
 			String msgErro = "Selecione uma musica para favoritar!";
@@ -210,10 +210,10 @@ public class TelaPrincipalController implements Initializable {
 	void unfavMusic(ActionEvent event) {
 		Music selectedMusic = tableViewTelaPrincipal.getSelectionModel().getSelectedItem();
 		
-		if (selectedMusic != null) {
+		if ( selectedMusic != null && musicManager.getMusicFavCheck() ) {
 			musicManager.unfavMusic(selectedMusic);
 		} else {
-			String msgErro = "Selecione uma musica para favoritar!";
+			String msgErro = selectedMusic == null ? "Selecione uma musica para favoritar!" : "Necessário filtro de favoritos ativado!";
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText(msgErro);
 			alert.initOwner(metadadosStage);;
@@ -280,22 +280,18 @@ public class TelaPrincipalController implements Initializable {
 
 	@FXML
 	void unfavPlaylist(ActionEvent event) {
-		// TODO
-		// código semelhante ao favMusic
+
 		Playlist playlistSelected = playlistTable.getSelectionModel().getSelectedItem();
-		if (playlistSelected != null) {
+		if ( playlistSelected != null && musicManager.getPlaylistFavCheck() ) {
 			musicManager.unfavPlaylist(playlistSelected);
 		}
 		else { 
-		String msgErro = "Selecione uma playlist para favoritar!";
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setContentText(msgErro);
-		alert.initOwner(metadadosStage);;
-		alert.showAndWait();
+			String msgErro = playlistSelected == null ? "Selecione uma playlist para favoritar!" : "Necessário filtro de favoritos ativado!";
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText(msgErro);
+			alert.initOwner(metadadosStage);;
+			alert.showAndWait();
 		}
-		
-		
-		
 	}
 
 

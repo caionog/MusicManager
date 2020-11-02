@@ -176,4 +176,12 @@ public class FacadeMusicManager {
 	public void createMusic(String path) throws IOException, SAXException, TikaException {
 		musicController.extractMetaData(path);
 	}
+
+	public boolean getMusicFavCheck() {
+		return settings.getShowMusicFav();
+	}
+
+	public boolean getPlaylistFavCheck() {
+		return settings.getShowPlaylistFav();
+	}
 }
