@@ -29,6 +29,9 @@ public class ScreenGenerateReportController implements Initializable {
     @FXML
     private Button backButton;
 
+    @FXML
+    private Text teste;
+
     // Resultado do generate report
     @FXML
     private Text nullText;
