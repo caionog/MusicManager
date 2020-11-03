@@ -166,8 +166,12 @@ public class TelaPrincipalController implements Initializable {
 
 
 	@FXML
-	void generateReport(ActionEvent event) {
-
+	void generateReport(ActionEvent event) throws IOException {
+		Parent tabbleViewParent = FXMLLoader.load(getClass().getClassLoader().getResource("gui/view/ScreenGenerateReport.fxml"));
+		Scene tabbleViewScene = new Scene(tabbleViewParent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(tabbleViewScene);
+		window.show();
 	}
 
 	// =-= // Função de navegação do usuário // =-= //
