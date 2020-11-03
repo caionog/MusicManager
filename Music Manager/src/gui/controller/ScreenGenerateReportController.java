@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.Node;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,8 +18,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import negocio.FacadeMusicManager; // Fachada
+
 import negocio.beans.Music;
-import negocio.beans.Playlist;
 
 public class ScreenGenerateReportController implements Initializable {
     
@@ -76,12 +78,11 @@ public class ScreenGenerateReportController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
         ArrayList<Music> musicLibrary = musicManager.getMusicLibrary();
-        ArrayList<Playlist> playlistLibrary = musicManager.getPlaylistLibrary();
 
-        int _null, not_listed, axe, blues, country;
-        int eletronic, lining, funk, gospel, hiphop;
-        int jazz, mpb, classic, pagode, pop;
-        int reague, rock, samba, back_country, podcast;
+        int _null = 0, not_listed = 0, axe = 0, blues = 0, country = 0;
+        int eletronic = 0, lining = 0, funk = 0, gospel = 0, hiphop = 0;
+        int jazz = 0, mpb = 0, classic = 0, pagode = 0, pop = 0;
+        int reague = 0, rock = 0, samba = 0, back_country = 0, podcast = 0;
 
 
         for (Music music : musicLibrary) {
@@ -112,33 +113,29 @@ public class ScreenGenerateReportController implements Initializable {
             }
         }
 
-        for (Playlist playlist : playlistLibrary) {
-            
-        }
-
 	    nullText.setText("NULL: " + _null);
-	    not_listedText.setText("NOT_LISTED: " + );
-	    axeText.setText("value");
-	    bluesText.setText("value");
-        countryText.setText("value");
+	    not_listedText.setText("NOT_LISTED: " + not_listed);
+	    axeText.setText("Axe: " + axe);
+	    bluesText.setText("Blues: " + blues);
+        countryText.setText("Country: " + country);
         
-        eletronicText.setText("value");
-	    liningText.setText("value");
-	    funkText.setText("value");
-	    gospelText.setText("value");
-        hiphopText.setText("value");
+        eletronicText.setText("Eletronic: " + eletronic);
+	    liningText.setText("Lining: " + lining);
+	    funkText.setText("Funk: " + funk);
+	    gospelText.setText("Gospel: " + gospel);
+        hiphopText.setText("Hiphop: " + hiphop);
         
-        jazzText.setText("value");
-	    mpbText.setText("value");
-	    classicText.setText("value");
-	    pagodeText.setText("value");
-        popText.setText("value");
+        jazzText.setText("Jazz: " + jazz);
+	    mpbText.setText("Mpb: " + mpb);
+	    classicText.setText("Classic: " + classic);
+	    pagodeText.setText("Pagode: " + pagode);
+        popText.setText("Pop: " + pop);
         
-        reagueText.setText("value");
-	    rockText.setText("value");
-	    sambaText.setText("value");
-	    back_countryText.setText("value");
-	    podcastText.setText("value");
+        reagueText.setText("Reague: " + reague);
+	    rockText.setText("Rock: " + rock);
+	    sambaText.setText("Samba: " + samba);
+	    back_countryText.setText("Back Country: "  + back_country);
+	    podcastText.setText("Podcast: " + podcast);
     }
 
     @FXML
