@@ -58,16 +58,14 @@ public class TelaPlaylistController implements Initializable{
     @FXML
     private Button botãoAtualizarTelaPlaylist;
     @FXML
-    private Button botãoTornarPúblico;
+    private Button botãoTornarPublico;
     
     @FXML
-    void fazerTornarPúblico(ActionEvent event) throws IOException {
+    void fazerTornarPublico(ActionEvent event) throws IOException {
     	Playlist selectedPlaylist = playlistListPlaylist.getSelectionModel().getSelectedItem();
     	if (selectedPlaylist != null) {
     		musicManager.setPlaylistPublic(selectedPlaylist);
-			
 		}
-
     }
 
     

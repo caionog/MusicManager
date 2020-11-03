@@ -50,7 +50,6 @@ public class PlaylistController {
 	
     public void deletePlaylist(Playlist selectedPlaylist) {
         playlistRepoInstance.deletePlaylist(selectedPlaylist);
-
         // TODO
         // Atualizar usuários que favoritaram essa playlist
     }
@@ -59,9 +58,9 @@ public class PlaylistController {
 	public ArrayList<Playlist> getPlaylistsLibrary() {
 		return playlistRepoInstance.getPlaylistsLibrary();
 	}
+
 	//AQUI
 //	public ArrayList<Playlist> getPlaylistMusicLibrary() {
-		// TODO Auto-generated method stub
 //		return playlistRepoInstance.getPlaylistMusicLibrary();
 //	}
 
@@ -72,30 +71,23 @@ public class PlaylistController {
 
 
 	public void createPlaylist(ArrayList<Music> p , String c) throws IOException {
-		 playlistRepoInstance.createPlaylist(p, c);
-		 
-		// playlistRepoInstance.cr
-		 
-		// TODO Auto-generated method stub
-		
+		playlistRepoInstance.createPlaylist(p, c);
 	}
 
 
 	public void setPlaylistPublic(Playlist selectedPlaylist) throws IOException {
-		// TODO Auto-generated method stub
-		playlistRepoInstance.updateVisibility("VISIBLE", selectedPlaylist.getId());
-		//_Visibility.VISIBLE
-		
+
+		String newVisibility = "VISIBLE";
+
+		// Inverte a visibilidade atual da playlist
+		if (selectedPlaylist.getVisibility().getValue()) {
+			newVisibility = "INVISIBLE";
+			selectedPlaylist.setVisibility(_Visibility.INVISIBLE);
+		} else {
+			selectedPlaylist.setVisibility(_Visibility.VISIBLE);
+		}
+
+		playlistRepoInstance.updateVisibility(newVisibility, selectedPlaylist.getId());
 	}
-
-
-
-	
-	
-	
-	
-	
-
-
 
 }

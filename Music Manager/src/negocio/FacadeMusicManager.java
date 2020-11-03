@@ -217,21 +217,17 @@ public class FacadeMusicManager {
 		
 		playlistContrtoller.createPlaylist(m, getLoggedUserName());
 		//loggedUser.getName();
-		// TODO Auto-generated method stub
 		System.out.println("funcionou");
 		
 	}
 
 	public void addMusicToPlaylist(Music selectedMusic, Playlist selectedPlaylist) {
-		// TODO Auto-generated method stub
 		selectedPlaylist.addMusicPlaylist(selectedMusic);
 		
 	}
 
 	public void setPlaylistPublic(Playlist selectedPlaylist) throws IOException {
-		// TODO Auto-generated method stub
 		playlistContrtoller.setPlaylistPublic(selectedPlaylist);
 	}
-
 
 }

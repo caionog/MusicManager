@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -21,7 +25,7 @@
             <Button fx:id="botãoVoltarTelaPlaylist" layoutX="590.0" layoutY="362.0" mnemonicParsing="false" onAction="#botãoVoltarTelaPlaylist" text="Voltar" />
             <Button fx:id="botãoCriarPlaylist" layoutX="145.0" layoutY="362.0" mnemonicParsing="false" onAction="#criarPlaylistTelaPlaylist" prefHeight="25.0" prefWidth="139.0" text="Criar e editar Playlist" />
             <Button fx:id="botãoDeletarTelaPlaylist" layoutX="309.0" layoutY="358.0" mnemonicParsing="false" onAction="#deletarTelaPlaylist" text="Deletar" />
-            <Button fx:id="botãoTornarPúblico" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#fazerTornarPúblico" text="Tornar Público" />
+            <Button fx:id="botãoTornarPublico" layoutX="14.0" layoutY="362.0" mnemonicParsing="false" onAction="#fazerTornarPublico" text="Tornar Público" />
          </children>
       </Pane>
    </children>
